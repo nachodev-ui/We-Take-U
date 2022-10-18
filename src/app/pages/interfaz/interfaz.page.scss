@@ -1,0 +1,54 @@
+ion-content {
+  --background: #fafafa;
+}
+
+hr {
+  border: 1px dashed rgb(111, 69, 121);
+  margin-block: 25px;
+}
+
+.passenger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    margin-top: 25%;
+    max-width: 80%;
+    border-radius: 50%;
+    border: 8px solid #fafafa;
+  }
+
+  ion-label {
+    font-weight: lighter;
+    font-size: 24px;
+    color: #010100;
+    margin-bottom: 5%;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+}
+
+.driver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    margin-bottom: 25px;
+    border-radius: 50%;
+    border: 8px solid #fafafa;
+  }
+
+  ion-label {
+    font-weight: lighter;
+    font-size: 24px;
+    color: #010100;
+    margin-top: 5%;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+}
+

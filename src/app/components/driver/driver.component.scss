@@ -1,0 +1,50 @@
+div {
+  img {
+    width: 280px;
+    height: 180px;
+    padding: 10px;
+    margin: 5px;
+    object-fit: cover !important;
+    border-radius: 100%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    transition: 1000ms all ease-in-out;
+  }
+}
+
+  ion-item {
+    background: inherit;
+    ion-label {
+      font-size: 0.95rem;
+    }
+    p {
+      ion-text {
+        font-size: 0.85rem;
+      }
+    }
+
+    ion-row {
+      margin: 5px 0;
+
+      ion-col {
+
+        ion-icon.gold {
+          font-size: larger;
+        }
+
+          ion-text {
+            font-size: 0.8rem;
+            font-weight: 400;
+          }
+      }
+
+      ion-col {
+          margin: 0 5px;
+
+          ion-icon {
+            margin-left: 2px;
+            transform: translateY(10%);
+            font-size: small;
+          }
+    }
+  }
+}

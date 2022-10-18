@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirme su viaje</ion-title>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label position="floating">Direccion:</ion-label>
+        <ion-input #txtDireccion></ion-input>
+      </ion-item>
+
+      <!--
+      <ion-item>
+        <ion-label position="floating">Estado:</ion-label>
+        <ion-input #txtEstado></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Valor:</ion-label>
+        <ion-input #txtValor></ion-input>
+      </ion-item>
+      -->
+
+      <ion-button expand="full" (click)="guardarViaje(txtDireccion)">Confirmar viaje</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

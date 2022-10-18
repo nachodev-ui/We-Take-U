@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+
+  <ion-toolbar mode="ios">
+
+    <ion-buttons class="back" slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-title class="title">
+    Sedes del Instituto
+  </ion-title>
+
+  <div class="sedes">
+
+      <ion-card *ngFor="let sede of sedes.data"  class="card">
+
+        <ion-card-header>
+
+          <ion-card-title class="title-sede">{{ sede.attributes.nombre }}</ion-card-title>
+
+        </ion-card-header>
+
+        <ion-card-content>
+
+          <ion-item class="data-sede">
+            <ion-icon name="pin" slot="start"></ion-icon>
+            <ion-label>{{ sede.attributes.direccion }}</ion-label>
+          </ion-item>
+
+          <ion-item class="data-sede">
+            <ion-icon name="call" slot="start"></ion-icon>
+            <ion-label>+ {{ sede.attributes.telefono }}</ion-label>
+          </ion-item>
+
+        </ion-card-content>
+
+      </ion-card>
+
+  </div>
+
+</ion-content>
+

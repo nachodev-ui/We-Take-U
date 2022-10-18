@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="header">
+    <h1>¡Deseamos conocer tu transporte!</h1>
+    <img src="assets/img/car-info.webp">
+  </div>
+
+  <form [formGroup]="formVehiculo" id="form">
+
+    <ion-input placeholder="Patente" formControlName="patente" id="patente" autocomplete="no"></ion-input>
+
+    <ion-input placeholder="Marca" formControlName="marca" id="marca"></ion-input>
+
+    <ion-input placeholder="Modelo" formControlName="modelo" id="modelo" type="text"></ion-input>
+
+    <ion-input placeholder="Color" formControlName="color" id="color" type="text"></ion-input>
+
+    <ion-input placeholder="Capacidad del vehiculo" formControlName="capacidad" id="capacidad" type="number"></ion-input>
+
+    <ion-button class="btnRegistrar" (click)="createVehicle()" shape="round" expand="block">Guardar mi auto</ion-button>
+  </form>
+
+</ion-content>
+
+

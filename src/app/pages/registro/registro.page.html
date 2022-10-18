@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button class="btnConductor" (click)="modoConductor()" fill="clear">Modo conductor<ion-icon slot="end" name="car-outline"></ion-icon></ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="header">
+    <h1>¿Usuario nuevo?</h1>
+    <img src="assets/img/car.webp">
+  </div>
+
+  <form [formGroup]="signupForm" id="form">
+
+    <ion-input placeholder="Nombre" formControlName="nombre" id="nombre" autocomplete="no"></ion-input>
+
+    <ion-input placeholder="Apellidos" formControlName="apellido" id="apellidos"></ion-input>
+
+    <ion-input placeholder="Email" formControlName="email" id="email" type="email"></ion-input>
+
+    <ion-input placeholder="Password" formControlName="password" id="password" type="password"></ion-input>
+
+    <ion-input placeholder="Confirm password" formControlName="password2" id="password2" type="password"></ion-input>
+
+    <ion-input type="tel" placeholder="Teléfono" formControlName="celular"id="telefono"></ion-input>
+
+    <ion-button class="btnRegistrar" (click)="registrar()" shape="round" expand="block">Crear cuenta</ion-button>
+  </form>
+
+</ion-content>

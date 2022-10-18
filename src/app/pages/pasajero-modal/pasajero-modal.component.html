@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+
+  <ion-toolbar mode="ios">
+    <ion-title>
+      Conductores
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal() "
+      expand="block">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresher($event)">
+    <ion-refresher-content refreshingSpinner="dots">
+
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-searchbar placeholder="Buscar conductor" showCancelButton="focus" [(ngModel)]="searchTerm">
+  </ion-searchbar>
+
+  <ion-card mode="ios" *ngFor="let conductor of conductores | filter : searchTerm">
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{conductor.name}} {{conductor.apellido}}
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="{{ conductor.cover }}">
+        </ion-avatar>
+        <ion-label>
+          <h4>{{ conductor.car }} {{ conductor.year }}</h4>
+          <p>{{ conductor.plate }} | Asientos: {{ conductor.seats }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+
+    <ion-buttons>
+      <ion-button (click)="travelTo()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Tomar viaje
+      </ion-button>
+    </ion-buttons>
+
+  </ion-card>
+</ion-content>
+

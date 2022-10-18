@@ -1,0 +1,137 @@
+ion-toolbar {
+  --background: #f5f5f3;
+
+  ion-back-button {
+    --color: #010100;
+  }
+
+  ion-label {
+    color: #010100;
+    padding-left: 2px;
+    padding-top: 6px;
+  }
+}
+
+ion-icon {
+  color: #010100;
+  font-size: 20px;
+}
+
+ion-content {
+  --background: #f5f5f3;
+
+
+  #header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      font-weight: 500;
+      font-size: 2rem;
+      color: #010100;
+      margin-bottom: 15%;
+    }
+
+    img {
+      width: 200px;
+      height: 155px;
+      border-radius: 50%;
+      border: 8px solid #ffffff;
+    }
+  }
+
+  #form {
+    margin-top: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .btn-login {
+      margin-top: 35px;
+      height: 44px;
+      font-size: 1.19rem;
+      text-transform: initial;
+      border-radius: 50px;
+      box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.5);
+      --box-shadow: none;
+      --ion-color-primary: #99EDC5;
+      --background-hover: #99EDC5;
+    }
+
+  }
+}
+
+.btn-reset {
+  margin-top: 10px;
+  font-size: 1.09rem;
+  text-transform: initial;
+  color: #43CEBB;
+}
+
+ion-input {
+  color: #010100;
+  border-radius: 50px;
+  height: 56px;
+  box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+  font-size: 0.9rem;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  --padding-start: 8%;
+}
+
+a {
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+}
+
+.btn-login:active {
+  background-color: #43CEBB;
+  color: #f5f5f3;
+}
+
+.methods {
+  margin-top: 28px;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+
+  .google {
+    height: 68px;
+    width: 68px;
+    margin-inline: 16px;
+    font-size: 0.7rem;
+    text-transform: initial;
+    --background: #f5f5f3;
+  }
+
+  .github {
+    height: 70px;
+    width: 70px;
+    font-size: 0.7rem;
+    text-transform: initial;
+    --background: #f5f5f3;
+  }
+}
+
+ion-footer {
+  --background: #f5f5f3;
+
+  ion-button {
+    padding-inline-end: 10px;
+    padding-bottom: 10px;
+
+    ion-label {
+      text-transform: uppercase;
+      font-size: 1.07rem;
+    }
+
+    ion-icon {
+      font-size: 1.5rem;
+      margin-right: 0.7rem;
+    }
+  }
+}
+
+

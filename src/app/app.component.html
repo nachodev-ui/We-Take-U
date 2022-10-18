@@ -1,0 +1,51 @@
+<ion-app>
+  <ion-menu *ngIf="login" side="start" menuId="main-menu" contentId="main">
+
+    <ion-content>
+      <div class="menu-header-bg"></div>
+      <div class="header-content">
+        <img src="" alt="">
+        <ion-label>
+          <h2>Bienvenid@, </h2>
+          <h3></h3>
+          <p *ngIf="rol === 'Pasajero'">Pasajero</p>
+          <p *ngIf="rol === 'Conductor'">Conductor</p>
+          <p *ngIf="rol === 'Administrador'">Administrador</p>
+        </ion-label>
+      </div>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-list mode="ios" class="menu-items" lines="none">
+          <ion-item *ngIf="login" (click)="navigateProfile()">
+            <ion-icon name="person-outline"></ion-icon>Mi perfil
+          </ion-item>
+          <ion-item *ngIf="rol === 'Pasajero'" class="active">
+            <ion-icon name="car-sport-outline"></ion-icon>Conductores
+          </ion-item>
+
+          <ion-item *ngIf="rol === 'Conductor'" class="active">
+            <ion-icon name="person-outline"></ion-icon>Pasajeros
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>Mensajes
+          </ion-item>
+          <ion-item>
+            <ion-icon name="stats-chart-outline"></ion-icon>Mis viajes
+          </ion-item>
+          <ion-item *ngIf="login" class="sign-out">
+            <ion-icon name="exit-outline"></ion-icon>
+            <ion-button (click)="logout()" fill="clear">
+              Cerrar sesión
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-menu-toggle>
+
+    </ion-content>
+
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+
+</ion-app>

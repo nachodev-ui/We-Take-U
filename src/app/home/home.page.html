@@ -1,0 +1,43 @@
+<ion-content>
+
+  <ion-slides class="bullet-slide" pager="ios">
+
+    <ion-slide *ngFor="let slide of slides">
+
+      <div class="slide-img-padding">
+        <img src="{{ slide.img }}">
+      </div>
+
+      <div>
+        <h3>{{ slide.titulo }}</h3>
+      </div>
+
+    </ion-slide>
+
+  </ion-slides>
+
+  <ion-footer class="ion-no-border">
+
+    <ion-grid class="fixed">
+      <ion-row>
+        <!-- offset para que el boton se espacio 1 de cada lado -->
+        <ion-col size="10" offset="1">
+          <ion-button [routerLink]="['/registro']"  expand="full" shape="round" mode="ios" class="btn-reg">
+            <ion-label>Crear cuenta</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="10" offset="1">
+            <ion-button [routerLink]="['/login']" fill="clear" expand="full" class="btn-log">
+              <ion-label>Iniciar sesión</ion-label>
+            </ion-button>
+          </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+  </ion-footer>
+
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "WeTakeU",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

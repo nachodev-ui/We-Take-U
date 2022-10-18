@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "umobile-auth": {
+      "hosting": {
+        "app": [
+          "umobile-auth"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "umobile-auth"
+  }
+}

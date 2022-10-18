@@ -1,0 +1,83 @@
+ion-header {
+
+  ion-toolbar{
+  --background: #fff;
+
+  ion-buttons {
+    color: #000;
+  }
+  }
+}
+
+ion-content {
+  --background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)), url("../../../../assets/img/resset_bg.jpg") no-repeat center center / cover;
+
+  .login-section {
+    height: 74vh;
+    width: 100%;
+    max-width: 500px;
+    background: #fff;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    margin: auto;
+    border-top-left-radius: 46px;
+    border-top-right-radius: 46px;
+
+    .heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+
+      h2 {
+        font-size: 1.85rem;
+        font-weight: bold;
+      }
+
+      ion-icon {
+        margin-block: 10px;
+        font-size: 3.5rem;
+        color: #fff;
+        background-color: #C0C385;
+        padding: 10px;
+        border-radius: 50px 50px;
+      }
+
+      p {
+        padding: 10px 0;
+        margin-top: 20px;
+        font-size: 1.1rem;
+        color: #7b7b7b;
+      }
+    }
+
+  }
+
+  .action-button {
+    text-align: center;
+
+    .login-button {
+      --background: #C0C385;
+      --border-radius: 20px;
+      width: 100%;
+      margin: 5px 10px;
+      font-weight: lighter;
+      font-size: 1.3rem;
+    }
+  }
+
+  .back-button {
+    text-align: center;
+    margin-left: 9%;
+    font-size: 1.09rem;
+    color: #7b7b7b;
+
+    .arrow {
+      font-size: 1.5rem;
+      margin-right: 5px;
+    }
+  }
+}

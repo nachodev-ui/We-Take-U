@@ -1,0 +1,107 @@
+<ion-header class="ion-no-border">
+
+  <ion-toolbar class="toolbar">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/interfaz/pasajero" color="light"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Detalle viaje</ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <div class="container">
+
+    <ion-grid>
+      <ion-row>
+
+        <ion-col>
+
+          <ion-card mode="ios">
+
+            <ion-card-header>
+              <ion-card-subtitle>Conductor: {{ viaje.conductorName }} {{ viaje.conductorApellido }}</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list>
+                <ion-item class="ion-no-border">
+
+                  <ion-thumbnail slot="start">
+                    <img src="{{ viaje.coverConductor }}" />
+                  </ion-thumbnail>
+
+                  <!--Calificar conductor-->
+                  <ion-label>
+                    <h2>Califica tu viaje</h2>
+                    <h3>
+                      <span><ion-icon name="star-outline"></ion-icon></span>
+
+                      <span><ion-icon name="star-outline"></ion-icon></span>
+
+                      <span><ion-icon name="star-outline"></ion-icon></span>
+
+                      <span><ion-icon name="star-outline"></ion-icon></span>
+
+                      <span><ion-icon name="star-outline"></ion-icon></span>
+                    </h3>
+                  </ion-label>
+
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+
+            <ion-card-content>
+              <ion-list>
+                <ion-item>
+
+                  <ion-label>
+                    <h2>Detalles</h2>
+                    <hr>
+                    <ion-list>
+                      <ion-item>
+                        <ion-icon name="hourglass-outline"></ion-icon>
+                        <ion-label>{{ viaje.estado }}</ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-icon name="time-outline"></ion-icon>
+                        <ion-label>{{ hours }}</ion-label>
+                      </ion-item>
+                      <ion-item>
+                        <ion-icon name="home-outline"></ion-icon>
+                        <ion-label>{{ viaje.direccion }}</ion-label>
+                      </ion-item>
+                      <ion-item>
+
+                        <ion-icon name="wallet-outline"></ion-icon>
+                        <ion-label>${{ viaje.valor }}</ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </ion-label>
+
+                </ion-item>
+              </ion-list>
+
+              <ion-button
+                *ngIf="viaje.estado === 'Activo'"
+                (click)="liveCancelTravel()"
+                expand="block" fill="clear">
+                Cancelar viaje
+              </ion-button>
+
+            </ion-card-content>
+
+          </ion-card>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+</ion-content>

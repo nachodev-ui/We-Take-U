@@ -1,0 +1,90 @@
+ion-toolbar {
+  --background: #f5f5f3;
+
+  ion-back-button {
+    --color: #010100;
+  }
+
+  ion-label {
+    color: #010100;
+    padding-left: 4%;
+    padding-top: 10%;
+  }
+
+  .btnConductor {
+    font-size: 1rem;
+    color: #010100;
+    font-weight: bold;
+
+    ion-icon {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+ion-icon {
+  color: #010100;
+  font-size: 20px;
+}
+
+ion-content {
+  --background: #f5f5f3;
+
+
+  #header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+
+    h1 {
+      font-weight: 500;
+      font-size: 1.9rem;
+      color: #010100;
+      margin-bottom: 8%;
+    }
+
+    img {
+      width: 200px;
+      height: 155px;
+      border-radius: 50%;
+      border: 8px solid #ffffff;
+    }
+  }
+
+  #form {
+    margin-top: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    ion-input {
+      color: #010100;
+      border-radius: 50px;
+      height: 45px;
+      box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+      font-size: 0.82rem;
+      margin-top: 7%;
+      margin-bottom: 7%;
+      --padding-start: 8%;
+    }
+
+    .btnRegistrar {
+      height: 50px;
+      margin-top: 35px;
+      font-size: 1.3rem;
+      text-transform: capitalize;
+      font-weight: 600;
+      border-radius: 50px;
+      box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.2);
+      --ion-color-primary: #e76168;
+      --background-hover: #e76168;
+    }
+  }
+}
+
+
+
+
+
+

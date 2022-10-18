@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="header">
+    <h1>Inicio de sesión</h1>
+    <img src="assets/img/car.webp">
+  </div>
+
+  <form [formGroup]="formularioLogin" id="form">
+
+    <ion-input placeholder="Email" formControlName="email" autocomplete="no"></ion-input>
+
+    <ion-input placeholder="Password" type="password" formControlName="password" autocomplete="no"></ion-input>
+
+    <ion-button (click)="login()" class="btn-login" shape="round" expand="block">Login</ion-button>
+
+    <ion-button (click)="resetPass()" class="btn-reset" expand="block" fill="clear" shape="round">
+      Recuperar mi contraseña
+    </ion-button>
+
+  </form>
+
+  <div class="methods">
+    <ion-button class="google" (click)="googleLogin()" ><img src="../../../assets/img/G Logo.svg.webp" alt=""></ion-button>
+
+    <ion-button class="github" (click)="githubLogin()" ><img src="../../../assets/img/Github.svg" alt=""></ion-button>
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="signUp()" color="primary">
+        <ion-icon name="person-add-outline"></ion-icon>
+        <ion-label>Registrarse</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

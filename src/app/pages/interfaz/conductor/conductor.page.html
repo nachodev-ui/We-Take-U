@@ -1,0 +1,212 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar no-border>
+
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu" auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Pasajeros</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="banner">
+
+    <img src="assets/img/driver.webp">
+
+    <div class="search">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-icon slot="start" name="search-outline"></ion-icon>
+        <ion-input placeholder="Sedes"></ion-input>
+        <ion-button slot="end">
+          <img src="assets/img/filter.png">
+        </ion-button>
+      </ion-item>
+    </div>
+
+  </div>
+
+  <div class="title">
+    <h2>Posibles viajes</h2>
+
+    <ion-buttons class="eye" slot="end">
+      <ion-button (click)="loadSedes()" fill="clear">
+        <ion-icon slot="end" name="eye"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+
+  <div class="event-slider">
+
+    <ion-slides [options]="{slidesPerView: 'auto', zoom: false, grabCursor: true}" class="default-left-padding">
+
+      <ion-slide>
+        <ion-col class="ion-text-left">
+          <ion-card>
+            <ion-card-header>
+              <img src="assets/img/union.jpg">
+            </ion-card-header>
+
+            <ion-card-content>
+              <p class="date">{{ actualDay }}</p>
+              <h2 class="eventname">San Joaquín</h2>
+              <p class="location"><ion-icon  name="location"></ion-icon>Vicuña Mackenna 4917, San Joaquín</p>
+
+              <div class="additional-info">
+                <div class="attendees">
+                  <img src="assets/img/av1.jpg">
+                  <img src="assets/img/av2.jpg">
+                  <img src="assets/img/av3.jpg">
+                  <img src="assets/img/av4.jpg">
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-col class="ion-text-left">
+          <ion-card>
+            <ion-card-header>
+              <img src="assets/img/event2.jpg">
+            </ion-card-header>
+
+            <ion-card-content>
+              <p class="date">{{ actualDay }}</p>
+              <h2 class="eventname">Alameda</h2>
+              <p class="location"><ion-icon name="location"></ion-icon>Av. España 8, Santiago Centro</p>
+
+              <div class="additional-info">
+                <div class="attendees">
+                  <img src="assets/img/av1.jpg">
+                  <img src="assets/img/av2.jpg">
+                  <img src="assets/img/av3.jpg">
+                  <img src="assets/img/av4.jpg">
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-col class="ion-text-left">
+          <ion-card>
+            <ion-card-header>
+              <img src="assets/img/event3.jpg">
+            </ion-card-header>
+
+            <ion-card-content>
+              <p class="date">{{ actualDay }}</p>
+              <h2 class="eventname">Antonio Varas</h2>
+              <p class="location"><ion-icon name="location"></ion-icon>Antonio Varas 666, Providencia</p>
+
+              <div class="additional-info">
+                <div class="attendees">
+                  <img src="assets/img/av1.jpg">
+                  <img src="assets/img/av2.jpg">
+                  <img src="assets/img/av3.jpg">
+                  <img src="assets/img/av4.jpg">
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-col class="ion-text-left">
+          <ion-card>
+            <ion-card-header>
+              <img src="assets/img/event4.jpg">
+            </ion-card-header>
+
+            <ion-card-content>
+              <p class="date">{{ actualDay }}</p>
+              <h2 class="eventname">Maipú</h2>
+              <p class="location"><ion-icon name="location"></ion-icon>Av. Esquina Blanca 501, Maipú</p>
+
+              <div class="additional-info">
+                <div class="attendees">
+                  <img src="assets/img/av1.jpg">
+                  <img src="assets/img/av2.jpg">
+                  <img src="assets/img/av3.jpg">
+                  <img src="assets/img/av4.jpg">
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-col class="ion-text-left">
+          <ion-card>
+            <ion-card-header>
+              <img src="assets/img/event5.jpg">
+            </ion-card-header>
+
+            <ion-card-content>
+              <p class="date">{{ actualDay }}</p>
+              <h2 class="eventname">Plaza Vespucio</h2>
+              <p class="location"><ion-icon name="location"></ion-icon>Froilán Roa 7107, La Florida</p>
+
+              <div class="additional-info">
+                <div class="attendees">
+                  <img src="assets/img/av1.jpg">
+                  <img src="assets/img/av2.jpg">
+                  <img src="assets/img/av3.jpg">
+                  <img src="assets/img/av4.jpg">
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-slide>
+
+    </ion-slides>
+
+  </div>
+
+  <div class="default-top-padding title">
+    <h2>Más concurrido</h2>
+  </div>
+
+  <div class="live-event">
+    <img src="assets/img/student_read.svg">
+
+    <div class="info">
+      <div class="content">
+        <h6>Puente alto</h6>
+
+        <p class="stats">
+          <span><ion-icon name="eye"></ion-icon>1K</span>
+          <span><ion-icon name="heart"></ion-icon>&ngsp;368</span>
+        </p>
+
+        <p class="location">
+          <span><ion-icon name="location"></ion-icon>Av. Concha Y Toro 1340</span>
+        </p>
+
+        <div class="additional-info">
+          <div class="attendees">
+            <img src="assets/img/av1.jpg">
+            <img src="assets/img/av2.jpg">
+            <img src="assets/img/av3.jpg">
+            <img src="assets/img/av4.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

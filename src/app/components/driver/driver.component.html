@@ -1,0 +1,34 @@
+<div>
+    <img [src]="driver?.cover" />
+</div>
+
+<ion-item lines="none" mode="ios">
+  <ion-label class="ion-text-wrap">
+    <ion-text>
+      <strong> {{driver?.name }} {{ driver?.apellido }} </strong>
+    </ion-text>
+    <p>
+      <ion-text color="medium">
+        <strong> {{ getData(driver?.datos) }} </strong>
+      </ion-text>
+    </p>
+    <ion-row class="ion-text-center">
+
+      <ion-col size="2" *ngIf="driver?.rating === 5">
+        <ion-icon class="gold" name="star" color="warning"></ion-icon>
+      </ion-col>
+
+      <ion-col size="2" class="rating" class="ion-align-items-center">
+        <ion-text>{{driver?.rating}}</ion-text>
+        <ion-icon color="dark" name="star"></ion-icon>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-text >
+          <strong>Valor: ${{driver?.price}}</strong>
+        </ion-text>
+      </ion-col>
+
+    </ion-row>
+  </ion-label>
+</ion-item>

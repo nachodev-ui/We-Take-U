@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="header">
+    <h1>¿Deseando manejar?</h1>
+    <img src="assets/img/wel_cond.png">
+  </div>
+
+  <form [formGroup]="formConductor" id="form">
+
+    <ion-input placeholder="Nombre" formControlName="nombre" id="nombre" autocomplete="no"></ion-input>
+
+    <ion-input placeholder="Apellido(s)" formControlName="apellido" id="apellidos"></ion-input>
+
+    <ion-input placeholder="Email" formControlName="email" id="email" type="email"></ion-input>
+
+    <ion-input placeholder="Password" formControlName="password" id="password" type="password"></ion-input>
+
+    <ion-input placeholder="Confirm password" formControlName="password2" id="password2" type="password"></ion-input>
+
+    <ion-input type="tel" placeholder="Teléfono" formControlName="celular"id="telefono"></ion-input>
+
+    <ion-button class="btnRegistrar" (click)="registrarConductor()" shape="round" expand="block">Crear cuenta</ion-button>
+  </form>
+
+</ion-content>
+

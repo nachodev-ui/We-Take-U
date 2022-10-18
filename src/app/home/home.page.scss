@@ -1,0 +1,66 @@
+ion-content {
+  --background: #ffffff;
+}
+
+ion-slide {
+  display: block;
+  margin-top: 10vh;
+}
+
+.slide-img-padding {
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+img {
+  max-height: 150px;
+}
+
+//slide.titulo
+h3 {
+  color: #000;
+  font-size: 20px;
+  font-weight: lighter;
+  margin-bottom: 60px;
+}
+
+//Boton de registro
+.btn-reg {
+  height: 3.3rem;
+  margin-top: 10%;
+  --background: #95c83f;
+  --background-hover: #95c83f;
+
+  ion-label {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+  }
+}
+
+//Boton de iniciar session
+.btn-log {
+  height: 20px;
+
+  ion-label {
+    color: #000;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12.2px;
+  }
+}
+
+//Puntos que muestran la enumeracion del slide
+.bullet-slide {
+  --bullet-background: #8690b8;
+  --bullet-background-active: #5AE5A8;
+}
+
+@media screen and (max-height: 775px) {
+  img {
+    width: 70%;
+  }
+}

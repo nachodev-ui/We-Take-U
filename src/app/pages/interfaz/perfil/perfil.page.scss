@@ -1,0 +1,128 @@
+ion-content {
+  font-family: sans-serif;
+  color: #3c39a9;
+  --background: linear-gradient(180deg, #fafafa 0%, #fbfafa 100%);
+
+  ion-toolbar {
+    --background: linear-gradient(180deg, #fafafa 0%, #fbfafa 100%);
+
+    ion-back-button {
+      --color: #7e9f7b;
+    }
+
+    ion-title {
+      color: #212121;
+      font-size: 1.3rem;
+    }
+  }
+
+  .profile-card {
+    margin-top: 4vh;
+    background: linear-gradient(360deg, #e0f7de 0%, #f8f8f8 100%);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+
+    .avatar-container {
+      position: relative;
+      margin-bottom: 20px;
+
+      .avatar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        overflow: hidden;
+      }
+
+      ion-button {
+        position: absolute;
+        bottom: 20px;
+        right: 22%;
+
+        ion-icon {
+          font-size: 1.5rem;
+
+        }
+      }
+
+    }
+
+    .title {
+
+      h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #212121;
+        letter-spacing: 1px;
+      }
+
+      .subtitle {
+
+        p {
+          font-size: 1rem;
+          font-weight: 500;
+          color: gray;
+        }
+
+      }
+    }
+  }
+
+
+  .main-container {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+
+    ion-list {
+      padding: 5px;
+      margin: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      background: #f7f7f7;
+
+    }
+
+    ion-item {
+      margin-bottom: 5px;
+      --background: #f7f7f7;
+
+      ion-icon {
+        color: #87ae6f;
+      }
+    }
+
+
+    hr {
+      margin: 20px 0;
+      background: #000;
+      opacity: 0.1;
+    }
+
+  }
+
+  ion-button {
+    margin-top: 15px;
+    --background: #f7f7f7;
+    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    ion-label {
+        color: #000;
+      }
+
+    ion-icon {
+      color: #5aa564;
+    }
+  }
+}
+
+
