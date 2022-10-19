@@ -1,12 +1,19 @@
+
 ion-toolbar {
-  --background: #f5f5f3;
+--background: #f5f5f3;
 
   ion-back-button {
     --color: #010100;
   }
 
+  .btnConductor {
+    box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+    --border-radius: 10px;
+    --color: #212121;
+  }
+
   ion-label {
-    color: #010100;
+    color: #212121;
     padding-left: 4%;
     padding-top: 10%;
   }
@@ -33,6 +40,7 @@ ion-toolbar {
     }
   }
 }
+
 
 ion-icon {
   color: #010100;

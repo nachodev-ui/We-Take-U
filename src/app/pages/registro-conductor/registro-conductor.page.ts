@@ -43,10 +43,20 @@ export class RegistroConductorPage implements OnInit {
   ngOnInit() {
   }
 
-  async intentaConOtroEmail() {
+  async loadingRegister() {
+    const loading = await this.loadingCtrl.create({
+      mode: 'ios',
+      message: 'Registrando...',
+      duration: 300,
+    });
+    await loading.present();
+  }
+
+  async voidForm() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Muy bien, intenta con otro email',
+      header: 'Registro fallido',
+      message: 'Por favor, complete todos los campos.',
       buttons: ['OK'],
     });
 
@@ -77,31 +87,21 @@ export class RegistroConductorPage implements OnInit {
     await alert.present();
   }
 
-  async EmailOrPasswordAreNotValid() {
+  async intentaConOtroEmail() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Registro fallido',
-      message: 'El correo o la contraseña no son válidos, por favor, intente de nuevo',
+      header: 'Muy bien, intenta con otro email',
       buttons: ['OK'],
     });
 
     await alert.present();
   }
 
-  async loadingRegister() {
-    const loading = await this.loadingCtrl.create({
-      mode: 'ios',
-      message: 'Registrando...',
-      duration: 300,
-    });
-    await loading.present();
-  }
-
-  async registerSuccess() {
+  async EmailOrPasswordAreNotValid() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Registro exitoso',
-      message: 'Para continuar, permitenos conocer más sobre tu medio de transporte',
+      header: 'Registro fallido',
+      message: 'El correo o la contraseña no son válidos, por favor, intente de nuevo',
       buttons: ['OK'],
     });
 
@@ -119,17 +119,6 @@ export class RegistroConductorPage implements OnInit {
     await alert.present();
   }
 
-  async voidForm() {
-    const alert = await this.alertCtrl.create({
-      mode: 'ios',
-      header: 'Registro fallido',
-      message: 'Por favor, complete todos los campos',
-      buttons: ['OK'],
-    });
-
-    await alert.present();
-  }
-
   async registrarConductor() {
 
     if (this.formConductor.value.password === this.formConductor.value.password2) {
@@ -139,7 +128,6 @@ export class RegistroConductorPage implements OnInit {
         this.loadingRegister();
 
         const validForm = await this.auth.registerUser(this.formConductor.value.email, this.formConductor.value.password).catch(res => {
-          this.EmailOrPasswordAreNotValid();
         });
 
         if (validForm) {
@@ -148,13 +136,14 @@ export class RegistroConductorPage implements OnInit {
           const id = validForm.user.uid;
 
           this.formConductor.value.uid = id;
+          this.formConductor.value.password = null;
+          this.formConductor.value.password2 = null;
 
           this.database.createDoc(this.formConductor.value, path, id);
 
-          setTimeout(() => {
-            this.registerSuccess();
-            this.router.navigate(['info-vehiculo']);
-          }, 2300);
+          this.registerSuccess();
+
+          this.auth.accountVerification();
 
         } else {
           this.valideIfEmailAlreadyExists();
@@ -166,10 +155,19 @@ export class RegistroConductorPage implements OnInit {
       this.passwordsAreNotEqual();
     }
 
-    setTimeout(() => {
-      this.router.navigate(['/verificate-conductor']);
+  }
+
+  async registerSuccess() {
+    const alert = await this.alertCtrl.create({
+      mode: 'ios',
+      header: 'Registro exitoso',
+      message: 'Para continuar, permitenos conocer más sobre tu medio de transporte',
+      buttons: ['OK'],
     });
 
+    alert.present();
+
+    this.router.navigateByUrl('verificate');
   }
 
 }

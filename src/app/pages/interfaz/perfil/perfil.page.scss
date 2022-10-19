@@ -1,24 +1,19 @@
 ion-content {
   font-family: sans-serif;
-  color: #3c39a9;
   --background: linear-gradient(180deg, #fafafa 0%, #fbfafa 100%);
 
   ion-toolbar {
     --background: linear-gradient(180deg, #fafafa 0%, #fbfafa 100%);
 
     ion-back-button {
-      --color: #7e9f7b;
-    }
-
-    ion-title {
-      color: #212121;
       font-size: 1.3rem;
+      --color: #C689C6;
     }
   }
 
   .profile-card {
     margin-top: 4vh;
-    background: linear-gradient(360deg, #e0f7de 0%, #f8f8f8 100%);
+    background: linear-gradient(360deg, #FFE6F7 0%, #f8f8f8 100%);
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -90,6 +85,11 @@ ion-content {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
       background: #f7f7f7;
 
+      ion-label {
+        font-size: 1rem;
+        font-weight: lighter;
+        color: #212121;
+      }
     }
 
     ion-item {
@@ -97,7 +97,7 @@ ion-content {
       --background: #f7f7f7;
 
       ion-icon {
-        color: #87ae6f;
+        color: #937DC2;
       }
     }
 
@@ -120,7 +120,7 @@ ion-content {
       }
 
     ion-icon {
-      color: #5aa564;
+      color: #937DC2;
     }
   }
 }

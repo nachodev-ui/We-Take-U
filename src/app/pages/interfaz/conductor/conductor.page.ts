@@ -27,7 +27,7 @@ export class ConductorPage implements OnInit {
   }
 
   loadSedes() {
-    this.router.navigateByUrl('c-modal');
+    this.router.navigateByUrl('googlemaps');
   }
 
 

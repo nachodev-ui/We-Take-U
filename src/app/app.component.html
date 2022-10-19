@@ -1,20 +1,19 @@
 <ion-app>
-  <ion-menu *ngIf="login" side="start" menuId="main-menu" contentId="main">
+  <ion-menu *ngIf="login" side="start" menuId="main-menu" contentId="main" name="menu" id="menu">
 
     <ion-content>
       <div class="menu-header-bg"></div>
-      <div class="header-content">
-        <img src="" alt="">
+      <div *ngIf="infoUser" class="header-content">
+        <img src="{{infoUser.imagen}}">
         <ion-label>
           <h2>Bienvenid@, </h2>
-          <h3></h3>
+          <h3>{{infoUser.nombre}}</h3>
           <p *ngIf="rol === 'Pasajero'">Pasajero</p>
           <p *ngIf="rol === 'Conductor'">Conductor</p>
-          <p *ngIf="rol === 'Administrador'">Administrador</p>
         </ion-label>
       </div>
 
-      <ion-menu-toggle auto-hide="true">
+      <ion-menu-toggle  auto-hide="true">
         <ion-list mode="ios" class="menu-items" lines="none">
           <ion-item *ngIf="login" (click)="navigateProfile()">
             <ion-icon name="person-outline"></ion-icon>Mi perfil
@@ -41,6 +40,12 @@
           </ion-item>
         </ion-list>
       </ion-menu-toggle>
+
+      <ion-footer class="ion-no-border">
+        <ion-toolbar>
+          <ion-title>Version 1.0.8</ion-title>
+        </ion-toolbar>
+      </ion-footer>
 
     </ion-content>
 

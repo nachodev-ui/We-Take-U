@@ -15,6 +15,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+
 import { environment } from 'src/environments/environment';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -33,13 +35,17 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    GooglePlaceModule
   ],
   providers: [
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     }
+  ],
+  exports: [
+    GooglePlaceModule
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

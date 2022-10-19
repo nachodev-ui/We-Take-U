@@ -6,7 +6,7 @@
 
 #map {
   position: absolute;
-  top: 0;
+  top: 100px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -54,4 +54,54 @@
 
 .map-pill-show {
   bottom: 25px !important;
+}
+
+.map-places-pill {
+  position: absolute;
+  top: 32px;
+  background: #753f17;
+  left: 0;
+  right: 0;
+  margin: 12px;
+  padding: 0px 12px 14px 12px;
+  border-radius: 0px 0px 30px 30px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+  z-index: 9;
+  color: #FFF;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.25s, padding-top 0.25s;
+
+  .material-icons {
+      font-size: 2em !important;
+      color: #FFF;
+  }
+
+  .material-icons.close-btn {
+      font-size: 1.3em !important;
+      display: flex;
+      align-items: center;
+  }
+
+  input {
+      background: transparent;
+      border: none;
+      color: #FFF;
+      font-size: 1.2em;
+      width: 100%;
+      padding: 12px 12px;
+  }
+
+  input[type=text] {
+      color: #FFF !important;
+      background: transparent;
+      border: none;
+      width: 100%;
+      margin-right: 12px;
+      text-overflow: ellipsis;
+  }
+
+  input[type=text]::placeholder {
+      color: #FFF;
+  }
 }

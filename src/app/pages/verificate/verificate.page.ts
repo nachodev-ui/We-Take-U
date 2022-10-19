@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 
 import { AlertController, LoadingController } from '@ionic/angular';
 
-import { AuthService } from 'src/app/services/auth.service';
-
 @Component({
   selector: 'app-verificate',
   templateUrl: './verificate.page.html',
@@ -15,7 +13,6 @@ export class VerificatePage implements OnInit {
 
   constructor(
     private router: Router,
-    private auth: AuthService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController
   ) { }
@@ -52,32 +49,21 @@ export class VerificatePage implements OnInit {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
       header: 'Cuenta verificada',
-      message: 'Su cuenta ha sido verificada correctamente. Ya puede iniciar sesión.',
+      message: 'Su cuenta ha sido verificada correctamente. Ahora ingrese su medio de transporte por favor.',
       buttons: ['OK']
     });
     await alert.present();
-  }
-
-  async alertNotVerified() {
-    const alert = await this.alertCtrl.create({
-      mode: 'ios',
-      header: 'Cuenta no verificada',
-      message: 'Su cuenta no ha sido verificada. Por favor, ingrese a su correo electrónico y verifique su cuenta.',
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
-
-  async recargarPagina() {
-    window.location.reload();
   }
 
   async redirectToFinal() {
     await this.verifing();
 
-    setTimeout(() => {
-      this.router.navigateByUrl('/login');
-    }, 1000);
+    setTimeout(async () => {
+
+      this.alertCorrectVerified();
+
+      await this.router.navigateByUrl('info-vehiculo');
+    }, 1500);
 
   }
 

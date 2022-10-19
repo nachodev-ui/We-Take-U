@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController, Platform } from '@ionic/angular';
-import { ConductorI, UserI, ViajeI } from './models/models';
-import { AuthService } from './services/auth.service';
 
+import { Router } from '@angular/router';
+
+import { AlertController, Platform } from '@ionic/angular';
+
+import { ConductorI, UserI, ViajeI } from './models/models';
+
+import { AuthService } from './services/auth.service';
 import { FirebaseService } from './services/firebase.service';
 
 @Component({
@@ -12,6 +15,9 @@ import { FirebaseService } from './services/firebase.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
+
+  uid: string = null;
+  infoUser: UserI = null;
 
   /*Antes de loguear, logged = false*/
   /*Controlar la vista*/
@@ -59,6 +65,22 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.stateUser().subscribe( res => {
+      this.getUid();
+    });
+  }
+
+  async getUid() {
+    const uid = await this.auth.getUid();
+
+    if (uid) {
+      this.uid = uid;
+
+      this.getInfoUser();
+
+    } else {
+      this.uid = null;
+    }
   }
 
   /*Alerta de sesion cerrada*/
@@ -130,6 +152,19 @@ export class AppComponent implements OnInit {
         this.rol = res.perfil;
       }
     });
+  }
+
+  /*Tomar los datos del usuario autenticado*/
+  getInfoUser() {
+    const path = 'Usuarios';
+    const id = this.uid;
+
+    this.database.getDoc<UserI>(path, id).subscribe( credentials => {
+      if (credentials) {
+        this.infoUser = credentials;
+      }
+    });
+
   }
 
   getConductorData(uid: string) {

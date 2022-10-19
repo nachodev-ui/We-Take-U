@@ -49,6 +49,7 @@ export class PerfilPage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: 'Editar Perfil',
       mode: 'ios',
+      cssClass: 'alertEditProfile',
       inputs: [
         {
           name: 'direccion',

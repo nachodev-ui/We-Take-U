@@ -25,8 +25,13 @@ export class AuthService {
     return await this.authfire.currentUser.then(u => u?.sendEmailVerification());
   }
 
-  async emailVerified() {
-    return await this.authfire.currentUser.then(u => u?.emailVerified);
+  authUserDisabled() {
+    return this.authfire.currentUser.then( user => {
+      if(user) {
+        return user.emailVerified;
+
+      }
+    });
   }
 
   googleLogin() {

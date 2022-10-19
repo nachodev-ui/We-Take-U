@@ -36,14 +36,14 @@ ion-content {
   }
 
   h2 {
+    font-size: 1rem;
     font-weight: 400;
     color: #fff;
   }
 
   h3 {
-    font-weight: lighter;
-    color: rgb(244, 244, 244);
-    font-size: 14px;
+    color: #fff;
+    font-size: 1rem;
     margin-bottom: 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
@@ -99,5 +99,18 @@ ion-content {
     padding-right: 0;
     color: #86979f;
     font-size: 17px;
+  }
+
+}
+
+ion-footer {
+  margin-top: 40vh;
+
+  ion-toolbar {
+    --background: #f5f5f3;
+
+    ion-title {
+      color: #86979f;
+    }
   }
 }

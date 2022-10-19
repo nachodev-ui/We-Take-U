@@ -1,19 +1,38 @@
 ion-header {
   background: #f1f5f8;
 
-  ion-toolbar, ion-item, p {
-    color: #000;
+  ion-toolbar {
+    --background: #f9fffa;
+
+    ion-buttons {
+
+      ion-menu-button {
+        font-size: 2.5rem;
+        --color: #000;
+      }
+    }
   }
 
-  ion-toolbar {
-    ion-menu-button {
-      font-size: 2.5rem;
-      --background: #f8f8f8;
-      --color: #000;
-    }
+  ion-item {
+    color: #212121;
+    --background: #f8f8f8;
 
-    ion-icon {
-      color: #000;
+    ion-list {
+      --background: #f8f8f8;
+
+      ion-label {
+
+        .data {
+          color: #212121;
+          background: #f8f8f8;
+        }
+
+        h3 {
+          color: #212121;
+          background: #f8f8f8;
+        }
+      }
+
     }
   }
 
@@ -83,23 +102,27 @@ ion-content {
       font-weight: bold;
     }
     ion-label.heading {
-      font-size: 1.5rem;
+      font-size: 1.7rem;
+      color: #212121;
     }
     ion-col {
       align-self: center;
 
       ion-button {
+        color: #000;
         padding-top: 5px;
         font-size: 1.17rem;
         --padding-end: 5%;
       }
+
     }
 
     ion-card {
-      height: 39vh;
-      margin-top: 10px;
+      height: 35vh;
+      margin-top: 1rem;
       margin-bottom: 5px;
       border-radius: 12px;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     }
   }
 

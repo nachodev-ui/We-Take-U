@@ -1,5 +1,12 @@
 <ion-content>
 
+  <input type="text"
+    [(ngModel)]="placesText"
+    #placesRef="ngx-places"
+    placeholder="Set truck location..."
+    ngx-google-places-autocomplete
+    (onAddressChange)="handleAddressChange($event)"/>
+
   <div class="app-page">
     <div #map id="map">
     </div>
