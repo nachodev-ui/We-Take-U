@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
   /*La APP se inicializa en SplashScreen*/
   initializeApp() {
     this.platform.ready().then(() => {
-      this.router.navigateByUrl('interfaz/conductor');
+      this.router.navigateByUrl('splashscreen');
     });
   }
 

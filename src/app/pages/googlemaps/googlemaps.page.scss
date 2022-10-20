@@ -6,7 +6,7 @@
 
 #map {
   position: absolute;
-  top: 100px;
+  top: 25px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -81,15 +81,6 @@
       font-size: 1.3em !important;
       display: flex;
       align-items: center;
-  }
-
-  input {
-      background: transparent;
-      border: none;
-      color: #FFF;
-      font-size: 1.2em;
-      width: 100%;
-      padding: 12px 12px;
   }
 
   input[type=text] {

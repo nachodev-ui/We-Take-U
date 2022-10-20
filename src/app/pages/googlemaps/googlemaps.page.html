@@ -1,9 +1,11 @@
 <ion-content>
 
-  <input type="text"
+  <input
+    id="direction"
+    type="text"
     [(ngModel)]="placesText"
     #placesRef="ngx-places"
-    placeholder="Set truck location..."
+    placeholder="Dirección de viaje. . ."
     ngx-google-places-autocomplete
     (onAddressChange)="handleAddressChange($event)"/>
 
@@ -15,7 +17,7 @@
   <div class="map-pill" [ngClass]="{'map-pill-show': showMapPill }" >
     <div class="youps-pill-logo"></div>
     <div class="youps-pill-content">
-      <div class="youps-pill-label">Tu viaje esta en proceso</div>
+      <div class="youps-pill-label">Tu viaje está en proceso</div>
       <div class="youps-pill-distance-time">{{ distance }} / {{ time }} </div>
     </div>
   </div>

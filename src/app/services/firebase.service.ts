@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { LoadingController, ToastController } from '@ionic/angular';
-import { VehiculoI } from '../models/models';
+import { VehiculoI, ViajeI } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +60,12 @@ export class FirebaseService {
   getCollection<tipo>(path: string) {
     const collection = this.database.collection<tipo>(path);
     return collection.valueChanges();
+  }
+
+  saveViajeDetails(viaje: ViajeI) {
+    const id = this.database.createId();
+    viaje.uid = id;
+    return this.database.collection('Viajes').doc(id).set(viaje);
   }
 
 }

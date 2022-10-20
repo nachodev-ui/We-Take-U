@@ -35,11 +35,12 @@ export interface VehiculoI {
 export interface ViajeI {
   uid: string;
   estado: string;
-  valor: string;
-  direccion: string;
+  destino: string;
+  duracionViaje: string;
+  fechaViaje: string;
   hora: string;
-  conductorName: string;
-  conductorApellido: string;
-  coverConductor: string;
+  precio: string;
+  conductor: string;
+  pasajero: string;
 }
 

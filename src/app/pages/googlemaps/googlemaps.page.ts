@@ -1,8 +1,10 @@
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-
-import { AlertController } from '@ionic/angular';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 import { } from 'googlemaps';
+import { ViajeI } from 'src/app/models/models';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-googlemaps',
@@ -41,14 +43,14 @@ export class GooglemapsPage implements OnInit {
   togglePlacesSearch: boolean = false;
 
   constructor(
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private fire: FirebaseService,
+    private alertCtrl: AlertController,
+    private router: Router,
+    private loadingCtrl: LoadingController
   ) { }
 
   async ngOnInit() {
-    await this.loadMap();
-  }
-
-  async loadMap() {
     this.ds = new google.maps.DirectionsService();
     this.dr = new google.maps.DirectionsRenderer({
       map: null,
@@ -94,6 +96,41 @@ export class GooglemapsPage implements OnInit {
     });
   }
 
+  async loading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando',
+      duration: 1200
+    });
+    await loading.present();
+  }
+
+  async confirmNewViaje() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmar',
+      message: '¿Desea confirmar el viaje?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.saveViajeDetailsInUser();
+          }
+        }
+      ]
+    });
+    await alert.present();
+
+    this.loading();
+
+    setTimeout(() => {
+      this.router.navigateByUrl('interfaz/pasajero-viajes')
+    }, 200);
+  }
+
   setRoutePolyne() {
     let request = {
       origin: this.source,
@@ -115,6 +152,7 @@ export class GooglemapsPage implements OnInit {
           let distanceInfo = response.routes[0].legs[0];
           this.distance = distanceInfo.distance.text;
           this.time = distanceInfo.duration.text;
+          this.generateViajeDetails();
         });
       }
     });
@@ -122,6 +160,8 @@ export class GooglemapsPage implements OnInit {
   }
 
   handleAddressChange(event: any) {
+    //rescue geolocation data
+
     const lat = event.geometry.location.lat();
     const lng = event.geometry.location.lng();
 
@@ -153,10 +193,83 @@ export class GooglemapsPage implements OnInit {
     }
 
     this.setRoutePolyne();
+    
   }
 
   onCenterMap() {
     this.map.panTo(this.source);
+  }
+
+  viajeDetails: ViajeI = {
+    destino: '',
+    duracionViaje: '',
+    fechaViaje: '',
+    hora: '',
+    precio: '',
+    conductor: '',
+    pasajero: '',
+    estado: '',
+    uid: ''
+  }
+
+  generateViajeDetails() {
+    let viajeDetails: ViajeI = {
+      destino: this.placesText,
+      duracionViaje: this.time,
+      fechaViaje: this.today(),
+      hora: this.hours(),
+      precio: this.calculatePrice(),
+      conductor: '',
+      pasajero: '',
+      estado: '',
+      uid: ''
+    }
+    return viajeDetails;
+
+  }
+
+  //calcular precio a partir de origen y destino
+  calculatePrice() {
+    let price = '0';
+    let distance = this.distance;
+    let distanceNumber = distance.split(' ');
+    let distanceNumberFloat = parseFloat(distanceNumber[0]);
+    if (distanceNumberFloat <= 5) {
+      price = '5.000';
+    } else if (distanceNumberFloat > 5 && distanceNumberFloat <= 10) {
+      price = '10.000';
+    } else if (distanceNumberFloat > 10 && distanceNumberFloat <= 15) {
+      price = '15.000';
+    } else if (distanceNumberFloat > 15 && distanceNumberFloat <= 20) {
+      price = '20.000';
+    } else if (distanceNumberFloat > 20 && distanceNumberFloat <= 25) {
+      price = '25.000';
+    } else if (distanceNumberFloat > 25 && distanceNumberFloat <= 30) {
+      price = '30.000';
+    }
+    return price;
+  }
+
+  hours() {
+    let date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let time = `${hours}:${minutes}`;
+    return time;
+  }
+
+  today() {
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let today = `${day}/${month}/${year}`;
+    return today;
+  }
+
+  saveViajeDetailsInUser() {
+    let viajeDetails = this.generateViajeDetails();
+    this.fire.saveViajeDetails(viajeDetails);
   }
 
 }
