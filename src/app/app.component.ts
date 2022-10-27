@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, Platform, PopoverController } from '@ionic/angular';
+
+import { Storage } from '@ionic/storage-angular';
 
 import { ConductorI, UserI, ViajeI } from './models/models';
 
 import { AuthService } from './services/auth.service';
 import { FirebaseService } from './services/firebase.service';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguagePopoverPage } from './pages/language-popover/language-popover.page';
+import { LanguagesService } from './services/languages.service';
 
 @Component({
   selector: 'app-root',
@@ -31,10 +36,15 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private alertCtrl: AlertController,
     private auth: AuthService,
-    private database: FirebaseService
+    private database: FirebaseService,
+    private translate: TranslateService,
+    private popoverCtrl: PopoverController,
+    private languageService: LanguagesService,
+    private storage: Storage
     ) {
 
     this.initializeApp();
+
     this.auth.stateUser().subscribe( res => {
       if(res) {
         console.log('User is logged in');
@@ -60,14 +70,45 @@ export class AppComponent implements OnInit {
   /*La APP se inicializa en SplashScreen*/
   initializeApp() {
     this.platform.ready().then(() => {
-      this.router.navigateByUrl('splashscreen');
+      this.router.navigateByUrl('home');
+
+      this.languageService.setInitialAppLanguage();
+
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    await this.storage.create();
+
     this.auth.stateUser().subscribe( res => {
       this.getUid();
     });
+  }
+
+  async autoHideAfterSelectLng() {
+    const menu = document.querySelector('ion-menu');
+
+    setTimeout(async () => {
+      await menu.close();
+    }, 2200);
+  }
+
+  async openLanguagePopover(ev: any) {
+    await this.popoverCtrl.create({
+      component: LanguagePopoverPage,
+      event: ev,
+      //translucent: true
+    }).then(popover => popover.present());
+  }
+
+  async popoverAlert() {
+    const alert = await this.alertCtrl.create({
+      header: this.translate.instant('ALERT.header'),
+      message: this.translate.instant('ALERT.message'),
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   async getUid() {

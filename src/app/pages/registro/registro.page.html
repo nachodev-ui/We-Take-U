@@ -6,7 +6,7 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button class="btnConductor" (click)="modoConductor()" fill="clear">Modo conductor<ion-icon slot="end" name="car-outline"></ion-icon></ion-button>
+      <ion-button class="btnConductor" (click)="modoConductor()" fill="clear">{{ 'U_REGISTER.btnDriver' | translate }}<ion-icon slot="end" name="car-outline"></ion-icon></ion-button>
     </ion-buttons>
 
   </ion-toolbar>
@@ -15,25 +15,25 @@
 <ion-content>
 
   <div id="header">
-    <h1>¿Usuario nuevo?</h1>
+    <h1>{{ 'U_REGISTER.title' | translate }}</h1>
     <img src="assets/img/car.webp">
   </div>
 
   <form [formGroup]="signupForm" id="form">
 
-    <ion-input placeholder="Nombre" formControlName="nombre" id="nombre" autocomplete="no"></ion-input>
+    <ion-input placeholder="{{ 'U_REGISTER.name' | translate }}" formControlName="nombre" id="nombre" autocomplete="no"></ion-input>
 
-    <ion-input placeholder="Apellidos" formControlName="apellido" id="apellidos"></ion-input>
+    <ion-input placeholder="{{ 'U_REGISTER.lastname' | translate }}" formControlName="apellido" id="apellidos"></ion-input>
 
-    <ion-input placeholder="Email" formControlName="email" id="email" type="email"></ion-input>
+    <ion-input placeholder="{{ 'U_REGISTER.email' | translate }}" formControlName="email" id="email" type="email"></ion-input>
 
-    <ion-input placeholder="Password" formControlName="password" id="password" type="password"></ion-input>
+    <ion-input placeholder="{{ 'U_REGISTER.password' | translate }}" formControlName="password" id="password" type="password"></ion-input>
 
-    <ion-input placeholder="Confirm password" formControlName="password2" id="password2" type="password"></ion-input>
+    <ion-input placeholder="{{ 'U_REGISTER.c_password' | translate }}" formControlName="password2" id="password2" type="password"></ion-input>
 
-    <ion-input type="tel" placeholder="Teléfono" formControlName="celular"id="telefono"></ion-input>
+    <ion-input type="tel" placeholder="{{ 'U_REGISTER.phone' | translate }}" formControlName="celular"id="telefono"></ion-input>
 
-    <ion-button class="btnRegistrar" (click)="registrar()" shape="round" expand="block">Crear cuenta</ion-button>
+    <ion-button class="btnRegistrar" (click)="registrar()" shape="round" expand="block">{{ 'U_REGISTER.btnRegister' | translate }}</ion-button>
   </form>
 
 </ion-content>

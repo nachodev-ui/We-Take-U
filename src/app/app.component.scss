@@ -106,11 +106,28 @@ ion-content {
 ion-footer {
   margin-top: 40vh;
 
-  ion-toolbar {
+  .footer-tool {
     --background: #f5f5f3;
 
+    ion-buttons {
+      margin-top: 0.7rem;
+      margin-left: 0;
+
+      ion-button {
+        --background: #f5f5f3;
+        color: #86979f;
+        font-size: 1.5rem;
+
+        ion-icon {
+          margin-right: 0;
+        }
+      }
+    }
+
     ion-title {
+      margin-top: 0.4rem;
       color: #86979f;
     }
   }
 }
+

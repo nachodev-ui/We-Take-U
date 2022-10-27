@@ -11,20 +11,20 @@
 <ion-content>
 
   <div id="header">
-    <h1>Inicio de sesión</h1>
+    <h1>{{ 'LOGIN.title' | translate }}</h1>
     <img src="assets/img/car.webp">
   </div>
 
   <form [formGroup]="formularioLogin" id="form">
 
-    <ion-input placeholder="Email" formControlName="email" autocomplete="no"></ion-input>
+    <ion-input placeholder="{{ 'LOGIN.email' | translate }}" formControlName="email" autocomplete="no"></ion-input>
 
-    <ion-input placeholder="Password" type="password" formControlName="password" autocomplete="no"></ion-input>
+    <ion-input placeholder="{{ 'LOGIN.password' | translate }}" type="password" formControlName="password" autocomplete="no"></ion-input>
 
-    <ion-button (click)="login()" class="btn-login" shape="round" expand="block">Login</ion-button>
+    <ion-button (click)="login()" class="btn-login" shape="round" expand="block">{{ 'LOGIN.btnLogin' | translate }}</ion-button>
 
     <ion-button (click)="resetPass()" class="btn-reset" expand="block" fill="clear" shape="round">
-      Recuperar mi contraseña
+      {{ 'LOGIN.btnReset' | translate }}
     </ion-button>
 
   </form>
@@ -42,7 +42,7 @@
     <ion-buttons slot="end">
       <ion-button (click)="signUp()" color="primary">
         <ion-icon name="person-add-outline"></ion-icon>
-        <ion-label>Registrarse</ion-label>
+        <ion-label>{{ 'LOGIN.btnSignUp' | translate }}</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

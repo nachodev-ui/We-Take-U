@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { LanguagesService } from '../services/languages.service';
 import { HomeService } from './home.service';
 
 @Component({
@@ -15,8 +15,14 @@ export class HomePage {
 
   constructor(
     private servicio: HomeService,
-    private router: Router,
-    ) {}
+    private languageService: LanguagesService
+    ) {
+      this.initializeApp();
+    }
+
+  initializeApp() {
+    this.languageService.setInitialAppLanguage();
+  }
 
   //Obtenemos los slides del servicio
   ngOnInit() {

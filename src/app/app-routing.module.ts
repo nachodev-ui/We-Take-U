@@ -76,6 +76,10 @@ const routes: Routes = [
     path: 'verificate-conductor',
     loadChildren: () => import('./pages/verificate-conductor/verificate-conductor.module').then( m => m.VerificateConductorPageModule)
   },
+  {
+    path: 'language-popover',
+    loadChildren: () => import('./pages/language-popover/language-popover.module').then( m => m.LanguagePopoverPageModule)
+  },
 ];
 
 @NgModule({

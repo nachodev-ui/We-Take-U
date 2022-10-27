@@ -9,6 +9,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -24,7 +26,8 @@ export class RegistroPage implements OnInit {
     private router: Router,
     private auth: AuthService,
     private database: FirebaseService,
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private translate: TranslateService
     ) {
       this.signupForm = this.builder.group({
         nombre: [''],
@@ -171,7 +174,7 @@ export class RegistroPage implements OnInit {
   async loadingConductor() {
     const loading = await this.loadingCtrl.create({
       mode: 'ios',
-      message: 'Ingresando...',
+      message: this.translate.instant('U_REGISTER.DR_ALERT.LOADING.message'),
       duration: 1000,
     });
     await loading.present();
@@ -180,16 +183,16 @@ export class RegistroPage implements OnInit {
   async modoConductor() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Modo conductor',
-      message: '¿Desea crear una cuenta como conductor?',
+      header: this.translate.instant('U_REGISTER.DR_ALERT.header'),
+      message: this.translate.instant('U_REGISTER.DR_ALERT.message'),
       buttons: [
         {
-          text: 'No',
+          text: this.translate.instant('U_REGISTER.DR_ALERT.no'),
           role: 'cancel',
           cssClass: 'secondary'
         },
         {
-          text: 'Sí',
+          text: this.translate.instant('U_REGISTER.DR_ALERT.yes'),
           cssClass: 'primary',
           handler: () => {
             this.loadingConductor();

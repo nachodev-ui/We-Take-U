@@ -4,12 +4,14 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
+import { IonicStorageModule } from '@ionic/storage-angular';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -17,9 +19,22 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
 import { environment } from 'src/environments/environment';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { LanguagePopoverPageModule } from './pages/language-popover/language-popover.module';
+
+registerLocaleData(localeEs, 'es');
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -29,6 +44,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     AngularFireAuthModule,
@@ -36,7 +52,15 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     AngularFirestoreModule,
     ReactiveFormsModule,
     FormsModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient],
+      },
+    }),
+    LanguagePopoverPageModule
   ],
   providers: [
     {
@@ -45,7 +69,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     }
   ],
   exports: [
-    GooglePlaceModule
+    GooglePlaceModule,
+    TranslateModule
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

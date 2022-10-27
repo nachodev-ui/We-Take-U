@@ -8,8 +8,9 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 
 import { AuthService } from 'src/app/services/auth.service';
 
-import { ConductorI, UserI } from 'src/app/models/models';
+import { UserI } from 'src/app/models/models';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { LanguagesService } from 'src/app/services/languages.service';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,11 @@ export class LoginPage implements OnInit {
     public navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private auth: AuthService,
-    private database: FirebaseService) {
+    private database: FirebaseService,
+    private languageService: LanguagesService
+    ) {
+
+    this.initializeApp();
 
     /* Validaciones para un formulario */
     this.formularioLogin = this.builder.group
@@ -55,6 +60,10 @@ export class LoginPage implements OnInit {
       }
     });
 
+  }
+
+  initializeApp() {
+    this.languageService.setInitialAppLanguage();
   }
 
   ngOnInit() {

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GooglemapsService } from './googlemaps.service';
+import { LanguagesService } from './languages.service';
 
-describe('GooglemapsService', () => {
-  let service: GooglemapsService;
+describe('LanguagesService', () => {
+  let service: LanguagesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GooglemapsService);
+    service = TestBed.inject(LanguagesService);
   });
 
   it('should be created', () => {

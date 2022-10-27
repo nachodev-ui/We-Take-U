@@ -1,0 +1,87 @@
+{
+  "MENU": {
+    "title": "Bienvenid@",
+    "profile": "Mi perfil",
+    "driver": "Conductor",
+    "drivers": "Conductores",
+    "passenger": "Pasajero",
+    "passengers": "Pasajeros",
+    "messages": "Mensajes",
+    "trips": "Viajes",
+    "logout": "Cerrar sesión"
+  },
+
+  "FOOTER": {
+    "version": "Versión"
+  },
+
+  "HOME": {
+    "f_slide": {
+      "title": "La dirección que necesitas a un click"
+    },
+    "s_slide": {
+      "title": "Vehículos disponibles en tu institución"
+    },
+    "t_slide": {
+      "title": "Sé el ejemplo de compañerismo"
+    },
+    "btnAccount": "Crear cuenta",
+    "btnLogin": "Iniciar sesión"
+  },
+
+  "LOGIN": {
+    "title": "Inicio de Sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "btnLogin": "Iniciar Sesión",
+    "btnReset": "Recuperar mi contraseña",
+    "btnSignUp": "Registrarse"
+  },
+
+  "U_REGISTER": {
+    "title": "¿Usuario nuevo?",
+    "btnDriver": "Modo conductor",
+    "name": "Nombre",
+    "lastname": "Apellido(s)",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "c_password": "Confirmar contraseña",
+    "phone": "Número de celular",
+    "btnRegister": "Crear cuenta",
+
+    "DR_ALERT": {
+      "header": "Modo conductor",
+      "message": "¿Desea crear una cuenta cómo conductor?",
+      "yes": "Sí",
+      "no": "No",
+
+      "LOADING": {
+        "message": "Por favor espere..."
+      }
+    }
+  },
+
+  "D_REGISTER": {
+    "title": "New user?",
+    "btnDriver": "Driving mode",
+    "name": "Name",
+    "lastname": "Lastname",
+    "email": "Email",
+    "password": "Password",
+    "c_password": "Confirm password",
+    "phone": "Phone number",
+    "btnRegister": "Create an account",
+
+    "DR_ALERT": {
+      "header": "Driving mode",
+      "message": "Would you like to create a driver account?",
+      "yes": "Yes",
+      "no": "No",
+
+      "LOADING": {
+        "message": "Please wait..."
+      }
+    }
+  }
+
+}

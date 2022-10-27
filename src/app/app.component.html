@@ -6,46 +6,58 @@
       <div *ngIf="infoUser" class="header-content">
         <img src="{{infoUser.imagen}}">
         <ion-label>
-          <h2>Bienvenid@, </h2>
+          <h2>{{ 'MENU.title' | translate }}, </h2>
+
           <h3>{{infoUser.nombre}}</h3>
-          <p *ngIf="rol === 'Pasajero'">Pasajero</p>
-          <p *ngIf="rol === 'Conductor'">Conductor</p>
+          <p *ngIf="rol === 'Pasajero'">{{ 'MENU.passenger' | translate }}</p>
+          <p *ngIf="rol === 'Conductor'">{{ 'MENU.driver' | translate }}</p>
         </ion-label>
       </div>
 
-      <ion-menu-toggle  auto-hide="true">
+      <ion-menu-toggle auto-hide="true">
         <ion-list mode="ios" class="menu-items" lines="none">
           <ion-item *ngIf="login" (click)="navigateProfile()">
-            <ion-icon name="person-outline"></ion-icon>Mi perfil
+            <ion-icon name="person-outline"></ion-icon>{{ 'MENU.profile' | translate }}
           </ion-item>
           <ion-item *ngIf="rol === 'Pasajero'" class="active">
-            <ion-icon name="car-sport-outline"></ion-icon>Conductores
+            <ion-icon name="car-sport-outline"></ion-icon>{{ 'MENU.drivers' | translate }}
           </ion-item>
 
           <ion-item *ngIf="rol === 'Conductor'" class="active">
-            <ion-icon name="person-outline"></ion-icon>Pasajeros
+            <ion-icon name="person-outline"></ion-icon>{{ 'MENU.passengers' | translate }}
           </ion-item>
 
           <ion-item>
-            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>Mensajes
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>{{ 'MENU.messages' | translate }}
           </ion-item>
           <ion-item>
-            <ion-icon name="stats-chart-outline"></ion-icon>Mis viajes
+            <ion-icon name="stats-chart-outline"></ion-icon>{{ 'MENU.trips' | translate }}
           </ion-item>
           <ion-item *ngIf="login" class="sign-out">
             <ion-icon name="exit-outline"></ion-icon>
             <ion-button (click)="logout()" fill="clear">
-              Cerrar sesión
+              {{ 'MENU.logout' | translate }}
             </ion-button>
           </ion-item>
         </ion-list>
+
       </ion-menu-toggle>
 
-      <ion-footer class="ion-no-border">
-        <ion-toolbar>
-          <ion-title>Version 1.0.8</ion-title>
+      <ion-footer>
+
+        <ion-toolbar class="footer-tool">
+
+          <ion-buttons slot="start">
+            <ion-button (click)="openLanguagePopover($event)" (click)="autoHideAfterSelectLng()" >
+              <ion-icon name="globe-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+          <ion-title slot="end">{{ 'FOOTER.version' | translate }} 1.0.8</ion-title>
+
         </ion-toolbar>
-      </ion-footer>
+
+    </ion-footer>
 
     </ion-content>
 

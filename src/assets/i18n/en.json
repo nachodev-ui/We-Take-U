@@ -1,0 +1,87 @@
+{
+  "MENU": {
+    "title": "Welcome",
+    "profile": "Profile",
+    "driver": "Conductor",
+    "drivers": "Drivers",
+    "passenger": "Passenger",
+    "passengers": "Passengers",
+    "messages": "Messages",
+    "trips": "Trips",
+    "logout": "Logout"
+  },
+
+  "FOOTER": {
+    "version": "Version"
+  },
+
+  "HOME": {
+    "f_slide": {
+      "title": "The address you need in just a click"
+    },
+    "s_slide": {
+      "title": "Vehicles available at your institution"
+    },
+    "t_slide": {
+      "title": "Be the example of fellowship"
+    },
+    "btnAccount": "Sign up",
+    "btnLogin": "Sign in"
+  },
+
+  "LOGIN": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "btnLogin": "Sign in",
+    "btnReset": "Recover password",
+    "btnSignUp": "Sign up"
+  },
+
+  "U_REGISTER": {
+    "title": "New user?",
+    "btnDriver": "Driving mode",
+    "name": "Name",
+    "lastname": "Lastname",
+    "email": "Email",
+    "password": "Password",
+    "c_password": "Confirm password",
+    "phone": "Phone number",
+    "btnRegister": "Create an account",
+
+    "DR_ALERT": {
+      "header": "Driving mode",
+      "message": "Would you like to create a driver account?",
+      "yes": "Yes",
+      "no": "No",
+
+      "LOADING": {
+        "message": "Please wait..."
+      }
+    }
+  },
+
+  "D_REGISTER": {
+    "title": "New user?",
+    "btnDriver": "Driving mode",
+    "name": "Name",
+    "lastname": "Lastname",
+    "email": "Email",
+    "password": "Password",
+    "c_password": "Confirm password",
+    "phone": "Phone number",
+    "btnRegister": "Create an account",
+
+    "DR_ALERT": {
+      "header": "Driving mode",
+      "message": "Would you like to create a driver account?",
+      "yes": "Yes",
+      "no": "No",
+
+      "LOADING": {
+        "message": "Please wait..."
+      }
+    }
+  }
+
+}

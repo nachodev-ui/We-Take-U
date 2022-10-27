@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Slide } from './home';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguagesService } from '../services/languages.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +9,28 @@ export class HomeService {
 
   private slides = [
     {
-      img: 'assets/img/gpslocation.png',
-      titulo: 'La dirección que necesitas en un solo click',
+      img: '../assets/img/gpslocation.png',
+      titulo: this.translate.instant('HOME.f_slide.title'),
+      color: '#FFD700',
     },
     {
-      img: 'assets/img/vehicle.webp',
-      titulo: 'Vehículos disponibles para todo el establecimiento',
+      img: '../assets/img/vehicle.webp',
+      titulo: this.translate.instant('HOME.s_slide.title'),
+      color: '#FFD700',
     },
     {
-      img: 'assets/img/university.jpg',
-      titulo: 'Una aplicación para tu universidad',
+      img: '../assets/img/university.jpg',
+      titulo: this.translate.instant('HOME.t_slide.title'),
+      color: '#FFD700',
     }
-  ]
+  ];
 
-  constructor() { }
+
+
+  constructor(
+    public translate: TranslateService
+    ) { }
+
 
   getSlides() {
     return [...this.slides]

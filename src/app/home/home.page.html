@@ -9,7 +9,7 @@
       </div>
 
       <div>
-        <h3>{{ slide.titulo }}</h3>
+        <h3>{{ slide.titulo | translate }}</h3>
       </div>
 
     </ion-slide>
@@ -23,7 +23,7 @@
         <!-- offset para que el boton se espacio 1 de cada lado -->
         <ion-col size="10" offset="1">
           <ion-button [routerLink]="['/registro']"  expand="full" shape="round" mode="ios" class="btn-reg">
-            <ion-label>Crear cuenta</ion-label>
+            <ion-label>{{ 'HOME.btnAccount' | translate }}</ion-label>
           </ion-button>
         </ion-col>
       </ion-row>
@@ -31,7 +31,7 @@
       <ion-row>
         <ion-col size="10" offset="1">
             <ion-button [routerLink]="['/login']" fill="clear" expand="full" class="btn-log">
-              <ion-label>Iniciar sesión</ion-label>
+              <ion-label>{{ 'HOME.btnLogin' | translate }}</ion-label>
             </ion-button>
           </ion-col>
       </ion-row>
