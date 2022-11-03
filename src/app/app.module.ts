@@ -13,6 +13,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -22,12 +30,15 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { JoyrideModule } from 'ngx-joyride';
+
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 
 import { environment } from 'src/environments/environment';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { LanguagePopoverPageModule } from './pages/language-popover/language-popover.module';
 
 registerLocaleData(localeEs, 'es');
@@ -60,7 +71,18 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
-    LanguagePopoverPageModule
+    LanguagePopoverPageModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    BrowserAnimationsModule,
+    JoyrideModule.forRoot(),
   ],
   providers: [
     {

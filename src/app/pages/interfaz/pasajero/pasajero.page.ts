@@ -4,13 +4,10 @@ import { AlertController, ModalController } from '@ionic/angular';
 
 import { PasajeroModalComponent } from '../../pasajero-modal/pasajero-modal.component';
 
-import { PasajerosService } from 'src/app/services/pasajeros.service';
-
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 import SwiperCore, { Autoplay, SwiperOptions } from 'swiper';
 
-import { Pasajero } from './pasajero';
 import { UserI } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -39,16 +36,15 @@ export class PasajeroPage implements OnInit, AfterContentChecked {
 
   constructor(
     private modalCtrl: ModalController,
-    private fire: FirebaseService,
     private database: FirebaseService,
     private alertCtrl: AlertController,
-    private authService: AuthService
+    private authService: AuthService,
     ) { }
 
   ngOnInit() {
 
     this.authService.stateUser().subscribe( res => {
-      console.log('RES', res);
+      console.log('User', res);
       this.getUid();
     });
 
@@ -123,17 +119,6 @@ export class PasajeroPage implements OnInit, AfterContentChecked {
     }
   }
 
-  obtenerConductores() {
-    this.fire.getCollection<Pasajero>('pasajeros').subscribe(
-      (res) => {
-        console.log(res)
-      },
-      (err) => {
-        console.log(err)
-      }
-    )
-  }
-
   ngAfterContentChecked() {
     this.driversConfig = {
       slidesPerView: 1,
@@ -141,6 +126,7 @@ export class PasajeroPage implements OnInit, AfterContentChecked {
     };
   }
 
+  //Slide from Passengers UI
   option = {
     slidesPerView: 1.5,
     spaceBetween: 10,
@@ -152,7 +138,7 @@ export class PasajeroPage implements OnInit, AfterContentChecked {
   }
 
   async modalUser() {
-    console.log('Ver usuario');
+    console.log('Open modal...');
     const modal = await this.modalCtrl.create({
       component: PasajeroModalComponent
     });
@@ -160,6 +146,7 @@ export class PasajeroPage implements OnInit, AfterContentChecked {
     await modal.present();
   }
 
+  //Deployment data from Passengers view
   getInfoUser() {
     const path = 'Usuarios';
     const id = this.uid;

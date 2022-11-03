@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
@@ -13,7 +13,9 @@ import { ConductoresService } from 'src/app/services/conductores.service';
   templateUrl: './pasajero-modal.component.html',
   styleUrls: ['./pasajero-modal.component.scss'],
 })
-export class PasajeroModalComponent implements OnInit {
+export class PasajeroModalComponent {
+
+  @ViewChild('templateList', {read: ElementRef}) templateListRef: QueryList<ElementRef>;
 
   /* Filtrador de busqueda */
   searchTerm: string;
@@ -31,9 +33,6 @@ export class PasajeroModalComponent implements OnInit {
     private viajeService: PasajeroViajesService
     ) { }
 
-  ngOnInit() {
-    this.conductores = this.conductorService.getConductores();
-  }
 
   ionViewWillEnter() {
     this.conductores = this.conductorService.getConductores();

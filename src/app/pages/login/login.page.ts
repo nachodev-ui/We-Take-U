@@ -11,12 +11,18 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserI } from 'src/app/models/models';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { LanguagesService } from 'src/app/services/languages.service';
+import { TranslateService } from '@ngx-translate/core';
+
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { CodeErrorService } from 'src/app/services/code-error.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
+
 export class LoginPage implements OnInit {
 
   formularioLogin: FormGroup;
@@ -36,7 +42,11 @@ export class LoginPage implements OnInit {
     private loadingCtrl: LoadingController,
     private auth: AuthService,
     private database: FirebaseService,
-    private languageService: LanguagesService
+    private languageService: LanguagesService,
+    private translate: TranslateService,
+    private afAuth: AngularFireAuth,
+    private errorCode: CodeErrorService,
+    private toastr: ToastrService
     ) {
 
     this.initializeApp();
@@ -95,7 +105,7 @@ export class LoginPage implements OnInit {
   async openLoading() {
     const loading = await this.loadingCtrl.create({
       mode: 'ios',
-      message: 'Cargando. . .',
+      message: this.translate.instant('LOGIN.LOADING.message'),
       duration: 100
     });
     return await loading.present();
@@ -108,8 +118,8 @@ export class LoginPage implements OnInit {
   async camposVacios() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Error',
-      message: 'Por favor ingrese su correo y contraseña.',
+      header: this.translate.instant('LOGIN.VACIO.header'),
+      message: this.translate.instant('LOGIN.VACIO.message'),
       buttons: ['OK']
     });
 
@@ -119,15 +129,15 @@ export class LoginPage implements OnInit {
   async emailNoRegistrado() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Error',
-      message: 'El correo no se encuentra registrado, por favor registrese.',
+      header: this.translate.instant('LOGIN.NEXISTE.header'),
+      message: this.translate.instant('LOGIN.NEXISTE.message'),
       buttons: ['OK']
     });
 
     await alert.present();
   }
 
-  async usuarioNoAutenticado() {
+  async usuarioNoVerificado() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
       header: 'Usuario no autenticado',
@@ -138,58 +148,36 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
-  async alertGoogleError() {
-    const alert = await this.alertCtrl.create({
-      mode: 'ios',
-      header: 'Error',
-      message: 'No se pudo iniciar sesión con Google, por favor intente de nuevo.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
-  async alertGithubError() {
-    const alert = await this.alertCtrl.create({
-      mode: 'ios',
-      header: 'Error',
-      message: 'No se pudo iniciar sesión con Github, por favor intente de nuevo.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
   async login() {
+
+    const email = this.formularioLogin.value.email;
+    const password = this.formularioLogin.value.password;
 
     await this.openLoading();
 
-    const validForm = await this.auth.login(this.formularioLogin.value.email, this.formularioLogin.value.password).catch( async err => {
+    this.afAuth.signInWithEmailAndPassword(email, password).then((user ) => {
+      if (user.user.emailVerified) {
 
-      if (this.formularioLogin.value.email === '' || this.formularioLogin.value.password === '') {
-        await this.camposVacios();
-      } else if (err.code === 'auth/user-not-found') {
-        await this.emailNoRegistrado();
+        this.router.navigate(['interfaz/pasajero']);
+
+      } else {
+        this.usuarioNoVerificado();
       }
+
+    }).catch((error) => {
+
+      console.log(error);
+
+      this.toastr.error(this.errorCode.stringError(error.code), 'Error');
+
+      /* this.alertCtrl.create({
+        mode: 'ios',
+        header: 'Error',
+        message: this.errorCode.stringError(error.code),
+        buttons: ['OK']
+      }).then(alert => alert.present()); */
 
     });
-
-    if (validForm) {
-
-      if (this.rol === 'Pasajero') {
-
-        await this.router.navigate(['interfaz/pasajero']);
-
-      } else if (this.rol === 'Conductor') {
-
-        setTimeout(() => {
-          this.router.navigate(['interfaz/conductor']);
-        }, 1000);
-      }
-
-      await this.closeLoading();
-
-    }
 
   }
 
@@ -209,7 +197,8 @@ export class LoginPage implements OnInit {
     await this.openLoading();
 
     const validForm = await this.auth.githubLogin().catch( async err => {
-      this.alertGithubError();
+      console.log(err);
+
     });
 
     if (validForm) {

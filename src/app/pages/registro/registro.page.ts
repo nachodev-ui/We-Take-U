@@ -34,16 +34,43 @@ export class RegistroPage implements OnInit {
         apellido: [''],
         email: ['', Validators.compose([Validators.email, Validators.required])],
         uid: [''],
-        password: ['', Validators.required],
+
+        password: ['', [Validators.required, Validators.minLength(6)]],
         password2: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-        celular: ['', Validators.compose([Validators.minLength(10), Validators.required])],
+
+        celular: ['', Validators.compose([Validators.minLength(9), Validators.maxLength(9), Validators.required])],
         direccion: [''],
-        imagen: ['https://ajisenramenpanama.com/wp-content/uploads/2020/07/user_icon.png'],
+        photoURL: ['https://ajisenramenpanama.com/wp-content/uploads/2020/07/user_icon.png'],
         perfil: 'Pasajero',
+      }, {
+        validator: this.Mustmatch('password', 'password2'),
       });
     }
 
   ngOnInit() {
+  }
+
+  get rf() {
+    return this.signupForm.controls;
+  }
+
+  Mustmatch(password: any, password2: any) {
+    return (formGroup: FormGroup) => {
+
+      const control = formGroup.controls[password];
+      const matchingControl = formGroup.controls[password2];
+
+      if (matchingControl.errors && !matchingControl.errors['Mustmatch']) {
+        return;
+      }
+
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ Mustmatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+
+    };
   }
 
   async valideIfEmailAlreadyExists() {
@@ -73,8 +100,8 @@ export class RegistroPage implements OnInit {
   async EmailOrPasswordAreNotValid() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Registro fallido',
-      message: 'El correo que está intentando ingresar no es válido, por favor, intente nuevamente.',
+      header: this.translate.instant('U_REGISTER.EMERROR.header'),
+      message: this.translate.instant('U_REGISTER.EMERROR.message'),
       buttons: ['OK'],
     });
 
@@ -84,7 +111,7 @@ export class RegistroPage implements OnInit {
   async loadingRegister() {
     const loading = await this.loadingCtrl.create({
       mode: 'ios',
-      message: 'Registrando...',
+      message: this.translate.instant('U_REGISTER.RLOADING.message'),
       duration: 1000,
     });
     await loading.present();
@@ -93,8 +120,8 @@ export class RegistroPage implements OnInit {
   async sentEmailVerification() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Correo de verificación enviado',
-      message: 'Se ha enviado un correo de verificación a su cuenta de correo electrónico. Por favor, verifique su cuenta.',
+      header: this.translate.instant('U_REGISTER.EMVERF.header'),
+      message: this.translate.instant('U_REGISTER.EMVERF.message'),
       buttons: ['OK'],
     });
 
@@ -103,8 +130,8 @@ export class RegistroPage implements OnInit {
 
   async passwordsAreNotEqual() {
     const alert = await this.alertCtrl.create({
-      header: 'Registro fallido',
-      message: 'Las contraseñas no coinciden, por favor, intente de nuevo',
+      header: this.translate.instant('U_REGISTER.PAERROR.header'),
+      message: this.translate.instant('U_REGISTER.PAERROR.message'),
       buttons: ['OK'],
     });
 
@@ -114,8 +141,8 @@ export class RegistroPage implements OnInit {
   async celularNoValido() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Celular no válido',
-      message: 'El número de celular debe tener 10 dígitos',
+      header: this.translate.instant('U_REGISTER.CELERROR.header'),
+      message: this.translate.instant('U_REGISTER.CELERROR.message'),
       buttons: ['OK'],
     });
 
@@ -125,8 +152,8 @@ export class RegistroPage implements OnInit {
   async correoVacio() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Correo vacío',
-      message: 'Por favor, ingrese su correo electrónico',
+      header: this.translate.instant('U_REGISTER.EMVACIO.header'),
+      message: this.translate.instant('U_REGISTER.EMVACIO.message'),
       buttons: ['OK'],
     });
 
@@ -141,12 +168,8 @@ export class RegistroPage implements OnInit {
         this.valideIfEmailAlreadyExists();
       } else if (err.code === 'auth/invalid-email') {
         this.EmailOrPasswordAreNotValid();
-      } else if (this.signupForm.value.celular.length < 9) {
-        this.celularNoValido();
       } else if (this.signupForm.value.password !== this.signupForm.value.password2) {
         this.passwordsAreNotEqual();
-      } else if (this.signupForm.value.email === '') {
-        this.correoVacio();
       }
 
     });

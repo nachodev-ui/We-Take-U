@@ -7,7 +7,7 @@ export interface UserI {
   password2: string;
   celular: string;
   direccion: string;
-  imagen: string;
+  photoURL: string;
   perfil: 'Pasajero';
 }
 
@@ -40,7 +40,6 @@ export interface ViajeI {
   fechaViaje: string;
   hora: string;
   precio: string;
-  conductor: string;
-  pasajero: string;
+  pasajero: [{}];
 }
 

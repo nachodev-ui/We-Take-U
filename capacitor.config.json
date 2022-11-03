@@ -1,1 +1,13 @@
-{}
+{
+  "appId": "io.ionic.starter",
+  "appName": "WeTakeU",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "GoogleAuth": {
+      "scopes": ["profile", "email"],
+      "serverClientId": "161344839824-u1en483sjldn6ui1hko6edtbuhfuhcnm.apps.googleusercontent.com",
+      "forceCodeForRefreshToken": true
+    }
+  }
+}

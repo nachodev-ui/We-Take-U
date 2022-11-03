@@ -8,6 +8,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { LanguagesService } from 'src/app/services/languages.service';
 
 @Component({
   selector: 'app-registro-conductor',
@@ -24,8 +25,12 @@ export class RegistroConductorPage implements OnInit {
     private router: Router,
     private auth: AuthService,
     private database: FirebaseService,
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private languageService: LanguagesService
   ) {
+
+    this.initializeApp();
+
     this.formConductor = this.builder.group({
       nombre: [''],
       apellido: [''],
@@ -35,9 +40,13 @@ export class RegistroConductorPage implements OnInit {
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required])],
       celular: ['', Validators.compose([Validators.minLength(10), Validators.required])],
       direccion: [''],
-      imagen: ['https://ajisenramenpanama.com/wp-content/uploads/2020/07/user_icon.png'],
+      photoURL: ['https://ajisenramenpanama.com/wp-content/uploads/2020/07/user_icon.png'],
       perfil: 'Conductor',
     });
+  }
+
+  initializeApp() {
+    this.languageService.setInitialAppLanguage();
   }
 
   ngOnInit() {

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Google Auth </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Google signin buttons -->
+  <ion-button (click)="signIn()" expand="full" *ngIf="!user"> <ion-icon name="logo-google" slot="start"></ion-icon> Google Signin </ion-button>
+
+  <ion-button (click)="signOut()" expand="full" *ngIf="user">
+    Sign out
+  </ion-button>
+
+  <ion-button (click)="refresh()" expand="full" *ngIf="!user">
+    Try refresh
+  </ion-button>
+
+
+  <ion-item *ngIf="user">
+
+    <ion-avatar slot="start">
+      <img [src]="user.imageUrl"/>
+    </ion-avatar>
+
+    <ion-label>
+
+      {{ user.givenName }} {{ user.familyName }}
+
+      <p>{{ user.email }}</p>
+
+    </ion-label>
+
+  </ion-item>
+
+  <!-- Image section -->
+  <ion-title>
+    My Profile
+  </ion-title>
+
+
+</ion-content>

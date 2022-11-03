@@ -35,7 +35,21 @@
     "password": "Contraseña",
     "btnLogin": "Iniciar Sesión",
     "btnReset": "Recuperar mi contraseña",
-    "btnSignUp": "Registrarse"
+    "btnSignUp": "Registrarse",
+
+    "LOADING": {
+      "message": "Por favor espere..."
+    },
+
+    "VACIO": {
+      "header": "Error",
+      "message": "Por favor ingrese su correo y contraseña."
+    },
+
+    "NEXISTE": {
+      "header": "Error",
+      "message": "El correo no se encuentra registrado, por favor registrese."
+    }
   },
 
   "U_REGISTER": {
@@ -46,8 +60,33 @@
     "email": "Correo electrónico",
     "password": "Contraseña",
     "c_password": "Confirmar contraseña",
-    "phone": "Número de celular",
+    "phone": "Ejemplo: 950004000",
     "btnRegister": "Crear cuenta",
+
+    "EMERROR": {
+      "header": "Registro fallido.",
+      "message": "El correo que intentas ingresar no es válido, por favor, intente nuevamente."
+    },
+
+    "EMVACIO": {
+      "header": "Registro fallido.",
+      "message": "El correo se encuentra vacío, por favor, intente nuevamente."
+    },
+
+    "EMVERF": {
+      "header": "Registro exitoso.",
+      "message": "Se ha enviado un correo de verificación a su cuenta de correo electrónico. Por favor, verifique su cuenta."
+    },
+
+    "PAERROR": {
+      "header": "Registro fallido.",
+      "message": "Las contraseñas no coinciden, por favor, intente nuevamente."
+    },
+
+    "CELERROR": {
+      "header": "Registro fallido.",
+      "message": "El celular debe contener 10 dígitos. Incluya el 9 antes."
+    },
 
     "DR_ALERT": {
       "header": "Modo conductor",
@@ -58,29 +97,73 @@
       "LOADING": {
         "message": "Por favor espere..."
       }
+    },
+
+    "RLOADING": {
+      "message": "Registrando..."
     }
   },
 
   "D_REGISTER": {
-    "title": "New user?",
-    "btnDriver": "Driving mode",
-    "name": "Name",
-    "lastname": "Lastname",
-    "email": "Email",
-    "password": "Password",
-    "c_password": "Confirm password",
-    "phone": "Phone number",
-    "btnRegister": "Create an account",
+    "title": "¿Deseando manejar?",
+    "name": "Nombre",
+    "lastname": "Apellido(s)",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "c_password": "Confirmar contraseña",
+    "phone": "Número de celular",
+    "btnRegister": "Crear cuenta"
+  },
 
-    "DR_ALERT": {
-      "header": "Driving mode",
-      "message": "Would you like to create a driver account?",
-      "yes": "Yes",
-      "no": "No",
+  "RECOVER": {
+    "title": "Recuperar contraseña",
+    "message": "Ingrese su correo para continuar",
+    "email": "Correo",
+    "btnRecover": "Recuperar contraseña",
+    "btnBack": "Regresar al inicio"
+  },
 
-      "LOADING": {
-        "message": "Please wait..."
-      }
+  "VERIFICATE": {
+    "title":"¡Un paso más y listo!",
+    "message":"Ingresa a tu correo electrónico para verificar tu cuenta y poder ingresar.",
+    "btnCheck": "Continuar",
+
+    "VLOADING": {
+      "message": "Verificando..."
+    }
+  },
+
+  "PASSENGERS": {
+    "title": "Conductores",
+    "zone": "Ver todos",
+
+    "DRIVERCOMP": {
+      "title": "Conductores",
+      "search": "Buscar conductor",
+      "btnJourney": "Tomar viaje"
+    }
+  },
+
+  "PROFILE": {
+    "btnModify": "Modificar perfil",
+
+    "imgCtrl": {
+      "header": "Cambiar foto de perfil",
+      "placeholder": "Agrega una dirección de imagen",
+      "btnChange": "Aceptar",
+      "btnCancel": "Cancelar"
+    },
+
+    "profileCtrl": {
+      "header":"Editar Perfil",
+      "placeholder": "Agrega una dirección",
+      "btnChange": "Aceptar",
+      "btnCancel": "Cancelar"
+    },
+
+    "alertUpd": {
+      "header": "Su perfil ha sido actualizado",
+      "btnOk": "Aceptar"
     }
   }
 

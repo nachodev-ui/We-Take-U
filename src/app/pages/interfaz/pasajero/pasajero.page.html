@@ -10,10 +10,10 @@
   <ion-item *ngIf="infoUser" lines="none">
 
     <ion-avatar slot="start">
-      <img src="{{ infoUser.imagen }}">
+      <img src="{{ infoUser.photoURL }}">
     </ion-avatar>
 
-    <ion-list>
+    <ion-list lines="none">
         <ion-label>
 
           <div class="data">
@@ -55,13 +55,15 @@
   <ion-row *ngIf="drivers?.length > 0">
     <ion-col size="8">
       <ion-label class="ion-margin-start heading">
-        Conductores
+        {{ 'PASSENGERS.title' | translate }}
       </ion-label>
     </ion-col>
     <ion-col size="4">
+
       <ion-button class="btnAll" (click)="modalUser()" fill="clear">
-        Ver todos
+        <ion-icon name="people-outline"></ion-icon>
       </ion-button>
+
     </ion-col>
 
     <ion-card>

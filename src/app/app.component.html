@@ -4,7 +4,7 @@
     <ion-content>
       <div class="menu-header-bg"></div>
       <div *ngIf="infoUser" class="header-content">
-        <img src="{{infoUser.imagen}}">
+        <img src="{{infoUser.photoURL}}">
         <ion-label>
           <h2>{{ 'MENU.title' | translate }}, </h2>
 
@@ -39,6 +39,7 @@
               {{ 'MENU.logout' | translate }}
             </ion-button>
           </ion-item>
+
         </ion-list>
 
       </ion-menu-toggle>

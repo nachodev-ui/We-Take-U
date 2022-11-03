@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlertController, LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { UserI } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -26,7 +27,8 @@ export class VerificatePage implements OnInit {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private database: FirebaseService,
-    private auth: AuthService
+    private auth: AuthService,
+    private translate: TranslateService
   ) {
     this.auth.stateUser().subscribe( res => {
       if(res) {
@@ -62,7 +64,7 @@ export class VerificatePage implements OnInit {
   async verifing() {
     const loading = await this.loadingCtrl.create({
       mode: 'ios',
-      message: 'Verificando cuenta',
+      message: this.translate.instant('VERIFICATE.VLOADING.message'),
       spinner: 'bubbles',
       duration: 1000
     });
@@ -72,21 +74,11 @@ export class VerificatePage implements OnInit {
   async loadingRedirect() {
     const loading = await this.loadingCtrl.create({
       mode: 'ios',
-      message: 'Redireccionando...',
+      message: this.translate.instant('VERIFICATE.VLOADING.message'),
       spinner: 'bubbles',
       duration: 1000
     });
     await loading.present();
-  }
-
-  async alertCorrectVerified() {
-    const alert = await this.alertCtrl.create({
-      mode: 'ios',
-      header: 'Cuenta verificada',
-      message: 'Su cuenta ha sido verificada correctamente. Ahora ingrese su medio de transporte por favor.',
-      buttons: ['OK']
-    });
-    await alert.present();
   }
 
   async redirectToFinal() {
@@ -102,8 +94,6 @@ export class VerificatePage implements OnInit {
     } else if (this.rol === 'Conductor') {
 
       setTimeout(async () => {
-
-        await this.alertCorrectVerified();
 
         this.router.navigate(['info-vehiculo']);
 

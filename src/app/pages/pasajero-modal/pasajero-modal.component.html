@@ -2,7 +2,7 @@
 
   <ion-toolbar mode="ios">
     <ion-title>
-      Conductores
+      {{ 'PASSENGERS.DRIVERCOMP.title' | translate }}
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal() "
@@ -21,7 +21,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-searchbar placeholder="Buscar conductor" showCancelButton="focus" class="custom" [(ngModel)]="searchTerm">
+  <ion-searchbar placeholder="{{ 'PASSENGERS.DRIVERCOMP.search' | translate }}" showCancelButton="focus" class="custom" [(ngModel)]="searchTerm">
   </ion-searchbar>
 
   <ion-card mode="ios" *ngFor="let conductor of conductores | filter : searchTerm">
@@ -54,7 +54,7 @@
 
       <ion-button (click)="travelTo()">
         <ion-icon slot="start" name="add"></ion-icon>
-        Tomar viaje
+        {{ 'PASSENGERS.DRIVERCOMP.btnJourney' | translate }}
       </ion-button>
 
     </ion-buttons>

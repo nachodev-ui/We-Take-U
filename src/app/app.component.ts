@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
   /*La APP se inicializa en SplashScreen*/
   initializeApp() {
     this.platform.ready().then(() => {
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl('interfaz/pasajero');
 
       this.languageService.setInitialAppLanguage();
 
@@ -188,7 +188,7 @@ export class AppComponent implements OnInit {
     const path = 'Usuarios';
     const id = uid;
     this.database.getDoc<UserI>(path, id).subscribe( res => {
-      console.log('datos ->', res);
+      console.log('Usuario ->', res);
       if (res) {
         this.rol = res.perfil;
       }
@@ -212,7 +212,7 @@ export class AppComponent implements OnInit {
     const path = 'Conductores';
     const id = uid;
     this.database.getDoc<ConductorI>(path, id).subscribe( res => {
-      console.log('datos ->', res);
+      console.log('Conductor ->', res);
       if (res) {
         this.rol = res.perfil;
       }
@@ -223,7 +223,7 @@ export class AppComponent implements OnInit {
     const path = 'Viajes';
     const id =  uid;
     this.database.getDoc<ViajeI>(path, id).subscribe( res => {
-      console.log('datos ->', res);
+      console.log('Viaje ->', res);
     });
   }
 
@@ -245,6 +245,10 @@ export class AppComponent implements OnInit {
 
   navigateProfile() {
     this.router.navigate(['../perfil']);
+  }
+
+  test() {
+    this.router.navigate(['test-blob']);
   }
 
 }

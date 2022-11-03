@@ -14,36 +14,21 @@ ion-header {
   }
 
   ion-item {
-    color: #212121;
     --background: #f8f8f8;
 
     ion-list {
-      --background: #f8f8f8;
+      background: #f8f8f8;
 
-      ion-label {
+      h3 {
+        font-weight: 700;
+        font-size: 1rem;
 
-        .data {
-          color: #212121;
-          background: #f8f8f8;
-        }
-
-        h3 {
-          color: #212121;
-          background: #f8f8f8;
-        }
       }
 
-    }
-  }
-
-  ion-item {
-    h3 {
-      font-weight: 700;
-      font-size: 1rem;
-    }
-    p {
-      font-weight: 500;
-      font-size: 1.1rem;
+      p {
+        font-weight: 500;
+        font-size: 1.1rem;
+      }
     }
   }
 
@@ -95,6 +80,21 @@ ion-slide {
 ion-content {
   --background: #f8f8f8;
 
+  .btnAll {
+    text-transform: capitalize;
+    font-weight: 700;
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 5px 45px;
+    margin: 10px 0;
+
+    ion-icon {
+      color: #b0decb;
+      font-size: 2.3rem;
+    }
+
+  }
+
   ion-row {
     padding-top: 15px;
 
@@ -102,7 +102,7 @@ ion-content {
       font-weight: bold;
     }
     ion-label.heading {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       color: #212121;
     }
     ion-col {

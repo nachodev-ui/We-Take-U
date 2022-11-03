@@ -1,22 +1,26 @@
-<ion-content>
+<ion-content scrollY="false">
 
-  <ion-toolbar class="toolbar">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/interfaz/pasajero"></ion-back-button>
+  </ion-buttons>
 
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/interfaz/pasajero"></ion-back-button>
-    </ion-buttons>
+  <div class="snow"></div>
 
-  </ion-toolbar>
-
-  <div *ngIf="infoUser" class="profile-card">
+  <div *ngIf="infoUser || user" class="profile-card">
 
     <div class="avatar-container">
 
       <ion-avatar class="avatar">
-        <img src="{{infoUser.imagen}}"/>
+        <img *ngIf="infoUser?.photoURL || user; else placeholder_avatar;" [src]="infoUser.photoURL" />
+
+        <ng-template #placeholder_avatar>
+          <div class="fallback">
+            <p>Select avatar</p>
+          </div>
+        </ng-template>
       </ion-avatar>
 
-      <ion-button (click)="editImage()" shape="round">
+      <ion-button (click)="changeImage()" shape="round">
         <ion-icon name="image-outline"></ion-icon>
       </ion-button>
 
@@ -63,7 +67,7 @@
       <hr>
 
       <ion-button (click)="editProfile()" expand="block"  shape="round">
-        <ion-label>Modificar perfil</ion-label>
+        <ion-label>{{ 'PROFILE.btnModify' | translate }}</ion-label>
         <ion-icon slot="start" name="pencil-outline"></ion-icon>
       </ion-button>
 

@@ -1,9 +1,14 @@
 import { Component, NgZone, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 
 import { } from 'googlemaps';
-import { ViajeI } from 'src/app/models/models';
+
+import { UserI, ViajeI } from 'src/app/models/models';
+
+import { Auth } from '@angular/fire/auth';
+import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -13,6 +18,10 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 
 export class GooglemapsPage implements OnInit {
+
+  uid : string = null;
+  infoUser: UserI = null;
+  rol: 'Pasajero' | 'Conductor' | 'Administrador';
 
   showMapPill: boolean;
   mapLoaded: boolean;
@@ -47,8 +56,21 @@ export class GooglemapsPage implements OnInit {
     private fire: FirebaseService,
     private alertCtrl: AlertController,
     private router: Router,
-    private loadingCtrl: LoadingController
-  ) { }
+    private loadingCtrl: LoadingController,
+    private afAuth: AngularFireAuth,
+    private authService: AuthService,
+    private dbFire: FirebaseService,
+    private auth: Auth
+  ) {
+    this.authService.stateUser().subscribe( res => {
+      if(res) {
+
+        /*Datos Pasajeros*/
+        this.loadUserData(res.uid);
+
+      }
+    });
+  }
 
   async ngOnInit() {
     this.ds = new google.maps.DirectionsService();
@@ -94,6 +116,7 @@ export class GooglemapsPage implements OnInit {
       });
 
     });
+
   }
 
   async loading() {
@@ -104,7 +127,7 @@ export class GooglemapsPage implements OnInit {
     await loading.present();
   }
 
-  async confirmNewViaje() {
+  async journeyReady() {
     const alert = await this.alertCtrl.create({
       header: 'Confirmar',
       message: '¿Desea confirmar el viaje?',
@@ -131,6 +154,21 @@ export class GooglemapsPage implements OnInit {
     }, 200);
   }
 
+  async journeyDeclined() {
+    const alert = await this.alertCtrl.create({
+      header: 'Cancelar',
+      message: '¿Desea cancelar el viaje?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   setRoutePolyne() {
     let request = {
       origin: this.source,
@@ -153,10 +191,10 @@ export class GooglemapsPage implements OnInit {
           this.distance = distanceInfo.distance.text;
           this.time = distanceInfo.duration.text;
           this.generateViajeDetails();
+          this.saveViajeDetailsInUser();
         });
       }
     });
-
   }
 
   handleAddressChange(event: any) {
@@ -176,8 +214,8 @@ export class GooglemapsPage implements OnInit {
         position: this.source,
         icon: {
           url: './assets/img/marker.png',
-          anchor: new google.maps.Point(35,10),
-          scaledSize: new google.maps.Size(30, 30)
+          anchor: new google.maps.Point(40,20),
+          scaledSize: new google.maps.Size(40, 40)
         },
         animation: google.maps.Animation.DROP,
         map: this.map
@@ -193,7 +231,7 @@ export class GooglemapsPage implements OnInit {
     }
 
     this.setRoutePolyne();
-    
+
   }
 
   onCenterMap() {
@@ -206,8 +244,7 @@ export class GooglemapsPage implements OnInit {
     fechaViaje: '',
     hora: '',
     precio: '',
-    conductor: '',
-    pasajero: '',
+    pasajero: [{}],
     estado: '',
     uid: ''
   }
@@ -219,13 +256,32 @@ export class GooglemapsPage implements OnInit {
       fechaViaje: this.today(),
       hora: this.hours(),
       precio: this.calculatePrice(),
-      conductor: '',
-      pasajero: '',
-      estado: '',
+      pasajero: [
+        {
+          nombre: this.infoUser.nombre,
+          apellido: this.infoUser.apellido,
+          celular: this.infoUser.celular,
+          email: this.infoUser.email,
+        }
+      ],
+      estado: 'En curso',
       uid: ''
     }
+
     return viajeDetails;
 
+  }
+
+  loadUserData(uid: string) {
+    const path = 'Usuarios';
+    const id = uid;
+    this.dbFire.getDoc<UserI>(path, id).subscribe( credentials => {
+      if (credentials) {
+        this.infoUser = credentials;
+      } else {
+        console.log('No existe el usuario');
+      }
+    });
   }
 
   //calcular precio a partir de origen y destino
@@ -235,15 +291,15 @@ export class GooglemapsPage implements OnInit {
     let distanceNumber = distance.split(' ');
     let distanceNumberFloat = parseFloat(distanceNumber[0]);
     if (distanceNumberFloat <= 5) {
-      price = '5.000';
+      price = '3.000';
     } else if (distanceNumberFloat > 5 && distanceNumberFloat <= 10) {
-      price = '10.000';
+      price = '6.500';
     } else if (distanceNumberFloat > 10 && distanceNumberFloat <= 15) {
-      price = '15.000';
+      price = '10.000';
     } else if (distanceNumberFloat > 15 && distanceNumberFloat <= 20) {
-      price = '20.000';
+      price = '15.000';
     } else if (distanceNumberFloat > 20 && distanceNumberFloat <= 25) {
-      price = '25.000';
+      price = '20.000';
     } else if (distanceNumberFloat > 25 && distanceNumberFloat <= 30) {
       price = '30.000';
     }

@@ -35,7 +35,22 @@
     "password": "Password",
     "btnLogin": "Sign in",
     "btnReset": "Recover password",
-    "btnSignUp": "Sign up"
+    "btnSignUp": "Sign up",
+
+    "LOADING": {
+      "message": "Please wait..."
+    },
+
+    "VACIO": {
+      "header": "Error",
+      "message": "Please enter your email and password."
+    },
+
+    "NEXISTE": {
+      "header": "Error",
+      "message": "The email is not registered, please register."
+    }
+
   },
 
   "U_REGISTER": {
@@ -46,8 +61,33 @@
     "email": "Email",
     "password": "Password",
     "c_password": "Confirm password",
-    "phone": "Phone number",
+    "phone": "Example: 950004000",
     "btnRegister": "Create an account",
+
+    "EMERROR": {
+      "header": "Failed registration",
+      "message": "The email you are trying to register is not valid, please try again."
+    },
+
+    "EMVACIO": {
+      "header": "Failed registration",
+      "message": "The email field is empty, please try again."
+    },
+
+    "EMVERF": {
+      "header": "Failed registration",
+      "message": "A verification email has been sent to your email account. Please verify your account."
+    },
+
+    "PAERROR": {
+      "header": "Failed registration",
+      "message": "Passwords do not match, please try again."
+    },
+
+    "CELERROR": {
+      "header": "Failed registration",
+      "message": "The cell phone number must be 10 digits long"
+    },
 
     "DR_ALERT": {
       "header": "Driving mode",
@@ -58,29 +98,73 @@
       "LOADING": {
         "message": "Please wait..."
       }
+    },
+
+    "RLOADING": {
+      "message": "Registering..."
     }
   },
 
   "D_REGISTER": {
-    "title": "New user?",
-    "btnDriver": "Driving mode",
+    "title": "Wanting to drive?",
     "name": "Name",
     "lastname": "Lastname",
     "email": "Email",
     "password": "Password",
     "c_password": "Confirm password",
     "phone": "Phone number",
-    "btnRegister": "Create an account",
+    "btnRegister": "Create an account"
+  },
 
-    "DR_ALERT": {
-      "header": "Driving mode",
-      "message": "Would you like to create a driver account?",
-      "yes": "Yes",
-      "no": "No",
+  "RECOVER": {
+    "title": "Recover password",
+    "message": "Enter your email to continue",
+    "email": "Email",
+    "btnRecover": "Recover password",
+    "btnBack": "Back to top"
+  },
 
-      "LOADING": {
-        "message": "Please wait..."
-      }
+  "VERIFICATE": {
+    "title":"One more step and that's it!",
+    "message":"Enter your email address to verify your account and login.",
+    "btnCheck": "Continue",
+
+    "VLOADING": {
+      "message": "Verifying..."
+    }
+  },
+
+  "PASSENGERS": {
+    "title": "Drivers",
+    "zone": "View all",
+
+    "DRIVERCOMP": {
+      "title": "Drivers",
+      "search": "Driver search",
+      "btnJourney": "Take a trip"
+    }
+  },
+
+  "PROFILE": {
+    "btnModify": "Modify profile",
+
+    "imgCtrl": {
+      "header": "Add image",
+      "placeholder": "Add an image address",
+      "btnChange": "Ready",
+      "btnCancel": "Cancel"
+    },
+
+    "profileCtrl": {
+      "header":"Edit Profile",
+      "placeholder": "Add an address",
+      "btnChange": "Ready",
+      "btnCancel": "Cancel"
+    },
+
+    "alertUpd": {
+      "header": "Your profile has been updated",
+      "btnOk": "OK"
     }
   }
 

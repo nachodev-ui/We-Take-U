@@ -1,7 +1,14 @@
 /* eslint-disable no-trailing-spaces */
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+
 import { UserI } from 'src/app/models/models';
+
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
+import { AvatarService } from 'src/app/services/avatar.service';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -18,10 +25,15 @@ export class PerfilPage implements OnInit {
   /*Variable para desplegar info*/
   infoUser: UserI = null;
 
+  user = null;
+
   constructor(
     private authService: AuthService,
     private database: FirebaseService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private translate: TranslateService,
+    private avatarService: AvatarService,
+    private loadingCtrl: LoadingController
     ) { }
 
   async ngOnInit() {
@@ -29,6 +41,38 @@ export class PerfilPage implements OnInit {
     this.authService.stateUser().subscribe( res => {
       this.getUid();
     });
+
+    this.avatarService.getUserProfile().subscribe((data) => {
+      this.infoUser;
+    });
+  }
+
+  async changeImage() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos, // Camera, Photos or Prompt
+    });
+
+    console.log(image);
+
+    if (image) {
+      const loading = await this.loadingCtrl.create();
+      await loading.present();
+
+      const result = await this.avatarService.uploadImage(image);
+      loading.dismiss();
+
+      if (!result) {
+        const alert = await this.alertCtrl.create({
+          header: 'Upload failed',
+          message: 'There was a problem uploading your avatar.',
+          buttons: ['OK'],
+        });
+        await alert.present();
+      }
+    }
 
   }
 
@@ -47,14 +91,14 @@ export class PerfilPage implements OnInit {
 
   async editProfile() {
     const alert = await this.alertCtrl.create({
-      header: 'Editar Perfil',
+      header: this.translate.instant('PROFILE.profileCtrl.header'),
       mode: 'ios',
       cssClass: 'alertEditProfile',
       inputs: [
         {
           name: 'direccion',
           type: 'text',
-          placeholder: 'Agrega una dirección'
+          placeholder: this.translate.instant('PROFILE.profileCtrl.placeholder')
         },
         {
           name: 'phone',
@@ -65,15 +109,14 @@ export class PerfilPage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('PROFILE.profileCtrl.btnCancel'),
           role: 'cancel',
           cssClass: 'secondary',
           handler: ()=> {
-            console.log('Cancelar');
           }
         },
         {
-          text: 'Aceptar',
+          text: this.translate.instant('PROFILE.profileCtrl.btnChange'),
           handler: (ev) => {
             this.savePhone(ev.phone);
             this.addDirection(ev.direccion);
@@ -87,26 +130,26 @@ export class PerfilPage implements OnInit {
 
   async editImage() {
     const alert = await this.alertCtrl.create({
-      header: 'Agregar imagen',
+      header: this.translate.instant('PROFILE.imgCtrl.header'),
       mode: 'ios',
       inputs: [
         {
           name: 'imagen',
           type: 'text',
-          placeholder: 'Agrega una dirección de imagen'
+          placeholder: this.translate.instant('PROFILE.imgCtrl.placeholder')
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('PROFILE.imgCtrl.btnCancel'),
           role: 'cancel',
           cssClass: 'secondary',
           handler: ()=> {
-            console.log('Cancelar');
+
           }
         },
         {
-          text: 'Aceptar',
+          text: this.translate.instant('PROFILE.imgCtrl.btnChange'),
           handler: (ev) => {
             this.uploadPhoto(ev.imagen);
           }
@@ -120,10 +163,9 @@ export class PerfilPage implements OnInit {
   async userUpdated() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Su perfil ha sido actualizado',
-      buttons: ['Aceptar']
+      header: this.translate.instant('PROFILE.alertUpd.header'),
+      buttons: [this.translate.instant('PROFILE.alertUpd.btnOk')]
     });
-
     await alert.present();
   }
 
@@ -150,7 +192,6 @@ export class PerfilPage implements OnInit {
     };
 
     this.database.updateDoc(path, id, updateDoc).then (  () => {
-      this.userUpdated();
     });
 
   }

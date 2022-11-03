@@ -1,6 +1,7 @@
 <ion-content>
 
   <input
+    class="journey"
     id="direction"
     type="text"
     [(ngModel)]="placesText"
@@ -8,6 +9,7 @@
     placeholder="Dirección de viaje. . ."
     ngx-google-places-autocomplete
     (onAddressChange)="handleAddressChange($event)"/>
+  <span class="_focusBorder"></span>
 
   <div class="app-page">
     <div #map id="map">
@@ -17,8 +19,18 @@
   <div class="map-pill" [ngClass]="{'map-pill-show': showMapPill }" >
     <div class="youps-pill-logo"></div>
     <div class="youps-pill-content">
-      <div class="youps-pill-label">Tu viaje está en proceso</div>
-      <div class="youps-pill-distance-time">{{ distance }} / {{ time }} </div>
+      <div class="youps-pill-label">Datos del viaje: </div>
+      <div class="youps-pill-distance-time">
+        {{ distance }} / {{ time }}
+
+        <ion-button (click)="journeyReady()">
+          <ion-icon slot="end" fill="clear" name="checkmark-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="journeyDeclined()">
+          <ion-icon slot="end" fill="clear" name="close-outline"></ion-icon>
+        </ion-button>
+
+      </div>
     </div>
   </div>
 

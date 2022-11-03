@@ -4,15 +4,15 @@
 
     <div class="heading ion-padding">
 
-      <h2>¡Un paso más y listo!</h2>
+      <h2>{{ 'VERIFICATE.title' | translate }}</h2>
       <img src="../../../assets/img/verificate-removebg-preview.png">
-      <p>Ingresa a tu correo electrónico para verificar tu cuenta y poder ingresar.</p>
+      <p>{{ 'VERIFICATE.message' | translate }}</p>
 
     </div>
 
     <div>
       <ion-button (click)="redirectToFinal()" class="verified-button" id="btn-vef" expand="block">
-        Verificado
+        {{ 'VERIFICATE.btnCheck' | translate }}
       </ion-button>
     </div>
 

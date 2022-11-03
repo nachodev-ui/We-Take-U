@@ -8,12 +8,15 @@ import { RegistroConductorPageRoutingModule } from './registro-conductor-routing
 
 import { RegistroConductorPage } from './registro-conductor.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegistroConductorPageRoutingModule
+    RegistroConductorPageRoutingModule,
+    TranslateModule
   ],
   declarations: [RegistroConductorPage]
 })

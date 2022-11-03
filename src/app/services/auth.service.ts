@@ -1,11 +1,15 @@
 /* eslint-disable no-trailing-spaces */
 import { Injectable } from '@angular/core';
 
+import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +17,21 @@ import 'firebase/compat/firestore';
 export class AuthService {
 
   constructor(
-    private authfire: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private router: Router
   ) { }
 
   /*Devolver la respuesta de la promesa*/
   login(email: string, password: string) {
-   return this.authfire.signInWithEmailAndPassword(email, password);
+   return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
   async accountVerification() {
-    return await this.authfire.currentUser.then(u => u?.sendEmailVerification());
+    return await this.afAuth.currentUser.then(u => u?.sendEmailVerification());
   }
 
   authUserDisabled() {
-    return this.authfire.currentUser.then( user => {
+    return this.afAuth.currentUser.then( user => {
       if(user) {
         return user.emailVerified;
 
@@ -35,43 +40,43 @@ export class AuthService {
   }
 
   googleLogin() {
-    return this.authfire.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   githubLogin() {
-    return this.authfire.signInWithPopup(new firebase.auth.GithubAuthProvider());
+    return this.afAuth.signInWithPopup(new firebase.auth.GithubAuthProvider());
   }
 
   logout() {
-    this.authfire.signOut();
+    this.afAuth.signOut();
   }
 
   /*Crea un nuevo usuario en el modulo de Authentication de Firestore*/
   registerUser(email: string, password: string) {
-    return this.authfire.createUserWithEmailAndPassword(email, password)
+    return this.afAuth.createUserWithEmailAndPassword(email, password)
   }
 
   stateUser() {
-    return this.authfire.authState;
+    return this.afAuth.authState;
   }
 
   buscarEmail(email: string) {
-    return this.authfire.fetchSignInMethodsForEmail(email);
+    return this.afAuth.fetchSignInMethodsForEmail(email);
   }
 
   async sendRessetPasswordEmail(email: string) {
-    return this.authfire.sendPasswordResetEmail(email);
+    return this.afAuth.sendPasswordResetEmail(email);
   }
 
   forgotPassword(email: string) {
-    return this.authfire.sendPasswordResetEmail(email);
+    return this.afAuth.sendPasswordResetEmail(email);
   }
 
   /*Recoge el Uid de la base de datos*/
   async getUid() {
 
     /*Espera a devolver el usuario actual*/
-    const user = await this.authfire.currentUser;
+    const user = await this.afAuth.currentUser;
 
     /*Retomamos el Uid*/
     if (user) {
@@ -83,7 +88,14 @@ export class AuthService {
   }
 
   getCurrentUserEmail() {
-    return this.authfire.currentUser;
+    return this.afAuth.currentUser;
+  }
+
+  //SignIn and Save credentials with googleSignIn
+  async googleSignIn() {
+    let googleUser = await GoogleAuth.signIn();
+    const credential = auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
+    return this.afAuth.signInWithCredential(credential);
   }
 
 }
