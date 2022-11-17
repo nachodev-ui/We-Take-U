@@ -11,7 +11,7 @@ export class CodeErrorService {
     switch (code) {
 
       case 'auth/invalid-email':
-        return 'El correo electrónico no es válido ingresado no es válido.'
+        return 'El correo electrónico ingresado no es válido.'
 
       case 'auth/user-not-found':
         return 'Usuario no encontrado';

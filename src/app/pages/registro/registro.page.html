@@ -6,7 +6,7 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button class="btnConductor" (click)="modoConductor()" fill="clear">{{ 'U_REGISTER.btnDriver' | translate }}<ion-icon slot="end" name="car-outline"></ion-icon></ion-button>
+      <ion-button class="btnConductor" (click)="modoConductor()">{{ 'U_REGISTER.btnDriver' | translate }}<ion-icon slot="end" name="car-outline"></ion-icon></ion-button>
     </ion-buttons>
 
   </ion-toolbar>
@@ -40,7 +40,7 @@
     <span *ngIf="signupForm.get('celular')?.hasError('required') && signupForm.get('celular')?.touched" class="error"> El número es <strong>obligatorio</strong>.</span>
     <span *ngIf="signupForm.get('celular')?.hasError('minlength') && signupForm.get('celular')?.touched" class="error"> El número debe ser de <strong>9 dígitos</strong>.</span>
 
-    <ion-button class="btnRegistrar" (click)="registrar()" shape="round" expand="block">{{ 'U_REGISTER.btnRegister' | translate }}</ion-button>
+    <ion-button [disabled]="signupForm.invalid"  class="btnRegistrar" (click)="registrar()" shape="round" expand="block">{{ 'U_REGISTER.btnRegister' | translate }}</ion-button>
   </form>
 
 </ion-content>

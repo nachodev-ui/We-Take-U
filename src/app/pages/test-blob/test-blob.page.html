@@ -33,10 +33,42 @@
 
   </ion-item>
 
-  <!-- Image section -->
-  <ion-title>
-    My Profile
-  </ion-title>
+  <!--  QR SECTION -->
+  <input #fileInput type="file" accept="image/*;capture=camera" hidden (change)="handleFile($event.target.files)">
 
+  <ion-button (click)="captureImage()" expand="full">
+    <ion-icon slot="start" name="camera"></ion-icon>
+    Capture Image
+  </ion-button>
+
+  <ion-button (click)="startScan()">
+    Start scan
+  </ion-button>
+
+  <ion-button (click)="reset()" expand="full" *ngIf="scanResult">
+    <ion-icon slot="start" name="refresh"></ion-icon>
+    Reset
+  </ion-button>
+
+  <video #video [hidden]="!scanActive" width="100">
+  </video>
+  <canvas #canvas hidden></canvas>
+
+  <ion-button (click)="stopScan()" expand="full" *ngIf="scanActive">
+    <ion-icon slot="start" name="close"></ion-icon>
+    Stop scan
+  </ion-button>
+
+  <ion-card>
+    <ion-card-header>
+
+      <ion-card-title>QR Code</ion-card-title>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ scanResult }}
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

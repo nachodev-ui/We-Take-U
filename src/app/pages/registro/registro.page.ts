@@ -30,8 +30,8 @@ export class RegistroPage implements OnInit {
     private translate: TranslateService
     ) {
       this.signupForm = this.builder.group({
-        nombre: [''],
-        apellido: [''],
+        nombre: ['', Validators.required],
+        apellido: ['', Validators.required],
         email: ['', Validators.compose([Validators.email, Validators.required])],
         uid: [''],
 
@@ -168,8 +168,6 @@ export class RegistroPage implements OnInit {
         this.valideIfEmailAlreadyExists();
       } else if (err.code === 'auth/invalid-email') {
         this.EmailOrPasswordAreNotValid();
-      } else if (this.signupForm.value.password !== this.signupForm.value.password2) {
-        this.passwordsAreNotEqual();
       }
 
     });

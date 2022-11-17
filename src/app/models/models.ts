@@ -8,6 +8,13 @@ export interface UserI {
   celular: string;
   direccion: string;
   photoURL: string;
+  vehiculo: {
+    patente: string;
+    marca: string;
+    modelo: string;
+    color: string;
+    capacidad: number;
+  };
   perfil: 'Pasajero';
 }
 
@@ -29,7 +36,6 @@ export interface VehiculoI {
   modelo: string;
   color: string;
   capacidad: number;
-  dueño: ConductorI;
 }
 
 export interface ViajeI {

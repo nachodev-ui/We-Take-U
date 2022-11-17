@@ -81,6 +81,11 @@ export class VerificatePage implements OnInit {
     await loading.present();
   }
 
+  async redirectLogin() {
+    this.router.navigateByUrl('login');
+  }
+
+  //ROUTER DEPENDS IS DRIVER OR CONDUCTOR
   async redirectToFinal() {
 
     await this.loadingRedirect();
@@ -106,7 +111,6 @@ export class VerificatePage implements OnInit {
     const path = 'Usuarios';
     const id = uid;
     this.database.getDoc<UserI>(path, id).subscribe( res => {
-      console.log('datos ->', res);
       if (res) {
         this.rol = res.perfil;
       }

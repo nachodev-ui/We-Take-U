@@ -25,9 +25,9 @@
 
     <ion-input placeholder="Color" formControlName="color" id="color" type="text"></ion-input>
 
-    <ion-input placeholder="Capacidad del vehiculo" formControlName="capacidad" id="capacidad" type="number"></ion-input>
+    <ion-input placeholder="Capacidad del vehiculo" formControlName="capacidad" id="capacidad" type="number" min="1"></ion-input>
 
-    <ion-button class="btnRegistrar" (click)="createVehicle()" shape="round" expand="block">Guardar mi auto</ion-button>
+    <ion-button class="btnRegistrar" (click)="addVehiculo()" shape="round" expand="block">Guardar vehículo</ion-button>
   </form>
 
 </ion-content>

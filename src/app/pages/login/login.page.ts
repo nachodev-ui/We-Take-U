@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { CodeErrorService } from 'src/app/services/code-error.service';
 import { ToastrService } from 'ngx-toastr';
+import { InfoVehiculoPage } from '../info-vehiculo/info-vehiculo.page';
 
 @Component({
   selector: 'app-login',
@@ -63,7 +64,9 @@ export class LoginPage implements OnInit {
         this.loged = true;
 
         /*Datos Pasajeros*/
-        this.getUserData(res.uid);
+        this.assignProfile(res.uid);
+
+        this.userProfile(res.uid);
 
       } else {
         this.loged = false;
@@ -91,13 +94,22 @@ export class LoginPage implements OnInit {
     this.router.navigate(['reset-password']);
   }
 
-  getUserData(uid: string) {
+  assignProfile(uid: string) {
     const path = 'Usuarios';
     const id = uid;
     this.database.getDoc<UserI>(path, id).subscribe( res => {
-      console.log('datos ->', res);
       if (res) {
         this.rol = res.perfil;
+      }
+    });
+  }
+
+  userProfile(uid: string) {
+    const path = 'Usuarios';
+    const id = uid;
+    this.database.getDoc<UserI>(path, id).subscribe( res => {
+      if (res) {
+        this.infoUser = res;
       }
     });
   }
@@ -158,25 +170,36 @@ export class LoginPage implements OnInit {
     this.afAuth.signInWithEmailAndPassword(email, password).then((user ) => {
       if (user.user.emailVerified) {
 
-        this.router.navigate(['interfaz/pasajero']);
+          if (this.rol === 'Pasajero') {
+
+            setTimeout(() => {
+              this.router.navigate(['interfaz/pasajero']);
+            }, 1000);
+
+          } else if (this.rol === 'Conductor') {
+
+            setTimeout(async () => {
+
+              const arrayVeh = this.infoUser.vehiculo
+              const arrayVeh2 = Object.values(arrayVeh.patente);
+
+              if (arrayVeh2.length === 1) {
+                console.log('No existe ningún vehículo en el usuario');
+                this.router.navigateByUrl('info-vehiculo');
+              }
+
+              if (arrayVeh2.length > 1) {
+                console.log('El usuario ya contiene vehículo');
+                this.router.navigateByUrl('interfaz/conductor')
+              }
+            }, 1000);
+          }
 
       } else {
         this.usuarioNoVerificado();
       }
-
     }).catch((error) => {
-
-      console.log(error);
-
       this.toastr.error(this.errorCode.stringError(error.code), 'Error');
-
-      /* this.alertCtrl.create({
-        mode: 'ios',
-        header: 'Error',
-        message: this.errorCode.stringError(error.code),
-        buttons: ['OK']
-      }).then(alert => alert.present()); */
-
     });
 
   }

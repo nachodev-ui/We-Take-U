@@ -42,6 +42,13 @@ export class RegistroConductorPage implements OnInit {
       direccion: [''],
       photoURL: ['https://ajisenramenpanama.com/wp-content/uploads/2020/07/user_icon.png'],
       perfil: 'Conductor',
+      vehiculo: {
+        patente: [''],
+        marca: [''],
+        modelo: [''],
+        color: [''],
+        capacidad: ['']
+      }
     });
   }
 

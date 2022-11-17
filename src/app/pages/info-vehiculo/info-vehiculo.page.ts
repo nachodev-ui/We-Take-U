@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AlertController, LoadingController } from '@ionic/angular';
+import { UserI } from 'src/app/models/models';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -19,6 +20,10 @@ export class InfoVehiculoPage implements OnInit {
 
   formVehiculo: FormGroup;
 
+  uid : string = null;
+
+  infoUser : UserI = null;
+
   constructor(
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
@@ -28,19 +33,47 @@ export class InfoVehiculoPage implements OnInit {
     private builder: FormBuilder,
   ) {
     this.formVehiculo = this.builder.group({
-      uid: [''],
       patente: ['', Validators.compose([Validators.minLength(6), Validators.required])],
       marca: ['', Validators.required],
       modelo: ['', Validators.required],
       color: ['', Validators.required],
       capacidad: ['', Validators.compose([Validators.minLength(1), Validators.required])],
-      conductorUid: [''],
     });
 
+    this.auth.stateUser().subscribe(res => {
+      if (res) {
+        this.uid = res.uid;
+        this.getInfoUser();
+      }
+    });
 
   }
 
   ngOnInit() {
+  }
+
+  /*Tomar los datos del usuario autenticado*/
+  getInfoUser() {
+    const path = 'Usuarios';
+    const id = this.uid;
+
+    this.database.getDoc<UserI>(path, id).subscribe( credentials => {
+      if (credentials) {
+        this.infoUser = credentials;
+      }
+    });
+
+  }
+
+  //Add data to vehiculo array in UserI
+  addVehiculo() {
+    this.auth.stateUser().subscribe(res => {
+      if (res) {
+        this.database.updateVehicleFromUserI(this.formVehiculo.value).then( res => {
+          this.alertaVehiculoCreado();
+        });
+      }
+    });
   }
 
   async alertaPatenteExiste() {
@@ -73,32 +106,6 @@ export class InfoVehiculoPage implements OnInit {
 
     await alert.present();
   }
-
-  createVehicle() {
-
-    const conductorUid = this.auth.getUid();
-
-    this.database.addVehicle(this.formVehiculo.value).then(() => {
-
-      this.savingCar();
-
-      setTimeout(() => {
-        this.alertaVehiculoCreado();
-        this.router.navigateByUrl('interfaz/conductor');
-      }, 2000);
-
-
-    }).catch(() => {
-
-      console.log('error');
-
-    }).finally(() => {
-
-      console.log('Finalmente');
-
-    });
-  }
-
 
 }
 

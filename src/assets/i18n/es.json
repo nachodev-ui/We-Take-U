@@ -146,6 +146,8 @@
 
   "PROFILE": {
     "btnModify": "Modificar perfil",
+    "passenger": "Pasajero",
+    "driver": "Conductor",
 
     "imgCtrl": {
       "header": "Cambiar foto de perfil",

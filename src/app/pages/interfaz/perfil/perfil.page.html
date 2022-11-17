@@ -1,10 +1,10 @@
 <ion-content scrollY="false">
 
-  <ion-buttons slot="start">
-    <ion-back-button defaultHref="/interfaz/pasajero"></ion-back-button>
-  </ion-buttons>
-
   <div class="snow"></div>
+
+  <ion-button class="backPsg" (click)="returnPsg()" fill="clear" shape="round">
+    <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+  </ion-button>
 
   <div *ngIf="infoUser || user" class="profile-card">
 
@@ -20,7 +20,7 @@
         </ng-template>
       </ion-avatar>
 
-      <ion-button (click)="changeImage()" shape="round">
+      <ion-button (click)="changeImage()">
         <ion-icon name="image-outline"></ion-icon>
       </ion-button>
 
@@ -29,15 +29,19 @@
     <div class="title">
       <h2>{{infoUser.nombre}} {{infoUser.apellido}}</h2>
 
-      <div class="subtitle">
-        <p>{{infoUser.perfil}}</p>
+      <div *ngIf="infoUser.perfil === 'Pasajero'" class="subtitle">
+        <p>{{ 'PROFILE.passenger' | translate }}</p>
+      </div>
+
+      <div *ngIf="infoUser.perfil !== 'Pasajero'" class="subtitle">
+        <p>{{ 'PROFILE.driver' | translate }}</p>
       </div>
 
     </div>
 
     <div class="main-container">
 
-      <ion-list lines="none">
+      <ion-list >
         <ion-item>
           <ion-label>
             WeTakeU Services
@@ -71,10 +75,9 @@
         <ion-icon slot="start" name="pencil-outline"></ion-icon>
       </ion-button>
 
-
     </div>
 
   </div>
 
-
 </ion-content>
+

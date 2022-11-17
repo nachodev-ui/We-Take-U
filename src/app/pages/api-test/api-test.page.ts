@@ -9,18 +9,22 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ApiTestPage implements OnInit {
 
+  sedes: any = [];
+
   constructor(private apiService : ApiService) { }
 
   ngOnInit() {
+    this.loadData();
   }
 
   loadData() {
     this.apiService.getSedes().subscribe(
       (res) => {
         console.log(res);
+        this.sedes = res;
       },
-      (error) => {
-        console.log(error);
+      (err) => {
+
       }
     );
   }

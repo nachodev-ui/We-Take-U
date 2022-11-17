@@ -1,15 +1,20 @@
-import { Component, NgZone, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 import { Router } from '@angular/router';
+
 import { AlertController, LoadingController } from '@ionic/angular';
 
 import { } from 'googlemaps';
 
 import { UserI, ViajeI } from 'src/app/models/models';
 
-import { Auth } from '@angular/fire/auth';
+import { User } from '@angular/fire/auth';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-googlemaps',
@@ -17,11 +22,20 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./googlemaps.page.scss'],
 })
 
-export class GooglemapsPage implements OnInit {
+export class GooglemapsPage implements OnInit, OnDestroy {
 
   uid : string = null;
   infoUser: UserI = null;
   rol: 'Pasajero' | 'Conductor' | 'Administrador';
+
+  authUser: User;
+  authUserSub: Subscription;
+
+  locationUpdateDoc = 'K8gg7mv2ITaRwZLGS9tw';
+  locationUpdatesCollection = 'location-updates';
+  driverId = '5i853iMMr7Rm63B1DlDwusV1io23';
+  recipientId = 'RCQUcURkT9VUvmVK20Cqiwiv8Mv2';
+  locSimulationInterval: any;
 
   showMapPill: boolean;
   mapLoaded: boolean;
@@ -33,6 +47,7 @@ export class GooglemapsPage implements OnInit {
 
   sourcePin: google.maps.Marker;
   destinationPin: google.maps.Marker;
+  locationWatchId: number;
 
   options: google.maps.MapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -57,22 +72,24 @@ export class GooglemapsPage implements OnInit {
     private alertCtrl: AlertController,
     private router: Router,
     private loadingCtrl: LoadingController,
-    private afAuth: AngularFireAuth,
     private authService: AuthService,
     private dbFire: FirebaseService,
-    private auth: Auth
+    private afs: AngularFirestore,
   ) {
-    this.authService.stateUser().subscribe( res => {
-      if(res) {
-
+    this.authService.stateUser().subscribe( credentials => {
+      if(credentials) {
         /*Datos Pasajeros*/
-        this.loadUserData(res.uid);
-
+        this.loadUserData(credentials.uid);
       }
     });
   }
 
   async ngOnInit() {
+
+    this.authUserSub = this.authService.stateUser().subscribe((user: User) => {
+      this.authUser = user;
+    });
+
     this.ds = new google.maps.DirectionsService();
     this.dr = new google.maps.DirectionsRenderer({
       map: null,
@@ -105,8 +122,9 @@ export class GooglemapsPage implements OnInit {
         position: this.destination,
         icon: {
           url: 'assets/img/marker.png',
-          anchor: new google.maps.Point(35, 10),
-          scaledSize: new google.maps.Size(30, 30),
+          anchor: new google.maps.Point(40,20),
+          origin: new google.maps.Point(0, 0),
+          scaledSize: new google.maps.Size(40, 40)
         },
         map: this.map
       });
@@ -116,6 +134,64 @@ export class GooglemapsPage implements OnInit {
       });
 
     });
+
+    this.locationWatchId = navigator.geolocation.watchPosition(
+      (position) => {
+
+        // if its the driver user that's logged in,
+        // then update its location as he / she moves
+
+        if (this.infoUser.uid === this.driverId) {
+
+          this.source = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          if (this.sourcePin) {
+            this.sourcePin.setPosition(this.source);
+          }
+
+          // broadcast my location to
+          // interest client via firebase
+          this.afs.collection(this.locationUpdatesCollection)
+          .doc(this.locationUpdateDoc)
+          .set({
+            source: {
+              location: {
+                lat: this.source.lat,
+                lng: this.source.lng
+              },
+              uid: this.infoUser.uid
+            }
+          }, { merge: true });
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    // listen for updates on locationUpdateDoc
+    // and update the map accordingly
+    this.afs.collection(this.locationUpdatesCollection)
+    .doc(this.locationUpdateDoc)
+    .valueChanges()
+    .subscribe((data: any) => {
+
+        if (data.destination && data.destination.uid === this.infoUser.uid) {
+
+          this.dr.setOptions({
+            map: this.map,
+            suppressPolylines: false,
+          });
+
+          // set route information once
+
+          // update source (driver location)
+
+        }
+      });
 
   }
 
@@ -186,6 +262,64 @@ export class GooglemapsPage implements OnInit {
       if (status == google.maps.DirectionsStatus.OK) {
         this.dr.setDirections(response);
 
+        // let's do a simulation...
+        if (this.infoUser.uid === this.driverId) {
+
+          // upload the route information to firebase so receiving user
+          // get it as well and avoid having to make a call in the
+          // Directions API
+
+          let latLngs = [];
+          let step: any = response.routes[0].legs[0].steps[0];
+          step.lat_lngs.forEach((stepPoint) => {
+            latLngs.push({
+              lat: stepPoint.lat(),
+              lng: stepPoint.lng()
+            });
+          });
+
+          // upload my location after getting it
+          // from the Google Places API
+          this.afs
+          .collection(this.locationUpdatesCollection)
+          .doc(this.locationUpdateDoc)
+          .set({
+            source: {
+              route: JSON.stringify(response),
+              location : {
+                lat: this.source.lat,
+                lng: this.source.lng
+              },
+              uid: this.infoUser.uid
+            }
+          }, { merge: true });
+
+          let count = 0;
+          this.locSimulationInterval = setInterval(() => {
+            if (count < latLngs.length) {
+              let currentPos = latLngs[count];
+
+              this.afs
+              .collection(this.locationUpdatesCollection)
+              .doc(this.locationUpdateDoc)
+              .set({
+                source: {
+                  location: {
+                    lat: currentPos.lat,
+                    lng: currentPos.lng
+                  },
+                  uid: this.infoUser.uid
+                }
+              }, { merge: true });
+              count++;
+
+              this.source = currentPos;
+              this.setupSourcePin();
+            }
+          }, 1000);
+
+        }
+
         this.ngZone.run(() => {
           let distanceInfo = response.routes[0].legs[0];
           this.distance = distanceInfo.distance.text;
@@ -208,6 +342,11 @@ export class GooglemapsPage implements OnInit {
       lng: lng
     };
 
+    this.setupSourcePin();
+    this.setRoutePolyne();
+  }
+
+  setupSourcePin() {
     if (!this.sourcePin) {
       // adding a marker
       this.sourcePin = new google.maps.Marker({
@@ -215,6 +354,7 @@ export class GooglemapsPage implements OnInit {
         icon: {
           url: './assets/img/marker.png',
           anchor: new google.maps.Point(40,20),
+          origin: new google.maps.Point(0, 0),
           scaledSize: new google.maps.Size(40, 40)
         },
         animation: google.maps.Animation.DROP,
@@ -229,9 +369,6 @@ export class GooglemapsPage implements OnInit {
     else {
       this.sourcePin.setPosition(this.source);
     }
-
-    this.setRoutePolyne();
-
   }
 
   onCenterMap() {
@@ -326,6 +463,12 @@ export class GooglemapsPage implements OnInit {
   saveViajeDetailsInUser() {
     let viajeDetails = this.generateViajeDetails();
     this.fire.saveViajeDetails(viajeDetails);
+  }
+
+  ngOnDestroy(): void {
+    this.authUserSub.unsubscribe();
+    navigator.geolocation.clearWatch(this.locationWatchId);
+    clearInterval(this.locSimulationInterval);
   }
 
 }

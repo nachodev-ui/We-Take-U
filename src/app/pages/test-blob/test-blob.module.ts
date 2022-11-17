@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TestBlobPageRoutingModule } from './test-blob-routing.module';
 
 import { TestBlobPage } from './test-blob.page';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { TestBlobPage } from './test-blob.page';
     FormsModule,
     IonicModule,
     TestBlobPageRoutingModule,
+    QRCodeModule
   ],
   declarations: [TestBlobPage]
 })

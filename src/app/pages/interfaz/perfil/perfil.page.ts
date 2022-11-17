@@ -11,6 +11,7 @@ import { AvatarService } from 'src/app/services/avatar.service';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -28,6 +29,7 @@ export class PerfilPage implements OnInit {
   user = null;
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private database: FirebaseService,
     private alertCtrl: AlertController,
@@ -220,6 +222,14 @@ export class PerfilPage implements OnInit {
     this.database.updateDoc(path, id, updateDoc).then (  () => {
       this.userUpdated();
     });
+  }
+
+  returnPsg() {
+    if (this.infoUser.perfil === 'Pasajero') {
+      this.router.navigateByUrl('interfaz/pasajero');
+    } else {
+      this.router.navigateByUrl('interfaz/conductor');
+    }
   }
 
 }

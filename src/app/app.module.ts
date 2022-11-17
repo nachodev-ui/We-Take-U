@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { QRCodeModule } from 'angularx-qrcode';
+
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -83,6 +85,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     BrowserAnimationsModule,
     JoyrideModule.forRoot(),
+    QRCodeModule
   ],
   providers: [
     {

@@ -6,7 +6,13 @@
 
 <ion-content>
 
-  <ion-card *ngFor="">
+  <ion-card *ngFor="let auxSede of sedes.data">
+
+    <ion-card-title>
+
+      {{ auxSede.attributes.nombre }}
+
+    </ion-card-title>
 
   </ion-card>
 

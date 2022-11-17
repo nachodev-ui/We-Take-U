@@ -2,7 +2,7 @@
   "MENU": {
     "title": "Welcome",
     "profile": "Profile",
-    "driver": "Conductor",
+    "driver": "Driver",
     "drivers": "Drivers",
     "passenger": "Passenger",
     "passengers": "Passengers",
@@ -147,6 +147,8 @@
 
   "PROFILE": {
     "btnModify": "Modify profile",
+    "passenger": "Passenger",
+    "driver": "Driver",
 
     "imgCtrl": {
       "header": "Add image",

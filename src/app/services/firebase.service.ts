@@ -2,19 +2,15 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { LoadingController, ToastController } from '@ionic/angular';
-import { VehiculoI, ViajeI } from '../models/models';
+import { UserI, ViajeI } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-  loadingAux: any;
 
   constructor(
     private database: AngularFirestore,
-    private toastController: ToastController,
-    private loadingController: LoadingController
   ) { }
 
   /* data = objeto, path = coleccion, id: id*/
@@ -23,15 +19,23 @@ export class FirebaseService {
     return collection.doc(id).set(data);
   }
 
-  addVehicle(vehicle: VehiculoI) {
-    const id = this.database.createId();
-    vehicle.uid = id;
-    return this.database.collection('Vehiculos').doc(id).set(vehicle);
+  //Agregar datos dentro de 'Usuarios' vehiculo
+  addVehiculo(vehiculo: UserI) {
+    return this.database.collection('Usuarios').doc().update({
+      vehiculo: vehiculo
+    });
+  }
+
+  //updateVehicleFromUserI
+  updateVehicleFromUserI(vehiculo: UserI) {
+    return this.database.collection('Usuarios').doc().update({
+      vehiculo: vehiculo
+    });
   }
 
   patenteYaExiste(patente: string) {
-    const collection = this.database.collection('Vehiculos');
-    return collection.ref.where('patente', '==', patente).get();
+    const collection = this.database.collection('Usuarios');
+    return collection.ref.where('vehiculo.patente', '==', patente).get();
   }
 
   getDoc<tipo>(path: string, id: string) {

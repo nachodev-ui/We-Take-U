@@ -27,12 +27,18 @@
             <ion-icon name="person-outline"></ion-icon>{{ 'MENU.passengers' | translate }}
           </ion-item>
 
+          <ion-item *ngIf="rol === 'Conductor'">
+            <ion-icon name="car-sport-outline"></ion-icon>Car
+          </ion-item>
+
           <ion-item>
             <ion-icon name="chatbubble-ellipses-outline"></ion-icon>{{ 'MENU.messages' | translate }}
           </ion-item>
+
           <ion-item>
             <ion-icon name="stats-chart-outline"></ion-icon>{{ 'MENU.trips' | translate }}
           </ion-item>
+
           <ion-item *ngIf="login" class="sign-out">
             <ion-icon name="exit-outline"></ion-icon>
             <ion-button (click)="logout()" fill="clear">

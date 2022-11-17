@@ -2,15 +2,6 @@ ion-content {
   font-family: sans-serif;
   --background: url('../../../../assets/img/profile_bg.webp') no-repeat center center / cover;
 
-  ion-toolbar {
-    --background: linear-gradient(180deg, #fafafa 0%, #fbfafa 100%);
-
-    ion-back-button {
-      font-size: 1.3rem;
-      --color: #fae6e6;
-    }
-  }
-
   .snow, .snow:after, .snow:before {
     content: "";
     position: absolute;
@@ -53,11 +44,11 @@ ion-content {
   }
 
   .profile-card {
-    margin-top: 4vh;
-    background: linear-gradient(180deg, #753C54 0%,  #2F273E 100%);
+    margin-top: 1.5vh;
+    background: linear-gradient(180deg, #744558 0%,  #2F273E 100%);
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0.4, 1);
     margin-bottom: 20px;
     text-align: center;
 
@@ -92,10 +83,11 @@ ion-content {
         position: absolute;
         bottom: 20px;
         right: 22%;
+        --border-radius: 50px 50px;
 
         ion-icon {
-          font-size: 1.6rem;
-          color: rgb(20, 20, 20);;
+          font-size: 1.8rem;
+          color: #744558;
         }
       }
 
@@ -137,7 +129,6 @@ ion-content {
   .main-container {
     padding: 20px;
     border-radius: 10px;
-    margin-bottom: 20px;
     text-align: left;
 
     ion-list {
@@ -159,7 +150,8 @@ ion-content {
       --background: #f7f7f7;
 
       ion-icon {
-        color: rgb(20, 20, 20);
+        font-size: 1.62rem;
+        color: #322c3d;
       }
     }
 
@@ -184,9 +176,26 @@ ion-content {
 
     ion-icon {
       color: #2F273E;
+      font-size: 1.5rem;
       margin-inline: 10px;
     }
   }
+
+  .backPsg {
+    margin-top: 14px;
+    margin-bottom: 6px;
+    margin-left: 6px;
+    text-align: center;
+    --background: linear-gradient(180deg, #744558 0%,  #3c3a40 100%);
+    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+
+    ion-icon {
+      font-size: 1.8rem;
+      color: #f1f1f1;
+      margin: 0;
+    }
+  }
+
 }
 
 
