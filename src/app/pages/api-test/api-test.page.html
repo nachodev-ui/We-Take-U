@@ -43,19 +43,21 @@
     <ion-list lines="none">
       <ion-label class="look-for">¿Buscas pasajeros?</ion-label>
       <ion-item>
-        <div *ngFor="let user of users" class="user">
+        <ion-col size="12">
+          <div *ngFor="let user of users" class="user">
 
-          <ion-avatar class="ion-align-self-center">
-            <img class="img" [src]="user.photoURL" />
-          </ion-avatar>
+            <ion-avatar class="ion-align-self-center">
+              <img class="img" [src]="user.photoURL" />
+            </ion-avatar>
 
-          <p>{{ user.nombre }} {{ user.apellido }}</p>
+            <p>{{ user.nombre }} {{ user.apellido }}</p>
 
-          <ion-button (click)="onClick()" fill="clear">
-            <ion-icon slot="end" name="notifications-circle-outline"></ion-icon>
-          </ion-button>
+            <ion-button (click)="onClick()" fill="clear">
+              <ion-icon slot="end" name="notifications-circle-outline"></ion-icon>
+            </ion-button>
 
-        </div>
+          </div>
+        </ion-col>
 
       </ion-item>
     </ion-list>
