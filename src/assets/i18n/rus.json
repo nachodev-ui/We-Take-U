@@ -18,16 +18,16 @@
 
   "HOME": {
     "f_slide": {
-      "title": "La dirección que necesitas a un click"
+      "title": "Нужный адрес находится всего в одном клике"
     },
     "s_slide": {
-      "title": "Vehículos disponibles en tu institución"
+      "title": "Автомобили, имеющиеся в вашем учреждении"
     },
     "t_slide": {
-      "title": "Sé el ejemplo de compañerismo"
+      "title": "Будьте примером общения"
     },
-    "btnAccount": "Crear cuenta",
-    "btnLogin": "Iniciar sesión"
+    "btnAccount": "Создать аккаунт",
+    "btnLogin": "Войти"
   },
 
   "LOGIN": {
@@ -66,172 +66,172 @@
   },
 
   "U_REGISTER": {
-    "title": "¿Usuario nuevo?",
-    "btnDriver": "Modo conductor",
-    "name": "Nombre",
-    "lastname": "Apellido(s)",
-    "email": "Correo electrónico",
-    "password": "Contraseña",
-    "c_password": "Confirmar contraseña",
-    "phone": "Ejemplo: 950004000",
-    "btnRegister": "Crear cuenta",
+    "title": "Новичок?",
+    "btnDriver": "Режим привода",
+    "name": "Имя",
+    "lastname": "Фамилия(и)",
+    "email": "Адрес эл. почты",
+    "password": "Пароль",
+    "c_password": "Подтвердите пароль",
+    "phone": "Пример: 950004000",
+    "btnRegister": "Создать аккаунт",
 
     "EMERROR": {
-      "header": "Registro fallido.",
-      "message": "El correo que intentas ingresar no es válido, por favor, intente nuevamente."
+      "header": "Регистрация не прошла.",
+      "message": "Электронная почта, которую вы пытаетесь ввести, недействительна, пожалуйста, попробуйте еще раз."
     },
 
     "EMVACIO": {
-      "header": "Registro fallido.",
-      "message": "El correo se encuentra vacío, por favor, intente nuevamente."
+      "header": "Регистрация не прошла.",
+      "message": "Электронная почта пуста, попробуйте еще раз."
     },
 
     "EMVERF": {
-      "header": "Registro exitoso.",
-      "message": "Se ha enviado un correo de verificación a su cuenta de correo electrónico. Por favor, verifique su cuenta."
+      "header": "Удачная регистрация.",
+      "message": "На ваш электронный ящик было отправлено письмо с подтверждением. Пожалуйста, проверьте свою учетную запись."
     },
 
     "PAERROR": {
-      "header": "Registro fallido.",
-      "message": "Las contraseñas no coinciden, por favor, intente nuevamente."
+      "header": "Регистрация не прошла.",
+      "message": "Пароли не совпадают, пожалуйста, попробуйте еще раз."
     },
 
     "CELERROR": {
-      "header": "Registro fallido.",
-      "message": "El celular debe contener 10 dígitos. Incluya el 9 antes."
+      "header": "Регистрация не прошла.",
+      "message": "Мобильный телефон должен содержать 10 цифр. Включите 9 до."
     },
 
     "DR_ALERT": {
-      "header": "Modo conductor",
-      "message": "¿Desea crear una cuenta cómo conductor?",
-      "yes": "Sí",
-      "no": "No",
+      "header": "Режим водителя",
+      "message": "Хотите создать учетную запись водителя?",
+      "yes": "Да",
+      "no": "Нет",
 
       "LOADING": {
-        "message": "Por favor espere..."
+        "message": "Подождите..."
       }
     },
 
     "RLOADING": {
-      "message": "Registrando..."
+      "message": "Регистрация ..."
     }
   },
 
   "D_REGISTER": {
-    "title": "¿Deseando manejar?",
-    "name": "Nombre",
-    "lastname": "Apellido(s)",
-    "email": "Correo electrónico",
-    "password": "Contraseña",
-    "c_password": "Confirmar contraseña",
-    "phone": "Número de celular",
-    "btnRegister": "Crear cuenta",
+    "title": "Хотите водить?",
+    "name": "Имя",
+    "lastname": "Фамилия(и)",
+    "email": "Электронный адрес",
+    "password": "Пароль",
+    "c_password": "Подтвердите пароль",
+    "phone": "Пример: 950004200",
+    "btnRegister": "Создать аккаунт",
 
     "LOADING": {
-      "message": "Registrando..."
+      "message": "Регистрация..."
     },
 
     "EMEXISTS": {
-      "header": "¿Ya tienes cuenta?",
-      "message": "El correo que ingresaste ya existe, quizá olvidaste tu contraseña",
-      "btnCancel": "No, no tengo cuenta",
-      "btnRecover": "Recuperar contraseña"
+      "header": "Уже есть аккаунт?",
+      "message": "Введенный вами email уже существует, возможно, вы забыли пароль.",
+      "btnCancel": "Нет, у меня нет аккаунта",
+      "btnRecover": "Восстановление пароля"
     },
 
     "OTHEREM": {
-      "header": "Bien, intenta con otro correo"
+      "header": "Хорошо, попробуйте другое письмо"
     },
 
     "SUCREGISTER": {
-      "header": "Registro exitoso.",
-      "message": "Su cuenta fue creada exitosamente. Le envíamos un correo para verificar su cuenta."
+      "header": "Успешная регистрация.",
+      "message": "Ваша учетная запись была успешно создана. Мы отправим вам электронное письмо для подтверждения вашей учетной записи."
     }
   },
 
   "D_INFO": {
-    "title": "¡Deseamos conocer tu transporte!",
-    "plate": "Patente",
-    "brand": "Marca",
-    "model": "Modelo",
-    "color": "Color",
-    "capacity": "Capacitad",
-    "btnAdd": "Guardar vehiculo"
+    "title": "Мы хотим знать ваш транспорт!",
+    "plate": "Патент",
+    "brand": "Бренд",
+    "model": "Модель",
+    "color": "Цвет",
+    "capacity": "Емкость",
+    "btnAdd": "Сохранение автомобиля"
   },
 
   "D_VALIDATIONS": {
-    "e-required": "El correo es obligatorio",
-    "e-noValid": "El correo no es válido",
-    "p-required": "La contraseña es obligatoria",
-    "p-min": "La contraseña debe tener 6 caracteres mínimo",
-    "p-notMutch": "Las contraseñas no coinciden",
-    "ph-required": "El número de teléfono es obligatorio",
-    "ph-min": "El número debe tener 9 dígitos"
+    "e-required": "Почта обязательна",
+    "e-noValid": "Почта недействительна",
+    "p-required": "Пароль обязателен",
+    "p-min": "Пароль должен содержать не менее 6 символов",
+    "p-notMutch": "Пароли не совпадают",
+    "ph-required": "Номер телефона обязателен",
+    "ph-min": "Номер должен состоять из 9 цифр"
   },
 
   "RECOVER": {
-    "title": "Recuperar contraseña",
-    "message": "Ingrese su correo para continuar",
-    "email": "Correo",
-    "btnRecover": "Recuperar contraseña",
-    "btnBack": "Regresar al inicio"
+    "title": "Восстановление пароля",
+    "message": "Введите свой адрес электронной почты, чтобы продолжить",
+    "email": "Пишите на",
+    "btnRecover": "Восстановление пароля",
+    "btnBack": "Назад к началу"
   },
 
   "VERIFICATE": {
-    "title":"¡Un paso más y listo!",
-    "message":"Ingresa a tu correo electrónico para verificar tu cuenta y poder ingresar.",
-    "btnCheck": "Continuar",
+    "title":"Еще один шаг и все!",
+    "message":"Войдите на свой адрес электронной почты, чтобы подтвердить свою учетную запись и иметь возможность войти в систему.",
+    "btnCheck": "Продолжить",
 
     "VLOADING": {
-      "message": "Verificando..."
+      "message": "Проверка..."
     }
   },
 
   "VERIFY": {
-    "title": "Correo envíado",
-    "message":"Por favor, para poder continuar navegando en nuestro sitio, visite su correo para la verificación de su cuenta.",
-    "btnConfirm": "Confirmar correo",
-    "btnBack": "Volver al inicio"
+    "title": "Отправка почты",
+    "message":"Пожалуйста, чтобы продолжить просмотр нашего сайта, зайдите на свою электронную почту для проверки учетной записи.",
+    "btnConfirm": "Подтвердите электронную почту",
+    "btnBack": "К началу"
   },
 
   "PASSENGERS": {
-    "title": "Conductores",
-    "zone": "Ver todos",
+    "title": "Драйверы",
+    "zone": "Смотреть все",
 
     "DRIVERCOMP": {
-      "title": "Conductores",
-      "search": "Buscar conductor",
-      "btnJourney": "Tomar viaje"
+      "title": "Драйверы",
+      "search": "Поиск водителя",
+      "btnJourney": "Путешествие"
     }
   },
 
   "PROFILE": {
-    "btnModify": "Modificar perfil",
-    "passenger": "Pasajero",
-    "driver": "Conductor",
+    "btnModify": "Изменять профиль",
+    "passenger": "Пассажир",
+    "driver": "Водитель",
 
     "imgCtrl": {
-      "header": "Cambiar foto de perfil",
-      "placeholder": "Agrega una dirección de imagen",
-      "btnChange": "Aceptar",
-      "btnCancel": "Cancelar"
+      "header": "Изменить картинку профиля",
+      "placeholder": "Добавить адрес изображения",
+      "btnChange": "Принять",
+      "btnCancel": "Отмена"
     },
 
     "profileCtrl": {
-      "header":"Editar Perfil",
-      "placeholder": "Agrega una dirección",
-      "btnChange": "Aceptar",
-      "btnCancel": "Cancelar"
+      "header":"Изменить профиль",
+      "placeholder": "Добавить адрес",
+      "btnChange": "Принять",
+      "btnCancel": "Отмена"
     },
 
     "alertUpd": {
-      "header": "Su perfil ha sido actualizado",
-      "btnOk": "Aceptar"
+      "header": "Обновленная анкета",
+      "btnOk": "Принять"
     }
   },
 
   "GOOGLE" : {
-    "input": "Ingresa la dirección...",
-    "data": "Datos del viaje: "
+    "input": "Введите адрес...",
+    "data": "Информация о поездке: "
   }
 
 }

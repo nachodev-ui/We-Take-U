@@ -8,12 +8,15 @@ import { ConductorPageRoutingModule } from './conductor-routing.module';
 
 import { ConductorPage } from './conductor.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ConductorPageRoutingModule
+    ConductorPageRoutingModule,
+    TranslateModule
   ],
   declarations: [ConductorPage]
 })

@@ -205,6 +205,11 @@
     }
   },
 
+  "DRIVER": {
+    "title": "Possible trips",
+    "crowded": "Most crowded"
+  },
+
   "PROFILE": {
     "btnModify": "Modify profile",
     "passenger": "Passenger",

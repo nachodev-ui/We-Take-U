@@ -204,6 +204,11 @@
     }
   },
 
+  "DRIVER": {
+    "title": "Posibles viajes",
+    "crowded": "Más concurrido"
+  },
+
   "PROFILE": {
     "btnModify": "Modificar perfil",
     "passenger": "Pasajero",
