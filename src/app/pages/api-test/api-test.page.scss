@@ -1,0 +1,162 @@
+ion-header {
+
+  ion-toolbar {
+
+    ion-menu-button {
+        font-size: 2.3rem;
+    }
+
+  }
+
+}
+
+ion-content {
+  padding: 10px;
+  --background: #fff;
+
+  .welcome {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+
+    .title {
+      margin-bottom: 4px;
+      font-weight: 700;
+      color: #444;
+
+      h1 {
+        font-size: 26px;
+      }
+    }
+
+@-webkit-keyframes tilt-in-top-1{0%{-webkit-transform:rotateY(30deg) translateY(-300px) skewY(-30deg);transform:rotateY(30deg) translateY(-300px) skewY(-30deg);opacity:0}100%{-webkit-transform:rotateY(0deg) translateY(0) skewY(0deg);transform:rotateY(0deg) translateY(0) skewY(0deg);opacity:1}}@keyframes tilt-in-top-1{0%{-webkit-transform:rotateY(30deg) translateY(-300px) skewY(-30deg);transform:rotateY(30deg) translateY(-300px) skewY(-30deg);opacity:0}100%{-webkit-transform:rotateY(0deg) translateY(0) skewY(0deg);transform:rotateY(0deg) translateY(0) skewY(0deg);opacity:1}}
+
+    img {
+      margin: 0;
+      margin-top: 10px;
+      padding: 0;
+      width: 94%;
+      border-radius: 18px;
+      filter: grayscale(10%);
+      filter: blur(2px);
+      filter: brightness(100%);
+      filter: drop-shadow(16px 16px 20px #c6b9b1);
+      -webkit-animation:tilt-in-top-1 .8s cubic-bezier(.25,.46,.45,.94) both;
+      animation:tilt-in-top-1 .8s cubic-bezier(.25,.46,.45,.94) both;
+    }
+  }
+
+  .suggestions {
+    margin-top: 36px;
+    margin-bottom: 16px;
+    padding: 4px 8px;
+
+    h2 {
+      margin: 0 15px;
+      margin-top: 24px;
+      margin-bottom: 16px;
+    }
+
+    .services {
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+
+      @-webkit-keyframes slide-in-bck-left{0%{-webkit-transform:translateZ(700px) translateX(-400px);transform:translateZ(700px) translateX(-400px);opacity:0}100%{-webkit-transform:translateZ(0) translateX(0);transform:translateZ(0) translateX(0);opacity:1}}@keyframes slide-in-bck-left{0%{-webkit-transform:translateZ(700px) translateX(-400px);transform:translateZ(700px) translateX(-400px);opacity:0}100%{-webkit-transform:translateZ(0) translateX(0);transform:translateZ(0) translateX(0);opacity:1}}
+
+        img {
+          padding: 10px;
+          max-width: 90px;
+          max-height: 90px;
+          border-radius: 50%;
+          -webkit-animation:slide-in-bck-left 1.2s cubic-bezier(.25,.46,.45,.94) both;
+          animation:slide-in-bck-left 1.2s cubic-bezier(.25,.46,.45,.94) both;
+        }
+
+        p {
+          margin-bottom: 0.3rem;
+          font-size: 16px;
+          font-weight: 700;
+          color: #444;
+          margin-left: 4px;
+        }
+
+        .fix {
+          margin-top: 0.2px;
+          margin-left: 19px;
+          padding: 0;
+        }
+    }
+  }
+
+  .passengers {
+    padding: 4px 8px;
+
+    .look-for {
+      font-size: 20px;
+      font-weight: 700;
+      color: #444;
+      margin-left: 4px;
+      margin-bottom: 4px;
+    }
+
+@-webkit-keyframes swing-in-bottom-bck{0%{-webkit-transform:rotateX(-70deg);transform:rotateX(-70deg);-webkit-transform-origin:bottom;transform-origin:bottom;opacity:0}100%{-webkit-transform:rotateX(0);transform:rotateX(0);-webkit-transform-origin:bottom;transform-origin:bottom;opacity:1}}@keyframes swing-in-bottom-bck{0%{-webkit-transform:rotateX(-70deg);transform:rotateX(-70deg);-webkit-transform-origin:bottom;transform-origin:bottom;opacity:0}100%{-webkit-transform:rotateX(0);transform:rotateX(0);-webkit-transform-origin:bottom;transform-origin:bottom;opacity:1}}
+
+    ion-item {
+      -webkit-animation:swing-in-bottom-bck 3s cubic-bezier(.175,.885,.32,1.275) both;
+      animation:swing-in-bottom-bck 3s cubic-bezier(.175,.885,.32,1.275) both;
+      margin-top: 24px;
+      margin-bottom: 8px;
+
+      .user {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        margin: 0;
+        width: 100%;
+        border-radius: 16px;
+        background: linear-gradient(
+          90deg,
+          #C4ADA0 50%,
+          #dacdc5 100%
+        );
+
+        ion-avatar {
+          margin-right: 10px;
+
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+          }
+        }
+
+        p {
+          margin-bottom: 20px;
+          font-size: 16px;
+          font-weight: 700;
+          color: #000;
+        }
+
+      }
+    }
+
+    ion-button {
+      position: absolute;
+      bottom: 50px;
+      right: 10px;
+      margin-left: auto;
+
+      ion-icon {
+        color: #4A332D;
+        font-weight: bolder;
+        font-size: 2rem;
+      }
+    }
+
+  }
+}

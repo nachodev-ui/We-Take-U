@@ -82,5 +82,4 @@ export class FirebaseService {
     return this.database.collection('Viajes').valueChanges();
   }
 
-
 }

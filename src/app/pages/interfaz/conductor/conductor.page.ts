@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class ConductorPage implements OnInit {
   actualDay = this.getDayDate();
 
   constructor(
-
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -26,7 +27,7 @@ export class ConductorPage implements OnInit {
   }
 
   loadSedes() {
-    //
+    this.router.navigateByUrl('api-test')
   }
 
 }

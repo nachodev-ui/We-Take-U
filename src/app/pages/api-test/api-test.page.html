@@ -1,19 +1,64 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>api-test</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-card *ngFor="let auxSede of sedes.data">
+  <div class="welcome">
 
-    <ion-card-title>
+    <div class="title">
+      <h1>Explora tu alrededor</h1>
+    </div>
 
-      {{ auxSede.attributes.nombre }}
+    <img src="../../../assets/img/api-test.webp">
+  </div>
 
-    </ion-card-title>
+  <div class="suggestions">
+    <h2>¿Qué te gustaría hacer hoy?</h2>
 
-  </ion-card>
+    <div class="services">
+      <div>
+        <img src="../../../assets/img/driving.webp">
+        <p>Transportar</p>
+      </div>
+      <div>
+        <img src="../../../assets/img/break.gif">
+        <p>Descansar</p>
+      </div>
+      <div>
+        <img src="../../../assets/img/news.webp">
+        <p class="fix">Nuevo</p>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="passengers">
+    <ion-list lines="none">
+      <ion-label class="look-for">¿Buscas pasajeros?</ion-label>
+      <ion-item>
+        <div *ngFor="let user of users" class="user">
+
+          <ion-avatar class="ion-align-self-center">
+            <img class="img" [src]="user.photoURL" />
+          </ion-avatar>
+
+          <p>{{ user.nombre }} {{ user.apellido }}</p>
+
+          <ion-button (click)="onClick()" fill="clear">
+            <ion-icon slot="end" name="notifications-circle-outline"></ion-icon>
+          </ion-button>
+
+        </div>
+
+      </ion-item>
+    </ion-list>
+  </div>
 
 </ion-content>
