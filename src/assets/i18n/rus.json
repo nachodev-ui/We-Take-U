@@ -1,19 +1,19 @@
 {
   "MENU": {
-    "title": "Bienvenid@",
-    "profile": "Mi perfil",
-    "driver": "Conductor",
-    "drivers": "Conductores",
-    "passenger": "Pasajero",
-    "passengers": "Pasajeros",
-    "car": "Vehículo",
-    "messages": "Mensajes",
-    "trips": "Viajes",
-    "logout": "Cerrar sesión"
+    "title": "Добро пожаловать",
+    "profile": "Моя анкета",
+    "driver": "Водитель",
+    "drivers": "Драйверы",
+    "passenger": "Пассажир",
+    "passengers": "Пассажиры",
+    "car": "Автомобиль",
+    "messages": "Сообщения",
+    "trips": "Поездка",
+    "logout": "Выход"
   },
 
   "FOOTER": {
-    "version": "Versión"
+    "version": "Версия"
   },
 
   "HOME": {
@@ -31,37 +31,37 @@
   },
 
   "LOGIN": {
-    "title": "Inicio de Sesión",
-    "email": "Correo electrónico",
-    "password": "Contraseña",
-    "btnLogin": "Iniciar Sesión",
-    "btnReset": "Recuperar mi contraseña",
-    "btnSignUp": "Registrarse",
+    "title": "Вход в систему",
+    "email": "Адрес электронной почты",
+    "password": "Пароль",
+    "btnLogin": "Вход в систему",
+    "btnReset": "Восстановить мой пароль",
+    "btnSignUp": "Регистрация",
 
     "LOADING": {
-      "message": "Por favor espere..."
+      "message": "Пожалуйста, подождите..."
     },
 
     "VACIO": {
-      "header": "Error",
-      "message": "Por favor ingrese su correo y contraseña."
+      "header": "Ошибка",
+      "message": "Пожалуйста, введите свой email и пароль."
     },
 
     "NEXISTE": {
-      "header": "Error",
-      "message": "El correo no se encuentra registrado, por favor registrese."
+      "header": "Ошибка",
+      "message": "Электронная почта не зарегистрирована, пожалуйста, зарегистрируйтесь."
     },
 
     "FAUTHENTICATED": {
-      "header": "Usuario no autenticado",
-      "message": "Por favor, visite su direccion de correo electrónico para verificar su cuenta."
+      "header": "Неавторизованный пользователь",
+      "message": "Пожалуйста, зайдите на свой адрес электронной почты, чтобы подтвердить учетную запись."
     },
 
     "CODERR": {
-      "invemail": "El correo electrónico ingresado no es válido.",
-      "notfound": "Usuario no encontrado.",
-      "wrongpass": "Contraseña incorrecta.",
-      "alreadyuse": "El correo se encuentra en uso."
+      "invemail": "Введенный вами адрес электронной почты недействителен.",
+      "notfound": "Пользователь не найден.",
+      "wrongpass": "Неверный пароль.",
+      "alreadyuse": "Используется почта."
     }
   },
 

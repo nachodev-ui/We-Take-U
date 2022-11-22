@@ -8,12 +8,15 @@ import { VerifyPageRoutingModule } from './verify-routing.module';
 
 import { VerifyPage } from './verify.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VerifyPageRoutingModule
+    VerifyPageRoutingModule,
+    TranslateModule
   ],
   declarations: [VerifyPage]
 })

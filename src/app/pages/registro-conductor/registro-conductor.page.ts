@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { LanguagesService } from 'src/app/services/languages.service';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-registro-conductor',
   templateUrl: './registro-conductor.page.html',
@@ -26,7 +28,8 @@ export class RegistroConductorPage implements OnInit {
     private auth: AuthService,
     private database: FirebaseService,
     private builder: FormBuilder,
-    private languageService: LanguagesService
+    private languageService: LanguagesService,
+    private translate: TranslateService,
   ) {
 
     this.initializeApp();
@@ -38,7 +41,7 @@ export class RegistroConductorPage implements OnInit {
       uid: [''],
       password: ['', Validators.required],
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      celular: ['', Validators.compose([Validators.minLength(10), Validators.required])],
+      celular: ['', Validators.compose([Validators.minLength(9), Validators.required])],
       direccion: [''],
       photoURL: ['https://ajisenramenpanama.com/wp-content/uploads/2020/07/user_icon.png'],
       perfil: 'Conductor',
@@ -48,7 +51,9 @@ export class RegistroConductorPage implements OnInit {
         modelo: [''],
         color: [''],
         capacidad: ['']
-      }
+      },
+    }, {
+      validator: this.Mustmatch('password', 'password2')
     });
   }
 
@@ -59,10 +64,33 @@ export class RegistroConductorPage implements OnInit {
   ngOnInit() {
   }
 
+  get rf() {
+    return this.formConductor.controls;
+  }
+
+  Mustmatch(password: any, password2: any) {
+    return (formGroup: FormGroup) => {
+
+      const control = formGroup.controls[password];
+      const matchingControl = formGroup.controls[password2];
+
+      if (matchingControl.errors && !matchingControl.errors['Mustmatch']) {
+        return;
+      }
+
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ Mustmatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+
+    };
+  }
+
   async loadingRegister() {
     const loading = await this.loadingCtrl.create({
       mode: 'ios',
-      message: 'Registrando...',
+      message: this.translate.instant('D_REGISTER.LOADING.message'),
       duration: 300,
     });
     await loading.present();
@@ -82,17 +110,17 @@ export class RegistroConductorPage implements OnInit {
   async valideIfEmailAlreadyExists() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: '¿Ya tienes una cuenta?',
-      message: 'El correo que ingresas se encuentra uso, quizá hayas olvidado tu contraseña',
+      header: this.translate.instant('D_REGISTER.EMEXISTS.header'),
+      message: this.translate.instant('D_REGISTER.EMEXISTS.message'),
       buttons: [
         {
-          text: 'No tengo cuenta',
+          text: this.translate.instant('D_REGISTER.EMEXISTS.btnCancel'),
           handler: () => {
             this.intentaConOtroEmail();
           }
         },
         {
-          text: 'Restablecer contraseña',
+          text: this.translate.instant('D_REGISTER.EMEXISTS.btnRecover'),
           handler: () => {
             this.router.navigate(['reset-password']);
           }
@@ -106,7 +134,7 @@ export class RegistroConductorPage implements OnInit {
   async intentaConOtroEmail() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Muy bien, intenta con otro email',
+      header: this.translate.instant('D_REGISTER.OTHEREM.header'),
       buttons: ['OK'],
     });
 
@@ -176,8 +204,8 @@ export class RegistroConductorPage implements OnInit {
   async registerSuccess() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Registro exitoso',
-      message: 'Para continuar, permitenos conocer más sobre tu medio de transporte',
+      header: this.translate.instant('D_REGISTER.SUCREGISTER.header'),
+      message: this.translate.instant('D_REGISTER.SUCREGISTER.message'),
       buttons: ['OK'],
     });
 

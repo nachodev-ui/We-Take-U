@@ -8,12 +8,15 @@ import { InfoVehiculoPageRoutingModule } from './info-vehiculo-routing.module';
 
 import { InfoVehiculoPage } from './info-vehiculo.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InfoVehiculoPageRoutingModule
+    InfoVehiculoPageRoutingModule,
+    TranslateModule
   ],
   declarations: [InfoVehiculoPage]
 })

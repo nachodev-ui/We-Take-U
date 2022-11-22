@@ -1,20 +1,22 @@
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { Router } from '@angular/router';
 
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 
 import { } from 'googlemaps';
 
 import { UserI, ViajeI } from 'src/app/models/models';
 
 import { User } from '@angular/fire/auth';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { Subscription } from 'rxjs';
+
+import jsQR from 'jsqr';
 
 @Component({
   selector: 'app-googlemaps',
@@ -27,6 +29,9 @@ export class GooglemapsPage implements OnInit, OnDestroy {
   uid : string = null;
   infoUser: UserI = null;
   rol: 'Pasajero' | 'Conductor' | 'Administrador';
+
+  uidViaje: string = null;
+  infoViaje: ViajeI = null;
 
   authUser: User;
   authUserSub: Subscription;
@@ -66,6 +71,19 @@ export class GooglemapsPage implements OnInit, OnDestroy {
   placesText: string;
   togglePlacesSearch: boolean = false;
 
+  scanActive = false;
+  scanResult = null;
+
+  @ViewChild('video', { static: false }) video : ElementRef;
+  @ViewChild('canvas', { static: false }) canvas : ElementRef;
+  @ViewChild('fileInput', { static: false }) fileInput : ElementRef;
+
+  videoElement: any;
+  canvasElement: any;
+  canvasContext: any;
+
+  loadinEl: HTMLIonLoadingElement;
+
   constructor(
     private ngZone: NgZone,
     private fire: FirebaseService,
@@ -75,13 +93,24 @@ export class GooglemapsPage implements OnInit, OnDestroy {
     private authService: AuthService,
     private dbFire: FirebaseService,
     private afs: AngularFirestore,
+    private platform: Platform
   ) {
     this.authService.stateUser().subscribe( credentials => {
       if(credentials) {
         /*Datos Pasajeros*/
-        this.loadUserData(credentials.uid);
+        this.uid = credentials.uid;
+        this.loadUserData(this.uid);
+        console.log('Usuario uid ---> ', this.uid);
       }
     });
+
+    const isInStandaloneMode = () =>
+    'standalone' in window.navigator && window.navigator['standalone'];
+
+    if (this.platform.is('ios') && isInStandaloneMode()) {
+      console.log('I am an iOS PWA!');
+    }
+
   }
 
   async ngOnInit() {
@@ -216,18 +245,55 @@ export class GooglemapsPage implements OnInit, OnDestroy {
         {
           text: 'Confirmar',
           handler: () => {
-            this.saveViajeDetailsInUser();
+            this.loading();
+            setTimeout(() => {
+              this.alertQR();
+            }, 800);
+            //this.saveViajeDetailsInUser();
           }
         }
       ]
     });
     await alert.present();
 
-    this.loading();
+    //this.loading();
 
-    setTimeout(() => {
+    /* setTimeout(() => {
       this.router.navigateByUrl('interfaz/pasajero-viajes')
-    }, 200);
+    }, 200); */
+  }
+
+    // Alert with QR
+  async alertQR() {
+    const alert = await this.alertCtrl.create({
+      header: 'Código QR',
+      message: 'Presenta este código QR al conductor para que pueda confirmar tu viaje.',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.finishTrip();
+          }
+        }
+      ],
+      cssClass: 'alertQR'
+    });
+
+    await alert.present();
+  }
+
+  async successDelete() {
+    const alert = await this.alertCtrl.create({
+      header: 'Viaje cancelado',
+      message: 'Su viaje fue cancelado exitosamente, vuelva más tarde.',
+      buttons: [
+        {
+          text: 'Aceptar',
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async journeyDeclined() {
@@ -237,6 +303,12 @@ export class GooglemapsPage implements OnInit, OnDestroy {
       buttons: [
         {
           text: 'Cancelar',
+          handler: () => {
+            this.deleteViaje();
+            setTimeout(() => {
+              this.successDelete();
+            }, 800);
+          },
           role: 'cancel',
           cssClass: 'secondary'
         }
@@ -402,7 +474,7 @@ export class GooglemapsPage implements OnInit, OnDestroy {
         }
       ],
       estado: 'En curso',
-      uid: ''
+      uid: '',
     }
 
     return viajeDetails;
@@ -415,8 +487,18 @@ export class GooglemapsPage implements OnInit, OnDestroy {
     this.dbFire.getDoc<UserI>(path, id).subscribe( credentials => {
       if (credentials) {
         this.infoUser = credentials;
-      } else {
-        console.log('No existe el usuario');
+      }
+    });
+  }
+
+  loadViajeData(uid: string) {
+    const path = 'Viajes';
+    const id = uid;
+    this.dbFire.getDoc<ViajeI>(path, id).subscribe( credentials => {
+      if (credentials) {
+        this.viajeDetails = credentials;
+        console.log(this.viajeDetails);
+
       }
     });
   }
@@ -463,6 +545,158 @@ export class GooglemapsPage implements OnInit, OnDestroy {
   saveViajeDetailsInUser() {
     let viajeDetails = this.generateViajeDetails();
     this.fire.saveViajeDetails(viajeDetails);
+  }
+
+  updateStatus() {
+    const userTripRef = this.afs.collection('Viajes');
+
+    userTripRef.doc(this.uidViaje)
+    .update({
+      estado: 'Finalizado'
+    });
+  }
+
+  // Recoger los uid de la coleccion Viajes
+  finishTrip() {
+    this.afs.collection('Viajes').valueChanges().subscribe( data => {
+      data.filter( a => {
+        let uid = a['uid'];
+        this.uidViaje = uid;
+
+        const userTripRef = this.afs.collection('Viajes');
+
+        userTripRef.doc(uid)
+        .update({
+          estado: 'Finalizado'
+        });
+
+      });
+    });
+  }
+
+  // Delete viaje
+  deleteViaje() {
+
+    this.afs.collection('Viajes').valueChanges().subscribe( data => {
+      data.filter( a => {
+        let uid = a['uid'];
+        this.uidViaje = uid;
+
+        const userTripRef = this.afs.collection('Viajes');
+
+        if (data.find(
+          a => a['estado'] === 'Finalizado' || a['estado'] === 'En curso'
+        )) {
+          userTripRef.doc(uid).delete();
+        }
+      });
+    })
+  }
+
+  captureImage() {
+    this.fileInput.nativeElement.click();
+  }
+
+  handleFile(files: FileList) {
+
+    const file = files.item(0);
+
+    var img = new Image();
+    img.onload = () => {
+      this.canvasContext.drawImage(img, 0, 0, this.canvasElement.width, this.canvasElement.height);
+      const imageData = this.canvasContext.getImageData(
+        0,
+        0,
+        this.canvasElement.width,
+        this.canvasElement.height
+      );
+      const code = jsQR(imageData.data, imageData.width, imageData.height, {
+        inversionAttempts: 'dontInvert'
+      });
+
+      if (code) {
+        this.scanResult = code.data;
+      }
+    };
+    img.src = URL.createObjectURL(file);
+  }
+
+  async startScan() {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment' }
+    });
+    this.videoElement.srcObject = stream;
+    this.videoElement.setAttribute('playsinline', true);
+    this.videoElement.play();
+
+    await this.loadingCtrl.create({
+      message: 'Escaneando...'
+    });
+    
+    requestAnimationFrame(this.scan.bind(this));
+  }
+
+  async scan() {
+
+    console.log('SCAN');
+
+    if (this.videoElement.readyState === this.videoElement.HAVE_ENOUGH_DATA) {
+
+      if (this.loading) {
+        await this.loadingCtrl.dismiss();
+        this.loading = null;
+        this.scanActive = true;
+      }
+
+      this.canvasElement.height = this.videoElement.videoHeight;
+      this.canvasElement.width = this.videoElement.videoWidth;
+
+      this.canvasContext.drawImage(
+        this.videoElement,
+        0,
+        0,
+        this.canvasElement.width,
+        this.canvasElement.height
+      );
+
+      const imageData = this.canvasContext.getImageData(
+        0,
+        0,
+        this.canvasElement.width,
+        this.canvasElement.height
+      );
+
+      const viaje = jsQR(imageData.data, imageData.width, imageData.height,
+        {
+          inversionAttempts: 'dontInvert'
+        });
+
+      if (viaje) {
+
+        this.scanActive = false;
+        this.scanResult = viaje.data;
+
+
+      } else {
+
+        if (this.scanActive) {
+          requestAnimationFrame(this.scan.bind(this));
+        }
+
+      }
+
+    } else {
+      requestAnimationFrame(this.scan.bind(this));
+    }
+  }
+
+  //Helper functions
+  stopScan() {
+    this.scanActive = false;
+  }
+
+  reset() {
+    this.scanResult = null;
   }
 
   ngOnDestroy(): void {

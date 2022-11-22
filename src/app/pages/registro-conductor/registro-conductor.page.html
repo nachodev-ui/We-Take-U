@@ -22,14 +22,21 @@
     <ion-input placeholder="{{ 'D_REGISTER.lastname' | translate }}" formControlName="apellido" id="apellidos"></ion-input>
 
     <ion-input placeholder="{{ 'D_REGISTER.email' | translate }}" formControlName="email" id="email" type="email"></ion-input>
+    <span *ngIf="formConductor.get('email')?.hasError('required') && formConductor.get('email')?.touched" class="error"> {{ 'D_VALIDATIONS.e-required' | translate }} </span>
+    <span *ngIf="formConductor.get('email')?.hasError('email') && formConductor.get('email')?.touched" class="error"> {{ 'D_VALIDATIONS.e-noValid' | translate }} </span>
 
     <ion-input placeholder="{{ 'D_REGISTER.password' | translate }}" formControlName="password" id="password" type="password"></ion-input>
+    <span *ngIf="formConductor.get('password')?.hasError('required') && formConductor.get('password')?.touched" class="error"> {{ 'D_VALIDATIONS.p-required' | translate}} </span>
+    <span *ngIf="formConductor.get('password')?.hasError('minlength') && formConductor.get('password')?.touched" class="error"> {{ 'D_VALIDATIONS.p-min' |translate }} </span>
 
     <ion-input placeholder="{{ 'D_REGISTER.c_password' | translate }}" formControlName="password2" id="password2" type="password"></ion-input>
+    <span *ngIf="rf['password2'].getError('Mustmatch')!=null" class="error"> {{ 'D_VALIDATIONS.p-notMutch' | translate }} </span>
 
     <ion-input type="tel" placeholder="{{ 'D_REGISTER.phone' | translate }}" formControlName="celular"id="telefono"></ion-input>
+    <span *ngIf="formConductor.get('celular')?.hasError('required') && formConductor.get('celular')?.touched" class="error"> {{ 'D_VALIDATIONS.ph-required' | translate }} </span>
+    <span *ngIf="formConductor.get('celular')?.hasError('minlength') && formConductor.get('celular')?.touched" class="error"> {{ 'D_VALIDATIONS.ph-min' | translate }} </span>
 
-    <ion-button class="btnRegistrar" (click)="registrarConductor()" shape="round" expand="block">{{ 'D_REGISTER.btnRegister' | translate }}</ion-button>
+    <ion-button [disabled]="formConductor.invalid" class="btnRegistrar" (click)="registrarConductor()" shape="round" expand="block">{{ 'D_REGISTER.btnRegister' | translate }}</ion-button>
   </form>
 
 </ion-content>

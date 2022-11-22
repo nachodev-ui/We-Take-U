@@ -70,10 +70,13 @@ ion-content {
   }
 
   .back-button {
-    text-align: center;
-    margin-left: 9%;
-    font-size: 1.09rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
     color: #7b7b7b;
+
 
     .arrow {
       font-size: 1.5rem;

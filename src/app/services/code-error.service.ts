@@ -1,26 +1,30 @@
 import { Injectable } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CodeErrorService {
 
-  constructor() { }
+  constructor(
+    private translate: TranslateService
+  ) { }
 
   stringError(code: string) {
     switch (code) {
 
       case 'auth/invalid-email':
-        return 'El correo electrónico ingresado no es válido.'
+        return this.translate.instant('LOGIN.CODERR.invemail');
 
       case 'auth/user-not-found':
-        return 'Usuario no encontrado';
+        return this.translate.instant('LOGIN.CODERR.notfound');
 
       case 'auth/wrong-password':
-        return 'Contraseña incorrecta';
+        return this.translate.instant('LOGIN.CODERR.wrongpass');
 
       case 'auth/email-already-in-use':
-        return 'El correo electrónico ya está en uso';
+        return this.translate.instant('LOGIN.CODERR.alreadyuse');
 
     }
   }

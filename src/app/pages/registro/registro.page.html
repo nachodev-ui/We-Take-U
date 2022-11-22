@@ -26,19 +26,19 @@
     <ion-input placeholder="{{ 'U_REGISTER.lastname' | translate }}" formControlName="apellido" id="apellidos"></ion-input>
 
     <ion-input placeholder="{{ 'U_REGISTER.email' | translate }}" formControlName="email" id="email" type="email"></ion-input>
-    <span *ngIf="signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched" class="error"> El <strong>correo</strong> es <strong>obligatorio.</strong> </span>
-    <span *ngIf="signupForm.get('email')?.hasError('email') && signupForm.get('email')?.touched" class="error"> El <strong>correo</strong> no es <strong>válido.</strong> </span>
+    <span *ngIf="signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched" class="error"> {{ 'D_VALIDATIONS.e-required' | translate }} </span>
+    <span *ngIf="signupForm.get('email')?.hasError('email') && signupForm.get('email')?.touched" class="error"> {{ 'D_VALIDATIONS.e-noValid' | translate }} </span>
 
     <ion-input placeholder="{{ 'U_REGISTER.password' | translate }}" formControlName="password" id="password" type="password"></ion-input>
-    <span *ngIf="signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched" class="error"> La <strong>contraseña</strong> es <strong>obligatoria.</strong> </span>
-    <span *ngIf="signupForm.get('password')?.hasError('minlength') && signupForm.get('password')?.touched" class="error"> La contraseña debe tener <strong>6 caracteres</strong>.</span>
+    <span *ngIf="signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched" class="error"> {{ 'D_VALIDATIONS.p-required' | translate}} </span>
+    <span *ngIf="signupForm.get('password')?.hasError('minlength') && signupForm.get('password')?.touched" class="error"> {{ 'D_VALIDATIONS.p-min' |translate }} </span>
 
     <ion-input placeholder="{{ 'U_REGISTER.c_password' | translate }}" formControlName="password2" id="password2" type="password"></ion-input>
-    <span *ngIf="rf['password2'].getError('Mustmatch')!=null" class="error"> Las contraseñas <strong>no coinciden</strong>.</span>
+    <span *ngIf="rf['password2'].getError('Mustmatch')!=null" class="error"> {{ 'D_VALIDATIONS.p-notMutch' | translate }} </span>
 
     <ion-input type="tel" placeholder="{{ 'U_REGISTER.phone' | translate }}" formControlName="celular" id="celular"></ion-input>
-    <span *ngIf="signupForm.get('celular')?.hasError('required') && signupForm.get('celular')?.touched" class="error"> El número es <strong>obligatorio</strong>.</span>
-    <span *ngIf="signupForm.get('celular')?.hasError('minlength') && signupForm.get('celular')?.touched" class="error"> El número debe ser de <strong>9 dígitos</strong>.</span>
+    <span *ngIf="signupForm.get('celular')?.hasError('required') && signupForm.get('celular')?.touched" class="error"> {{ 'D_VALIDATIONS.ph-required' | translate }} </span>
+    <span *ngIf="signupForm.get('celular')?.hasError('minlength') && signupForm.get('celular')?.touched" class="error"> {{ 'D_VALIDATIONS.ph-min' | translate }} </span>
 
     <ion-button [disabled]="signupForm.invalid"  class="btnRegistrar" (click)="registrar()" shape="round" expand="block">{{ 'U_REGISTER.btnRegister' | translate }}</ion-button>
   </form>

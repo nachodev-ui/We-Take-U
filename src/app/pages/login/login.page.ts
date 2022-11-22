@@ -16,7 +16,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { CodeErrorService } from 'src/app/services/code-error.service';
 import { ToastrService } from 'ngx-toastr';
-import { InfoVehiculoPage } from '../info-vehiculo/info-vehiculo.page';
 
 @Component({
   selector: 'app-login',
@@ -152,8 +151,8 @@ export class LoginPage implements OnInit {
   async usuarioNoVerificado() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'Usuario no autenticado',
-      message: 'Por favor, visite su direccion de correo electrónico para verificar su cuenta.',
+      header: this.translate.instant('LOGIN.FAUTHENTICATED.header'),
+      message: this.translate.instant('LOGIN.FAUTHENTICATED.message'),
       buttons: ['OK']
     });
 

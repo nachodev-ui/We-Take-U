@@ -27,6 +27,7 @@ export class TestBlobPage {
   canvasContext: any;
 
   loading: HTMLIonLoadingElement;
+  viaje: any;
 
   constructor(
     private platform: Platform,
@@ -97,6 +98,7 @@ export class TestBlobPage {
 
       if (code) {
         this.scanResult = code.data;
+
         this.presentToast();
       }
     };
@@ -147,19 +149,24 @@ export class TestBlobPage {
         this.canvasElement.height
       );
 
-      const code = jsQR(imageData.data, imageData.width, imageData.height, {
-        inversionAttempts: 'dontInvert'
-      });
-      console.log('code:', code);
+      const viaje = jsQR(imageData.data, imageData.width, imageData.height,
+        {
+          inversionAttempts: 'dontInvert'
+        });
 
-      if (code) {
+      if (viaje) {
+
         this.scanActive = false;
-        this.scanResult = code.data;
+        this.scanResult = viaje.data;
+
         this.presentToast();
+
       } else {
+
         if (this.scanActive) {
           requestAnimationFrame(this.scan.bind(this));
         }
+
       }
 
     } else {

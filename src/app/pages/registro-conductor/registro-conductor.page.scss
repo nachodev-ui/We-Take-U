@@ -68,9 +68,18 @@ ion-content {
       --padding-start: 8%;
     }
 
+    span {
+      font-size: 0.8rem;
+      color: #010100;
+      margin-bottom: 5%;
+      padding-left: 6%;
+      color: red;
+    }
+
     .btnRegistrar {
       height: 50px;
       margin-top: 35px;
+      margin-bottom: 10px;
       font-size: 1.3rem;
       text-transform: capitalize;
       font-weight: 600;

@@ -11,23 +11,23 @@
 <ion-content>
 
   <div id="header">
-    <h1>¡Deseamos conocer tu transporte!</h1>
+    <h1>{{ 'D_INFO.title' | translate }}</h1>
     <img src="assets/img/car-info.webp">
   </div>
 
   <form [formGroup]="formVehiculo" id="form">
 
-    <ion-input placeholder="Patente" formControlName="patente" id="patente" autocomplete="no"></ion-input>
+    <ion-input placeholder="{{ 'D_INFO.plate' | translate }}" formControlName="patente" id="patente" autocomplete="no"></ion-input>
 
-    <ion-input placeholder="Marca" formControlName="marca" id="marca"></ion-input>
+    <ion-input placeholder="{{ 'D_INFO.brand' | translate }}" formControlName="marca" id="marca"></ion-input>
 
-    <ion-input placeholder="Modelo" formControlName="modelo" id="modelo" type="text"></ion-input>
+    <ion-input placeholder="{{ 'D_INFO.model' | translate }}" formControlName="modelo" id="modelo" type="text"></ion-input>
 
-    <ion-input placeholder="Color" formControlName="color" id="color" type="text"></ion-input>
+    <ion-input placeholder="{{ 'D_INFO.color' | translate }}" formControlName="color" id="color" type="text"></ion-input>
 
-    <ion-input placeholder="Capacidad del vehiculo" formControlName="capacidad" id="capacidad" type="number" min="1"></ion-input>
+    <ion-input placeholder="{{ 'D_INFO.capacity' | translate }}" formControlName="capacidad" id="capacidad" type="number" min="1"></ion-input>
 
-    <ion-button class="btnRegistrar" (click)="addVehiculo()" shape="round" expand="block">Guardar vehículo</ion-button>
+    <ion-button class="btnRegistrar" (click)="addVehiculo()" shape="round" expand="block">{{ 'D_INFO.btnAdd' | translate }}</ion-button>
   </form>
 
 </ion-content>

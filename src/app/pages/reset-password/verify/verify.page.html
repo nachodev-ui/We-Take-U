@@ -4,22 +4,22 @@
 
     <div class="heading ion-padding">
 
-      <h2>Correo enviado</h2>
+      <h2>{{ 'VERIFY.title' | translate }}</h2>
       <ion-icon name="checkmark-outline"></ion-icon>
-      <p>Por favor, para poder continuar navegando en nuestro sitio, visite su correo para la verificación de su cuenta.</p>
+      <p>{{ 'VERIFY.message' | translate }}</p>
 
     </div>
 
     <div class="action-button ion-padding">
       <ion-button (click)="confirmMail()" expand="block" class="login-button">
-        Confirmar correo electrónico
+        {{ 'VERIFY.btnConfirm' | translate }}
       </ion-button>
     </div>
 
     <div class="button-login ion-padding">
       <ion-button (click)="backToLogin()" fill="clear" class="back-button">
         <ion-icon class="arrow" name="arrow-back-outline"></ion-icon>
-        Regresar a inicio de sesión
+        {{ 'VERIFY.btnBack' | translate }}
       </ion-button>
     </div>
 

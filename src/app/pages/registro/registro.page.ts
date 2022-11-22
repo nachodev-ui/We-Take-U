@@ -42,7 +42,8 @@ export class RegistroPage implements OnInit {
         direccion: [''],
         photoURL: ['https://ajisenramenpanama.com/wp-content/uploads/2020/07/user_icon.png'],
         perfil: 'Pasajero',
-      }, {
+      },
+      {
         validator: this.Mustmatch('password', 'password2'),
       });
     }
@@ -76,16 +77,16 @@ export class RegistroPage implements OnInit {
   async valideIfEmailAlreadyExists() {
     const alert = await this.alertCtrl.create({
       mode: 'ios',
-      header: 'El correo ya existe',
-      message: '¿Olvidó su contraseña? Intente recuperarla',
+      header: this.translate.instant('D_REGISTER.EMEXISTS.header'),
+      message: this.translate.instant('D_REGISTER.EMEXISTS.message'),
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('D_REGISTER.EMEXISTS.btnCancel'),
           role: 'cancel',
           cssClass: 'secondary'
         },
         {
-          text: 'Recuperar',
+          text: this.translate.instant('D_REGISTER.EMEXISTS.btnRecover'),
           cssClass: 'primary',
           handler: () => {
             this.router.navigate(['reset-password']);

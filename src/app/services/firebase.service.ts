@@ -72,4 +72,15 @@ export class FirebaseService {
     return this.database.collection('Viajes').doc(id).set(viaje);
   }
 
+  updateViajeEstado(viaje: ViajeI) {
+    return this.database.collection('Viajes').doc(viaje.uid).update({
+      estado: viaje.estado
+    });
+  }
+
+  getViajes() {
+    return this.database.collection('Viajes').valueChanges();
+  }
+
+
 }

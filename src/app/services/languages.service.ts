@@ -32,6 +32,7 @@ export class LanguagesService {
     return [
       { text: 'English', value: 'en', img: 'assets/img/usa.png' },
       { text: 'Español', value: 'es', img: 'assets/img/spanish.png' },
+      { text: 'Ruso', value: 'rus', img: 'assets/img/rusia.png' },
     ];
   }
 

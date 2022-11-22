@@ -32,8 +32,8 @@ ion-content {
     background: url('../../../assets/img/icon_app.png');
     background-size: cover;
     background-position: center;
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 100px;
   }
 
   .youps-pill-content {
@@ -104,4 +104,24 @@ ion-content {
   padding: 0.3rem;
   opacity: 1 !important;
   width: 80%;
+}
+
+.tripButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 0.7rem;
+  margin-bottom: 0rem;
+  margin-left: 0;
+  padding-left: 0;
+
+  .check {
+    font-size: 2rem;
+    color: #aadb96;
+  }
+
+  .close {
+    font-size: 2rem;
+    color: #fa8a8a;
+  }
 }

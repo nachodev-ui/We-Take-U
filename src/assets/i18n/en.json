@@ -6,6 +6,7 @@
     "drivers": "Drivers",
     "passenger": "Passenger",
     "passengers": "Passengers",
+    "car": "Car",
     "messages": "Messages",
     "trips": "Trips",
     "logout": "Logout"
@@ -49,6 +50,18 @@
     "NEXISTE": {
       "header": "Error",
       "message": "The email is not registered, please register."
+    },
+
+    "FAUTHENTICATED": {
+      "header": "User not authenticated",
+      "message": "Please visit your email address to verify your account."
+    },
+
+    "CODERR": {
+      "invemail": "The e-mail address entered is invalid.",
+      "notfound": "User not found.",
+      "wrongpass": "Wrong password.",
+      "alreadyuse": "E-mail is already in use."
     }
 
   },
@@ -113,7 +126,47 @@
     "password": "Password",
     "c_password": "Confirm password",
     "phone": "Phone number",
-    "btnRegister": "Create an account"
+    "btnRegister": "Create an account",
+
+    "LOADING": {
+      "message": "Registering..."
+    },
+
+    "EMEXISTS": {
+      "header": "Already have an account?",
+      "message": "The e-mail address you enter is in use, maybe you have forgotten your password.",
+      "btnCancel": "No, I don't have an account",
+      "btnRecover": "Reset password"
+    },
+
+    "OTHEREM": {
+      "header": "Well, let's try another email!"
+    },
+
+    "SUCREGISTER": {
+      "header": "Success",
+      "message": "Your account has been created successfully, please check your email to verify your account."
+    }
+  },
+
+  "D_VALIDATIONS": {
+    "e-required": "The email field is required",
+    "e-noValid": "The email is not valid",
+    "p-required": "The password field is required",
+    "p-min": "The password must be at least 6 characters long",
+    "p-notMutch": "The passwords do not match",
+    "ph-required": "The phone number is required",
+    "ph-min": "Phone number must be at least 9 characters long"
+  },
+
+  "D_INFO": {
+    "title": "We would like to know your transport!",
+    "plate": "Vehicle registration",
+    "brand": "Brand",
+    "model": "Model",
+    "color": "Color",
+    "capacity": "Capacity",
+    "btnAdd": "Save car"
   },
 
   "RECOVER": {
@@ -132,6 +185,13 @@
     "VLOADING": {
       "message": "Verifying..."
     }
+  },
+
+  "VERIFY": {
+    "title": "Mail sent",
+    "message":"A verification email has been sent to your email account. Please verify your account.",
+    "btnConfirm": "Confirm email",
+    "btnBack": "Back to top"
   },
 
   "PASSENGERS": {
@@ -168,6 +228,11 @@
       "header": "Your profile has been updated",
       "btnOk": "OK"
     }
+  },
+
+  "GOOGLE" : {
+    "input": "Enter the address...",
+    "data": "Trip data: "
   }
 
 }
