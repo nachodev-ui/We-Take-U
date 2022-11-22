@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
   /*La APP se inicializa en SplashScreen*/
   initializeApp() {
     this.platform.ready().then(() => {
-      this.router.navigateByUrl('googlemaps');
+      this.router.navigateByUrl('splashscreen');
 
       this.languageService.setInitialAppLanguage();
 
