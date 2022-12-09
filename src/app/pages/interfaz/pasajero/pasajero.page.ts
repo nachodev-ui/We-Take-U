@@ -10,6 +10,7 @@ import SwiperCore, { Autoplay, SwiperOptions } from 'swiper';
 
 import { UserI } from 'src/app/models/models';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 SwiperCore.use([Autoplay]);
 
@@ -39,6 +40,7 @@ export class PasajeroPage implements OnInit, AfterContentChecked {
     private database: FirebaseService,
     private alertCtrl: AlertController,
     private authService: AuthService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -157,6 +159,21 @@ export class PasajeroPage implements OnInit, AfterContentChecked {
       }
     });
 
+  }
+
+  async getUserTrip() {
+    const path = 'Viajes';
+    const id = this.uid;
+
+    this.database.getDoc<UserI>(path, id).subscribe( credentials => {
+      if (credentials) {
+        this.infoUser = credentials;
+      }
+    });
+  }
+
+  availableTrips() {
+    this.router.navigateByUrl('routes');
   }
 
 

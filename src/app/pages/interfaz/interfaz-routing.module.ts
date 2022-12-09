@@ -21,10 +21,6 @@ const routes: Routes = [
     loadChildren: () => import('./agregar-viaje/agregar-viaje.module').then( m => m.AgregarViajePageModule)
   },
   {
-    path: ':id',
-    loadChildren: () => import('./pasajero-viajes/pasajero-viajes.module').then( m => m.PasajeroViajesPageModule)
-  },
-  {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   }

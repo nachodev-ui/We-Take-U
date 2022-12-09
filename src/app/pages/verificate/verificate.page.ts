@@ -52,7 +52,7 @@ export class VerificatePage implements OnInit {
   }
 
   dissapearButton() {
-    document.getElementById('btn-vef').style.display = 'none';
+    document.getElementById('btn-vef').style.bottom= '200';
   }
 
   appearButton() {

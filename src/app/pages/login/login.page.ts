@@ -184,12 +184,12 @@ export class LoginPage implements OnInit {
 
               if (arrayVeh2.length === 1) {
                 console.log('No existe ningún vehículo en el usuario');
-                this.router.navigateByUrl('info-vehiculo');
+                this.router.navigate(['info-vehiculo']);
               }
 
               if (arrayVeh2.length > 1) {
                 console.log('El usuario ya contiene vehículo');
-                this.router.navigateByUrl('interfaz/conductor')
+                this.router.navigate(['interfaz/conductor']);
               }
             }, 1000);
           }

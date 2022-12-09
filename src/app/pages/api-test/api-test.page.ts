@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserI } from 'src/app/models/models';
 
@@ -20,7 +21,9 @@ export class ApiTestPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private fireService: FirebaseService
+    private fireService: FirebaseService,
+    private router: Router,
+    private actRoute: ActivatedRoute,
     ) {
 
     this.authService.stateUser().subscribe( res => {
@@ -29,10 +32,6 @@ export class ApiTestPage implements OnInit {
         /*Datos Pasajeros*/
         this.getUserData(res.uid);
 
-        this.getCollectionUser();
-
-      } else {
-        console.log('User is not logged in');
       }
     });
    }
@@ -65,8 +64,13 @@ export class ApiTestPage implements OnInit {
 
   }
 
-  onClick() {
-    console.log('Click');
+  // Navigate by id
+  viajeDetailId(id: string) {
+    this.router.navigate(['detalle-viaje/', id], {relativeTo: this.actRoute});
+  }
+
+  navToRoutes() {
+    this.router.navigateByUrl('googlemaps');
   }
 
 }

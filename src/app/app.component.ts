@@ -11,6 +11,7 @@ import { ConductorI, UserI, ViajeI } from './models/models';
 import { AuthService } from './services/auth.service';
 import { FirebaseService } from './services/firebase.service';
 import { TranslateService } from '@ngx-translate/core';
+
 import { LanguagePopoverPage } from './pages/language-popover/language-popover.page';
 import { LanguagesService } from './services/languages.service';
 
@@ -23,6 +24,8 @@ export class AppComponent implements OnInit {
 
   uid: string = null;
   infoUser: UserI = null;
+
+  infoViaje: ViajeI = null;
 
   /*Antes de loguear, logged = false*/
   /*Controlar la vista*/
@@ -60,17 +63,18 @@ export class AppComponent implements OnInit {
         this.getViajeData(res.uid);
 
       } else {
-        console.log('No existe usuario logueado');
+        console.log('User is not loggin');
         this.login = false;
       }
     });
 
   }
 
-  /*La APP se inicializa en SplashScreen*/
+  /*La APP se inicializa*/
   initializeApp() {
     this.platform.ready().then(() => {
-      this.router.navigateByUrl('api-test');
+
+      this.router.navigateByUrl('routes');
 
       this.languageService.setInitialAppLanguage();
 
@@ -148,7 +152,7 @@ export class AppComponent implements OnInit {
       message: 'Puede continuar navegando en la aplicación',
       buttons: [
         {
-          text: 'Continuar navegando',
+          text: 'Navegar',
         }
       ]
     });
@@ -188,10 +192,13 @@ export class AppComponent implements OnInit {
     const path = 'Usuarios';
     const id = uid;
     this.database.getDoc<UserI>(path, id).subscribe( res => {
-      console.log('Usuario ->', res);
+
       if (res) {
         this.rol = res.perfil;
+      } else {
+        this.rol = null;
       }
+
     });
   }
 
@@ -201,8 +208,13 @@ export class AppComponent implements OnInit {
     const id = this.uid;
 
     this.database.getDoc<UserI>(path, id).subscribe( credentials => {
+
       if (credentials) {
+
         this.infoUser = credentials;
+
+      } else {
+        this.infoUser = null;
       }
     });
 
@@ -211,8 +223,9 @@ export class AppComponent implements OnInit {
   getConductorData(uid: string) {
     const path = 'Conductores';
     const id = uid;
+
     this.database.getDoc<ConductorI>(path, id).subscribe( res => {
-      console.log('Conductor ->', res);
+
       if (res) {
         this.rol = res.perfil;
       }
@@ -222,29 +235,17 @@ export class AppComponent implements OnInit {
   getViajeData(uid: string) {
     const path = 'Viajes';
     const id =  uid;
-    this.database.getDoc<ViajeI>(path, id).subscribe( res => {
-      console.log('Viaje ->', res);
+    this.database.getDoc<ViajeI>(path, id).subscribe( viaje => {
+
+      if (viaje) {
+        this.infoViaje = viaje;
+      }
+
     });
   }
 
-  /*getGoogleUserData(uid: string) {
-    const path = 'Usuarios';
-    const id = uid;
-    this.database.getGoogleDoc<UserI>(path, id).subscribe( res => {
-      console.log('Data ->', res);
-      if (res) {
-        this.rol = res.data.arguments[0].perfil;
-      }
-    });
-  }*/
-
-  /*Boton del HTML que abarca todas las alertas y sus funciones*/
   logout() {
     this.exitSession();
-  }
-
-  navigateProfile() {
-    this.router.navigate(['../perfil']);
   }
 
   test() {

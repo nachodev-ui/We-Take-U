@@ -14,20 +14,22 @@
         </ion-label>
       </div>
 
-      <ion-menu-toggle auto-hide="true">
+      <ion-menu-toggle auto-hide="true" class="active">
         <ion-list mode="ios" class="menu-items" lines="none">
-          <ion-item *ngIf="login" (click)="navigateProfile()">
+
+          <ion-item [routerLink]="['perfil']" *ngIf="login">
             <ion-icon name="person-outline"></ion-icon>{{ 'MENU.profile' | translate }}
           </ion-item>
-          <ion-item *ngIf="rol === 'Pasajero'" class="active">
+
+          <ion-item [routerLink]="['interfaz/pasajero']" *ngIf="rol === 'Pasajero'">
             <ion-icon name="car-sport-outline"></ion-icon>{{ 'MENU.drivers' | translate }}
           </ion-item>
 
-          <ion-item *ngIf="rol === 'Conductor'" class="active">
+          <ion-item [routerLink]="['interfaz/conductor']" *ngIf="rol === 'Conductor'">
             <ion-icon name="person-outline"></ion-icon>{{ 'MENU.passengers' | translate }}
           </ion-item>
 
-          <ion-item *ngIf="rol === 'Conductor'">
+          <ion-item [routerLink]="['car']" *ngIf="rol === 'Conductor'">
             <ion-icon name="car-sport-outline"></ion-icon>{{ 'MENU.car' | translate }}
           </ion-item>
 
@@ -35,7 +37,7 @@
             <ion-icon name="chatbubble-ellipses-outline"></ion-icon>{{ 'MENU.messages' | translate }}
           </ion-item>
 
-          <ion-item>
+          <ion-item [routerLink]="['routes']" *ngIf="rol === 'Pasajero'">
             <ion-icon name="stats-chart-outline"></ion-icon>{{ 'MENU.trips' | translate }}
           </ion-item>
 

@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
-import jsQR from 'jsqr';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 
 @Component({
   selector: 'app-googlemaps',
@@ -27,6 +27,7 @@ import jsQR from 'jsqr';
 export class GooglemapsPage implements OnInit, OnDestroy {
 
   uid : string = null;
+  uidConductor: string = null;
   infoUser: UserI = null;
   rol: 'Pasajero' | 'Conductor' | 'Administrador';
 
@@ -35,6 +36,8 @@ export class GooglemapsPage implements OnInit, OnDestroy {
 
   authUser: User;
   authUserSub: Subscription;
+
+  magImg: google.maps.ImageMapType;
 
   locationUpdateDoc = 'K8gg7mv2ITaRwZLGS9tw';
   locationUpdatesCollection = 'location-updates';
@@ -54,29 +57,27 @@ export class GooglemapsPage implements OnInit, OnDestroy {
   destinationPin: google.maps.Marker;
   locationWatchId: number;
 
-  options: google.maps.MapOptions = {
+  options = {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     scrollwheel: true,
     disableDefaultUI: true,
     disableDoubleClickZoom: false,
-    zoom: 15
+    zoom: 15,
+    componentRestrictions: {
+      country: 'CL'
+    }
   }
 
   time: string = '';
   distance: string = '';
+  address: string = '';
 
   ds: google.maps.DirectionsService;
   dr: google.maps.DirectionsRenderer;
 
-  placesText: string;
   togglePlacesSearch: boolean = false;
 
-  scanActive = false;
-  scanResult = null;
-
-  @ViewChild('video', { static: false }) video : ElementRef;
-  @ViewChild('canvas', { static: false }) canvas : ElementRef;
-  @ViewChild('fileInput', { static: false }) fileInput : ElementRef;
+  @ViewChild('placesRef') placesRef: GooglePlaceDirective;
 
   videoElement: any;
   canvasElement: any;
@@ -93,14 +94,18 @@ export class GooglemapsPage implements OnInit, OnDestroy {
     private authService: AuthService,
     private dbFire: FirebaseService,
     private afs: AngularFirestore,
-    private platform: Platform
+    private platform: Platform,
   ) {
     this.authService.stateUser().subscribe( credentials => {
       if(credentials) {
-        /*Datos Pasajeros*/
+
+        /* Asignar uid */
         this.uid = credentials.uid;
+
+        /* Datos del usuario */
         this.loadUserData(this.uid);
         console.log('Usuario uid ---> ', this.uid);
+
       }
     });
 
@@ -108,7 +113,7 @@ export class GooglemapsPage implements OnInit, OnDestroy {
     'standalone' in window.navigator && window.navigator['standalone'];
 
     if (this.platform.is('ios') && isInStandaloneMode()) {
-      console.log('I am an iOS PWA!');
+      console.log('iOS PWA');
     }
 
   }
@@ -224,97 +229,33 @@ export class GooglemapsPage implements OnInit, OnDestroy {
 
   }
 
+  loadUserData(uid: string) {
+    const path = 'Usuarios';
+    const id = uid;
+    this.dbFire.getDoc<UserI>(path, id).subscribe( credentials => {
+      if (credentials) {
+        this.infoUser = credentials;
+      }
+    });
+  }
+
+  loadViajeData(uid: string) {
+    const path = 'Viajes';
+    const id = uid;
+    this.dbFire.getDoc<ViajeI>(path, id).subscribe( credentials => {
+      if (credentials) {
+        this.viajeDetails = credentials;
+        console.log(this.viajeDetails);
+      }
+    });
+  }
+
   async loading() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando',
       duration: 1200
     });
     await loading.present();
-  }
-
-  async journeyReady() {
-    const alert = await this.alertCtrl.create({
-      header: 'Confirmar',
-      message: '¿Desea confirmar el viaje?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary'
-        },
-        {
-          text: 'Confirmar',
-          handler: () => {
-            this.loading();
-            setTimeout(() => {
-              this.alertQR();
-            }, 800);
-            //this.saveViajeDetailsInUser();
-          }
-        }
-      ]
-    });
-    await alert.present();
-
-    //this.loading();
-
-    /* setTimeout(() => {
-      this.router.navigateByUrl('interfaz/pasajero-viajes')
-    }, 200); */
-  }
-
-    // Alert with QR
-  async alertQR() {
-    const alert = await this.alertCtrl.create({
-      header: 'Código QR',
-      message: 'Presenta este código QR al conductor para que pueda confirmar tu viaje.',
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            this.finishTrip();
-          }
-        }
-      ],
-      cssClass: 'alertQR'
-    });
-
-    await alert.present();
-  }
-
-  async successDelete() {
-    const alert = await this.alertCtrl.create({
-      header: 'Viaje cancelado',
-      message: 'Su viaje fue cancelado exitosamente, vuelva más tarde.',
-      buttons: [
-        {
-          text: 'Aceptar',
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
-  async journeyDeclined() {
-    const alert = await this.alertCtrl.create({
-      header: 'Cancelar',
-      message: '¿Desea cancelar el viaje?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          handler: () => {
-            this.deleteViaje();
-            setTimeout(() => {
-              this.successDelete();
-            }, 800);
-          },
-          role: 'cancel',
-          cssClass: 'secondary'
-        }
-      ]
-    });
-    await alert.present();
   }
 
   setRoutePolyne() {
@@ -396,8 +337,10 @@ export class GooglemapsPage implements OnInit, OnDestroy {
           let distanceInfo = response.routes[0].legs[0];
           this.distance = distanceInfo.distance.text;
           this.time = distanceInfo.duration.text;
+
+          this.address = distanceInfo.start_address;
+
           this.generateViajeDetails();
-          this.saveViajeDetailsInUser();
         });
       }
     });
@@ -453,57 +396,122 @@ export class GooglemapsPage implements OnInit, OnDestroy {
     fechaViaje: '',
     hora: '',
     precio: '',
-    pasajero: [{}],
+    capacidad: 0,
+    conductor: {
+      uid: '',
+      nombre: '',
+      apellido: '',
+      celular: '',
+      email: '',
+      photoURL: '',
+      vehiculo: {
+        marca: '',
+        modelo: '',
+        patente: '',
+        color: '',
+      }
+    },
+    pasajeros: [
+      {
+        nombre: '',
+        apellido: '',
+        email: '',
+        celular: '',
+        photoURL: '',
+        uid: '',
+      }
+    ],
     estado: '',
     uid: ''
   }
 
   generateViajeDetails() {
+
     let viajeDetails: ViajeI = {
-      destino: this.placesText,
-      duracionViaje: this.time,
-      fechaViaje: this.today(),
-      hora: this.hours(),
-      precio: this.calculatePrice(),
-      pasajero: [
-        {
+        destino: this.address,
+        duracionViaje: this.time,
+        fechaViaje: this.today(),
+        hora: this.hours(),
+        precio: this.calculatePrice(),
+        capacidad: this.infoUser.vehiculo.capacidad,
+        conductor:{
+          uid: this.infoUser.uid,
           nombre: this.infoUser.nombre,
           apellido: this.infoUser.apellido,
           celular: this.infoUser.celular,
           email: this.infoUser.email,
+          photoURL: this.infoUser.photoURL,
+          vehiculo: {
+            patente: this.infoUser.vehiculo.patente,
+            marca: this.infoUser.vehiculo.marca,
+            modelo: this.infoUser.vehiculo.modelo,
+            color: this.infoUser.vehiculo.color,
+          }
+        },
+        pasajeros: [
+          {
+            nombre: '',
+            apellido: '',
+            email: '',
+            celular: '',
+            photoURL: '',
+            uid: '',
+          }
+        ],
+        estado: 'Pendiente',
+        uid: '',
+      }
+
+      return viajeDetails;
+
+
+  }
+
+  async detailsPage() {
+    const trip = await this.alertCtrl.create({
+      mode: 'ios',
+      header: '¿Desea confirmar su viaje?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Confirmar',
+          handler: async() => {
+            const handleLoader = await this.loadingCtrl.create({
+              mode: 'ios',
+              spinner: 'lines-small',
+              duration: 1000
+            });
+
+            this.saveViajeDetailsInUser();
+
+            await handleLoader.present().then( async() => {
+              setTimeout( async() => {
+                const handleAlert = await this.alertCtrl.create({
+                  mode: 'ios',
+                  header: 'Tú viaje ha sido confirmado :)!',
+                  message: 'A continuación, presiona OK para ver los detalles',
+                  buttons: [
+                    {
+                      text: 'OK',
+                      handler: () => {
+                        this.router.navigateByUrl('trip-details');
+                      }
+                    }
+                  ]
+                });
+                handleAlert.present();
+              }, 1500);
+            })
+          }
         }
-      ],
-      estado: 'En curso',
-      uid: '',
-    }
-
-    return viajeDetails;
-
-  }
-
-  loadUserData(uid: string) {
-    const path = 'Usuarios';
-    const id = uid;
-    this.dbFire.getDoc<UserI>(path, id).subscribe( credentials => {
-      if (credentials) {
-        this.infoUser = credentials;
-      }
+      ]
     });
+
+    trip.present();
   }
 
-  loadViajeData(uid: string) {
-    const path = 'Viajes';
-    const id = uid;
-    this.dbFire.getDoc<ViajeI>(path, id).subscribe( credentials => {
-      if (credentials) {
-        this.viajeDetails = credentials;
-        console.log(this.viajeDetails);
-
-      }
-    });
-  }
-
-  //calcular precio a partir de origen y destino
   calculatePrice() {
     let price = '0';
     let distance = this.distance;
@@ -519,7 +527,7 @@ export class GooglemapsPage implements OnInit, OnDestroy {
       price = '15.000';
     } else if (distanceNumberFloat > 20 && distanceNumberFloat <= 25) {
       price = '20.000';
-    } else if (distanceNumberFloat > 25 && distanceNumberFloat <= 30) {
+    } else if (distanceNumberFloat > 25) {
       price = '30.000';
     }
     return price;
@@ -545,158 +553,6 @@ export class GooglemapsPage implements OnInit, OnDestroy {
   saveViajeDetailsInUser() {
     let viajeDetails = this.generateViajeDetails();
     this.fire.saveViajeDetails(viajeDetails);
-  }
-
-  updateStatus() {
-    const userTripRef = this.afs.collection('Viajes');
-
-    userTripRef.doc(this.uidViaje)
-    .update({
-      estado: 'Finalizado'
-    });
-  }
-
-  // Recoger los uid de la coleccion Viajes
-  finishTrip() {
-    this.afs.collection('Viajes').valueChanges().subscribe( data => {
-      data.filter( a => {
-        let uid = a['uid'];
-        this.uidViaje = uid;
-
-        const userTripRef = this.afs.collection('Viajes');
-
-        userTripRef.doc(uid)
-        .update({
-          estado: 'Finalizado'
-        });
-
-      });
-    });
-  }
-
-  // Delete viaje
-  deleteViaje() {
-
-    this.afs.collection('Viajes').valueChanges().subscribe( data => {
-      data.filter( a => {
-        let uid = a['uid'];
-        this.uidViaje = uid;
-
-        const userTripRef = this.afs.collection('Viajes');
-
-        if (data.find(
-          a => a['estado'] === 'Finalizado' || a['estado'] === 'En curso'
-        )) {
-          userTripRef.doc(uid).delete();
-        }
-      });
-    })
-  }
-
-  captureImage() {
-    this.fileInput.nativeElement.click();
-  }
-
-  handleFile(files: FileList) {
-
-    const file = files.item(0);
-
-    var img = new Image();
-    img.onload = () => {
-      this.canvasContext.drawImage(img, 0, 0, this.canvasElement.width, this.canvasElement.height);
-      const imageData = this.canvasContext.getImageData(
-        0,
-        0,
-        this.canvasElement.width,
-        this.canvasElement.height
-      );
-      const code = jsQR(imageData.data, imageData.width, imageData.height, {
-        inversionAttempts: 'dontInvert'
-      });
-
-      if (code) {
-        this.scanResult = code.data;
-      }
-    };
-    img.src = URL.createObjectURL(file);
-  }
-
-  async startScan() {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment' }
-    });
-    this.videoElement.srcObject = stream;
-    this.videoElement.setAttribute('playsinline', true);
-    this.videoElement.play();
-
-    await this.loadingCtrl.create({
-      message: 'Escaneando...'
-    });
-    
-    requestAnimationFrame(this.scan.bind(this));
-  }
-
-  async scan() {
-
-    console.log('SCAN');
-
-    if (this.videoElement.readyState === this.videoElement.HAVE_ENOUGH_DATA) {
-
-      if (this.loading) {
-        await this.loadingCtrl.dismiss();
-        this.loading = null;
-        this.scanActive = true;
-      }
-
-      this.canvasElement.height = this.videoElement.videoHeight;
-      this.canvasElement.width = this.videoElement.videoWidth;
-
-      this.canvasContext.drawImage(
-        this.videoElement,
-        0,
-        0,
-        this.canvasElement.width,
-        this.canvasElement.height
-      );
-
-      const imageData = this.canvasContext.getImageData(
-        0,
-        0,
-        this.canvasElement.width,
-        this.canvasElement.height
-      );
-
-      const viaje = jsQR(imageData.data, imageData.width, imageData.height,
-        {
-          inversionAttempts: 'dontInvert'
-        });
-
-      if (viaje) {
-
-        this.scanActive = false;
-        this.scanResult = viaje.data;
-
-
-      } else {
-
-        if (this.scanActive) {
-          requestAnimationFrame(this.scan.bind(this));
-        }
-
-      }
-
-    } else {
-      requestAnimationFrame(this.scan.bind(this));
-    }
-  }
-
-  //Helper functions
-  stopScan() {
-    this.scanActive = false;
-  }
-
-  reset() {
-    this.scanResult = null;
   }
 
   ngOnDestroy(): void {

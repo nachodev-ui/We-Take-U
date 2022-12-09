@@ -1,6 +1,6 @@
 ion-content {
   font-family: sans-serif;
-  --background: url('../../../../assets/img/profile_bg.webp') no-repeat center center / cover;
+  --background: url('../../../../assets/img/beige_bg.jpg') no-repeat center center / cover;
 
   .snow, .snow:after, .snow:before {
     content: "";
@@ -44,12 +44,12 @@ ion-content {
   }
 
   .profile-card {
-    margin-top: 1.5vh;
-    background: linear-gradient(180deg, #744558 0%,  #2F273E 100%);
-    padding: 15px;
+    margin-top: 1vh;
+    background: linear-gradient(180deg, #D1B79B 0%,  #AF957C 100%);
+    padding: 6px;
     border-radius: 16px;
-    box-shadow: 0 0 10px rgba(0, 0, 0.4, 1);
-    margin-bottom: 20px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
     text-align: center;
 
     .avatar-container {
@@ -66,6 +66,7 @@ ion-content {
         background: #fff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin: 0 auto;
+        margin-top: 6px;
         overflow: hidden;
       }
 
@@ -87,7 +88,7 @@ ion-content {
 
         ion-icon {
           font-size: 1.8rem;
-          color: #744558;
+          color: #444;
         }
       }
 
@@ -133,9 +134,9 @@ ion-content {
 
     ion-list {
       padding: 10px;
-      margin: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-      background: #f7f7f7;
+      margin: 4px;
+      box-shadow: 0 0 2px #212121(0, 0, 0, 0.5);
+      background: #f1f1f1;
       border-radius: 2rem;
 
       ion-label {
@@ -147,7 +148,7 @@ ion-content {
 
     ion-item {
       margin-bottom: 5px;
-      --background: #f7f7f7;
+      --background: #f1f1f1;
 
       ion-icon {
         font-size: 1.62rem;
@@ -168,7 +169,7 @@ ion-content {
     height: 3rem;
     margin-top: 15px;
     --background: #f7f7f7;
-    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
     ion-label {
         color: #000;
@@ -186,7 +187,7 @@ ion-content {
     margin-bottom: 6px;
     margin-left: 6px;
     text-align: center;
-    --background: linear-gradient(180deg, #744558 0%,  #3c3a40 100%);
+    --background: linear-gradient(180deg, #D9C1A5 0%,  #AD937A 100%);
     --box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 
     ion-icon {

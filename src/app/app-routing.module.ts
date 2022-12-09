@@ -50,7 +50,16 @@ const routes: Routes = [
   },
   {
     path: 'api-test',
-    loadChildren: () => import('./pages/api-test/api-test.module').then( m => m.ApiTestPageModule)
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/api-test/api-test.module').then( m => m.ApiTestPageModule)
+      },
+      {
+        path: ':id',
+        loadChildren: () => import('./pages/api-test/detalle-viaje/detalle-viaje.module').then( m => m.DetalleViajePageModule )
+      }
+    ]
   },
   {
     path: 'googlemaps',
@@ -83,6 +92,18 @@ const routes: Routes = [
   {
     path: 'test-blob',
     loadChildren: () => import('./pages/test-blob/test-blob.module').then( m => m.TestBlobPageModule)
+  },
+  {
+    path: 'car',
+    loadChildren: () => import('./pages/car/car.module').then( m => m.CarPageModule)
+  },
+  {
+    path: 'routes',
+    loadChildren: () => import('./pages/routes/routes.module').then( m => m.RoutesPageModule)
+  },
+  {
+    path: 'trip-details',
+    loadChildren: () => import('./pages/trip-details/trip-details.module').then( m => m.TripDetailsPageModule)
   },
 ];
 

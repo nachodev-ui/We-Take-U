@@ -1,15 +1,20 @@
 <ion-content>
 
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+
   <input
     class="journey"
-    id="direction"
     type="text"
-    [(ngModel)]="placesText"
-    #placesRef="ngx-places"
+    #inputPlaces
     placeholder="{{ 'GOOGLE.input' | translate }}"
+    #placesRef="ngx-places"
     ngx-google-places-autocomplete
+    [options]= 'options'
     (onAddressChange)="handleAddressChange($event)"/>
-  <span class="_focusBorder"></span>
 
   <div class="app-page">
     <div #map id="map">
@@ -19,48 +24,21 @@
   <div class="map-pill" [ngClass]="{'map-pill-show': showMapPill }" >
     <div class="youps-pill-logo"></div>
     <div class="youps-pill-content">
-      <div class="youps-pill-label">{{ 'GOOGLE.data' | translate }}</div>
+      <div class="youps-pill-label">
+        {{ 'GOOGLE.data' | translate }}
+      </div>
       <div class="youps-pill-distance-time">
         {{ distance }} / {{ time }}
 
+        <div class="pill-buttons">
+          <ion-button (click)="detailsPage()" fill="clear">
+            <ion-icon name="checkmark-done-outline"></ion-icon>
+            Confirmar viaje
+          </ion-button>
+        </div>
+
       </div>
 
-      <div class="tripButtons">
-
-        <!--  QR SECTION -->
-        <input #fileInput type="file" accept="image/*;capture=camera" hidden (change)="handleFile($event.target.files)">
-
-        <ion-button (click)="captureImage()">
-          <ion-icon slot="start" name="camera"></ion-icon>
-        </ion-button>
-
-        <ion-buttons>
-          <ion-button (click)="startScan()">
-            <ion-icon class="check" slot="start" name="checkmark-outline"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-
-        <ion-button (click)="reset()" expand="full" *ngIf="scanResult">
-          <ion-icon slot="start" name="refresh"></ion-icon>
-          Reset
-        </ion-button>
-
-        <video #video [hidden]="!scanActive" width="100">
-        </video>
-        <canvas #canvas hidden></canvas>
-
-        <ion-button (click)="stopScan()" expand="full" *ngIf="scanActive">
-          <ion-icon slot="start" name="close"></ion-icon>
-          Stop scan
-        </ion-button>
-
-        <ion-buttons>
-          <ion-button (click)="journeyDeclined()">
-            <ion-icon class="close" slot="start" name="close-outline"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-
-      </div>
     </div>
   </div>
 

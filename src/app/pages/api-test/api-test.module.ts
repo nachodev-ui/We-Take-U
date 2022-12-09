@@ -8,12 +8,15 @@ import { ApiTestPageRoutingModule } from './api-test-routing.module';
 
 import { ApiTestPage } from './api-test.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ApiTestPageRoutingModule
+    ApiTestPageRoutingModule,
+    TranslateModule
   ],
   declarations: [ApiTestPage]
 })

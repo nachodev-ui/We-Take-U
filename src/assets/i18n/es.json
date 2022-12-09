@@ -237,6 +237,15 @@
   "GOOGLE" : {
     "input": "Ingresa la dirección...",
     "data": "Datos del viaje: "
+  },
+
+  "API": {
+    "explore": "Explora tu alrededor",
+    "toDo": "¿Qué te gustaría hacer hoy?",
+    "convey": "Transportar",
+    "rest": "Descansar",
+    "new": "Nuevo",
+    "looking": "¿Buscando pasajeros?"
   }
 
 }

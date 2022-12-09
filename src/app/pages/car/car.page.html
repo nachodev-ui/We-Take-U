@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- CAR PAGE UI -->
+  <ion-grid>
+
+    <ion-title>My car</ion-title>
+
+    <ion-row *ngIf="infoUser">
+
+      <ion-col size="12">
+
+        <ion-item>
+          <ion-label> {{ infoUser.vehiculo.patente }} </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label> {{ infoUser.vehiculo.marca }} </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label> {{ infoUser.vehiculo.modelo }} </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label> {{ infoUser.vehiculo.capacidad }} </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label> {{ infoUser.vehiculo.color }} </ion-label>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

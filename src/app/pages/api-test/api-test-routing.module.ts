@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ApiTestPage
+  },
+  {
+    path: 'detalle-viaje',
+    loadChildren: () => import('./detalle-viaje/detalle-viaje.module').then( m => m.DetalleViajePageModule)
   }
 ];
 

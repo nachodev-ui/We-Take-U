@@ -1,0 +1,89 @@
+<ion-content>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <img class="brown-car" src="../../../assets/img/brown-car.png" alt="Brown Car">
+
+  <ion-list lines="none">
+
+    <ion-title *ngIf="dataAvailable">
+      De momento no existen viajes. . .
+    </ion-title>
+
+    <ion-item *ngIf="infoViaje">
+
+      <div class="tripInfo">
+        <div class="tripInfoText">
+
+          <h2> {{ infoViaje.destino }}. </h2>
+          <p>Duración: {{ infoViaje.duracionViaje }} </p>
+
+        </div>
+
+        <div class="driverInfo">
+
+          <ion-avatar>
+            <img [src]="infoViaje.conductor.photoURL" />
+          </ion-avatar>
+
+          <div class="driverInfoText">
+            <h3> {{ infoViaje.conductor.nombre }} {{ infoViaje.conductor.apellido }} </h3>
+          </div>
+
+        </div>
+
+        <ion-button (click)="manualUpdate()" expand="block" fill="round">
+          Unirse al Viaje
+        </ion-button>
+
+      </div>
+
+    </ion-item>
+
+    <div class="qr-section">
+
+      <input id="fileinp" #fileinput type="file" accept="image/*;capture=camera" hidden (change)="handleFile($event.target.files)">
+
+      <ion-button (click)="captureImage()"  expand="full" fill="round">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Capture Image
+      </ion-button>
+
+      <ion-button (click)="startScan()" expand="full" fill="round" *ngIf="!dataAvailable">
+        <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+        Escanear
+      </ion-button>
+
+      <ion-button (click)="resetScan()" expand="full" fill="round" *ngIf="scanResult">
+        <ion-icon slot="start" name="refresh"></ion-icon>
+        Reiniciar escáner
+      </ion-button>
+
+      <video #video [hidden]="!scanActive" width="100%"></video>
+      <canvas #canvas hidden></canvas>
+
+      <ion-button (click)="stopScan()" expand="full" fill="round" *ngIf="scanActive">
+        <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
+        Detener escáner
+      </ion-button>
+
+      <ion-card *ngIf="scanResult">
+        <ion-card-header>
+          <ion-card-title>Resultado</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{ scanResult }}
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+
+
+  </ion-list>
+
+</ion-content>

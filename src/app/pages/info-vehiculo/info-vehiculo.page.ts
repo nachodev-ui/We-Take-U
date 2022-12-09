@@ -65,15 +65,50 @@ export class InfoVehiculoPage implements OnInit {
 
   }
 
-  //Add data to vehiculo array in UserI
+  //Add data to vehiculo array in logged UserI
   addVehiculo() {
-    this.auth.stateUser().subscribe(res => {
-      if (res) {
-        this.database.updateVehicleFromUserI(this.formVehiculo.value).then( res => {
-          this.alertaVehiculoCreado();
-        });
+    const path = 'Usuarios';
+    const id = this.uid;
+
+    const data = {
+      vehiculo: {
+        patente: this.formVehiculo.value.patente,
+        marca: this.formVehiculo.value.marca,
+        modelo: this.formVehiculo.value.modelo,
+        color: this.formVehiculo.value.color,
+        capacidad: this.formVehiculo.value.capacidad,
       }
+    }
+
+    // Get all patentes and verify wich exists
+    this.database.getCollection<UserI>('Usuarios').subscribe( res => {
+      res.forEach( user => {
+        if (user.vehiculo) {
+          console.log(user);
+          if (user.vehiculo.patente === this.formVehiculo.value.patente) {
+            this.alertaPatenteExiste();
+            return;
+          } else {
+              this.database.updateDoc(path, id, data).then( res => {
+              this.alertaVehiculoCreado();
+            }).catch( err => {
+              console.log(err);
+            });
+          }
+        }
+      });
     });
+  }
+
+  async patentAlreadyExists() {
+    const alert = await this.alertCtrl.create({
+      mode: 'ios',
+      header: 'Lo sentimos',
+      message: 'La patente que intentas ingresar ya existe',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   async alertaPatenteExiste() {

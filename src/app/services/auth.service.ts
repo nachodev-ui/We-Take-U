@@ -10,6 +10,8 @@ import 'firebase/compat/firestore';
 
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FirebaseService } from './firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,8 @@ export class AuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private firestoreService: FirebaseService
   ) { }
 
   /*Devolver la respuesta de la promesa*/
@@ -86,7 +89,7 @@ export class AuthService {
     }
 
   }
-
+  
   getCurrentUserEmail() {
     return this.afAuth.currentUser;
   }

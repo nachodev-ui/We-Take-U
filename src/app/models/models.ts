@@ -46,6 +46,30 @@ export interface ViajeI {
   fechaViaje: string;
   hora: string;
   precio: string;
-  pasajero: [{}];
+  capacidad: number;
+  conductor: {
+    nombre: string;
+    apellido: string;
+    email: string;
+    celular: string;
+    photoURL: string;
+    uid: string;
+    vehiculo: {
+      patente: string;
+      marca: string;
+      modelo: string;
+      color: string;
+    }
+  };
+  pasajeros: [
+    {
+      nombre: string;
+      apellido: string;
+      email: string;
+      celular: string;
+      photoURL: string;
+      uid: string;
+    }
+  ]
 }
 

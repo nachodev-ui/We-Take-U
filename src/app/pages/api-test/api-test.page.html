@@ -11,56 +11,36 @@
   <div class="welcome">
 
     <div class="title">
-      <h1>Explora tu alrededor</h1>
+      <h1> {{ 'API.explore' | translate }} </h1>
     </div>
 
     <img src="../../../assets/img/api-test.webp">
   </div>
 
   <div class="suggestions">
-    <h2>¿Qué te gustaría hacer hoy?</h2>
+    <h2> {{ 'API.toDo' | translate }} </h2>
 
     <div class="services">
-      <div>
+
+      <div (click)="navToRoutes()">
         <img src="../../../assets/img/driving.webp">
-        <p>Transportar</p>
+        <p> {{ 'API.convey' | translate }} </p>
       </div>
+
       <div>
         <img src="../../../assets/img/break.gif">
-        <p>Descansar</p>
+        <p> {{ 'API.rest' | translate }} </p>
       </div>
+
       <div>
         <img src="../../../assets/img/news.webp">
-        <p class="fix">Nuevo</p>
+        <p class="fix"> {{ 'API.new' | translate }} </p>
       </div>
+
     </div>
 
   </div>
 
   <hr>
-
-  <div class="passengers">
-    <ion-list lines="none">
-      <ion-label class="look-for">¿Buscas pasajeros?</ion-label>
-      <ion-item>
-        <ion-col size="12">
-          <div *ngFor="let user of users" class="user">
-
-            <ion-avatar class="ion-align-self-center">
-              <img class="img" [src]="user.photoURL" />
-            </ion-avatar>
-
-            <p>{{ user.nombre }} {{ user.apellido }}</p>
-
-            <ion-button (click)="onClick()" fill="clear">
-              <ion-icon slot="end" name="notifications-circle-outline"></ion-icon>
-            </ion-button>
-
-          </div>
-        </ion-col>
-
-      </ion-item>
-    </ion-list>
-  </div>
 
 </ion-content>

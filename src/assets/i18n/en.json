@@ -238,6 +238,15 @@
   "GOOGLE" : {
     "input": "Enter the address...",
     "data": "Trip data: "
+  },
+
+  "API": {
+    "explore": "Explore your surroundings",
+    "toDo": "What would you like to do today?",
+    "convey": "Convey",
+    "rest": "Rest",
+    "new": "News",
+    "looking": "Looking for passengers?"
   }
 
 }

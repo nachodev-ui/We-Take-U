@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { } from 'googlemaps';
 
@@ -7,8 +8,14 @@ import { } from 'googlemaps';
 })
 export class TripService {
 
-  constructor() { }
+  constructor(
+    private db: AngularFirestore,
+  ) { }
 
+  // Viaje by id
 
+  getTrip(id: string) {
+    return this.db.collection('Viajes').doc(id).valueChanges();
+  }
 
 }
