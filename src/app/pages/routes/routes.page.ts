@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import jsQR from 'jsqr';
+import { element } from 'protractor';
 
 import { UserI, ViajeI } from 'src/app/models/models';
 
@@ -200,8 +201,10 @@ export class RoutesPage implements OnInit {
 
       if (code) {
 
+        // Agregar
         this.passengersPush();
         this.decreaseCapacity();
+
         this.scanActive = false;
         this.scanResult = code.data;
 
@@ -259,9 +262,41 @@ export class RoutesPage implements OnInit {
         });
 
         if (code) {
-          this.passengersPush();
-          this.decreaseCapacity();
-          console.log('Pasajero añadido');
+
+          if ( this.passengersPush() === true ) {
+            const passAdd = this.alertCtrl.create({
+              mode: 'ios',
+              header: 'Bien hecho',
+              message: 'Te has unido correctamente al viaje',
+              buttons: [
+                {
+                  text: 'OK'
+              }
+              ]
+            });
+
+            this.decreaseCapacity();
+
+            passAdd.then( isokay => {
+              isokay.present();
+            })
+          } else {
+            const errorPass = this.alertCtrl.create({
+              mode: 'ios',
+              header: 'Lo sentimos',
+              message: 'No existe más capacidad en este viaje.',
+              buttons: [
+                {
+                  text: 'OK'
+                }
+              ]
+            });
+
+            errorPass.then( error => {
+              error.present();
+            });
+
+          }
 
         } else {
 
@@ -277,6 +312,5 @@ export class RoutesPage implements OnInit {
     this.passengersPush();
     this.decreaseCapacity();
   }
-
 
 }

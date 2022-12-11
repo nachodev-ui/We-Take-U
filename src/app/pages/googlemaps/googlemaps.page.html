@@ -1,24 +1,36 @@
 <ion-content>
 
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-
-  <input
-    class="journey"
-    type="text"
-    #inputPlaces
-    placeholder="{{ 'GOOGLE.input' | translate }}"
-    #placesRef="ngx-places"
-    ngx-google-places-autocomplete
-    [options]= 'options'
-    (onAddressChange)="handleAddressChange($event)"/>
-
   <div class="app-page">
     <div #map id="map">
     </div>
+  </div>
+
+  <div (click)="toggleSearch()" class="map-pill map-user-pill" *ngIf="infoUser">
+    <div class="map-user-img">
+      <img [src]="infoUser.photoURL" alt="">
+    </div>
+    <div class="map-user-pill-content">
+      <div class="map-user-display-name">
+        {{ infoUser.nombre }} {{ infoUser.apellido }}
+      </div>
+      <div class="map-user-display-desc">
+        Bienvenid@ de nuevo!
+      </div>
+    </div>
+  </div>
+
+  <div class="map-places-pill" [ngClass]="{ 'map-places-search-visible': togglePlacesSearch }">
+
+    <!-- Ignore error, it is 'cause we dont add all needless properties -->
+    <input
+    type="text"
+    [options]= 'options'
+    #placesRef="ngx-places"
+    [(ngModel)]="placesText"
+    ngx-google-places-autocomplete
+    placeholder="{{ 'GOOGLE.input' | translate }}"
+    (onAddressChange)="handleAddressChange($event)"/>
+
   </div>
 
   <div class="map-pill" [ngClass]="{'map-pill-show': showMapPill }" >

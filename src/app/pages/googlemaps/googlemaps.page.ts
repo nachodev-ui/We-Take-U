@@ -75,6 +75,7 @@ export class GooglemapsPage implements OnInit, OnDestroy {
   ds: google.maps.DirectionsService;
   dr: google.maps.DirectionsRenderer;
 
+  placesText: string;
   togglePlacesSearch: boolean = false;
 
   @ViewChild('placesRef') placesRef: GooglePlaceDirective;
@@ -388,6 +389,14 @@ export class GooglemapsPage implements OnInit, OnDestroy {
 
   onCenterMap() {
     this.map.panTo(this.source);
+  }
+
+  clearPlacesField() {
+    this.placesText = "";
+  }
+
+  toggleSearch() {
+    this.togglePlacesSearch = !this.togglePlacesSearch;
   }
 
   viajeDetails: ViajeI = {

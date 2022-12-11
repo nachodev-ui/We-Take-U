@@ -25,7 +25,6 @@
 
       <div class="title">
         <h1>Detalles de tu viaje</h1>
-        <div class="underline"></div>
       </div>
 
       <div class="receipt" *ngIf="infoTrip.estado === 'Pendiente'">
@@ -60,13 +59,20 @@
 
         <ion-item class="passengers">
 
-          <ion-icon slot="start" name="person-outline"></ion-icon>
           <ion-label class="text">Pasajeros
 
             <ion-list lines="none" *ngFor="let pass of passengers; index as i" class="passengers-list">
 
-              <p> {{ pass.nombre }} {{ pass.apellido }} </p>
-              <p> {{ pass.celular }} </p>
+              <div class="passenger-info">
+
+                <ion-avatar>
+                  <img [src]="pass.photoURL" />
+                </ion-avatar>
+
+                <p class="name"> {{ pass.nombre }} {{ pass.apellido }} </p>
+
+                <p class="contact">+56 {{ pass.celular }} </p>
+              </div>
 
             </ion-list>
 

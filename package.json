@@ -44,6 +44,7 @@
     "angularx-qrcode": "^14.0.0",
     "firebase": "^9.10.0",
     "jsqr": "^1.4.0",
+    "loader-utils": "^1.4.2",
     "ng2-search-filter": "^0.5.1",
     "ngx-google-places-autocomplete": "^2.0.5",
     "ngx-joyride": "^2.5.0",
