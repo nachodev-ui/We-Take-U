@@ -34,7 +34,7 @@
     "@capacitor/status-bar": "4.0.1",
     "@codetrix-studio/capacitor-google-auth": "^3.2.0",
     "@cordobo/qrcode": "^1.5.0",
-    "@ionic/angular": "^6.1.9",
+    "@ionic/angular": "^6.3.8",
     "@ionic/pwa-elements": "^3.1.1",
     "@ionic/storage": "^3.0.6",
     "@ionic/storage-angular": "^3.0.6",
