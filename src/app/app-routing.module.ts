@@ -90,10 +90,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/language-popover/language-popover.module').then( m => m.LanguagePopoverPageModule)
   },
   {
-    path: 'test-blob',
-    loadChildren: () => import('./pages/test-blob/test-blob.module').then( m => m.TestBlobPageModule)
-  },
-  {
     path: 'car',
     loadChildren: () => import('./pages/car/car.module').then( m => m.CarPageModule)
   },

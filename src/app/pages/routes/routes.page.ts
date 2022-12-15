@@ -201,9 +201,40 @@ export class RoutesPage implements OnInit {
 
       if (code) {
 
-        // Agregar
-        this.passengersPush();
-        this.decreaseCapacity();
+        if ( this.passengersPush() === true ) {
+          const passAdd = this.alertCtrl.create({
+            mode: 'ios',
+            header: 'Bien hecho',
+            message: 'Te has unido correctamente al viaje',
+            buttons: [
+              {
+                text: 'OK'
+            }
+            ]
+          });
+
+          this.decreaseCapacity();
+
+          passAdd.then( isokay => {
+            isokay.present();
+          })
+        } else {
+          const errorPass = this.alertCtrl.create({
+            mode: 'ios',
+            header: 'Lo sentimos',
+            message: 'No existe más capacidad en este viaje.',
+            buttons: [
+              {
+                text: 'OK'
+              }
+            ]
+          });
+
+          errorPass.then( error => {
+            error.present();
+          });
+
+        }
 
         this.scanActive = false;
         this.scanResult = code.data;
