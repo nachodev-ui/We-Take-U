@@ -11,8 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { QRCodeModule } from 'angularx-qrcode';
-
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -31,8 +29,6 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-import { JoyrideModule } from 'ngx-joyride';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -83,9 +79,7 @@ export function createTranslateLoader(http: HttpClient) {
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
-    BrowserAnimationsModule,
-    JoyrideModule.forRoot(),
-    QRCodeModule
+    BrowserAnimationsModule
   ],
   providers: [
     {

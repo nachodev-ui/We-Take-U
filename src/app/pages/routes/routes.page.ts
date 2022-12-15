@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
+
 import jsQR from 'jsqr';
-import { element } from 'protractor';
 
 import { UserI, ViajeI } from 'src/app/models/models';
 

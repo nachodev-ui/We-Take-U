@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
@@ -24,7 +24,7 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
   styleUrls: ['./googlemaps.page.scss'],
 })
 
-export class GooglemapsPage implements OnInit, OnDestroy {
+export class GooglemapsPage implements OnInit {
 
   uid : string = null;
   uidConductor: string = null;
@@ -562,12 +562,6 @@ export class GooglemapsPage implements OnInit, OnDestroy {
   saveViajeDetailsInUser() {
     let viajeDetails = this.generateViajeDetails();
     this.fire.saveViajeDetails(viajeDetails);
-  }
-
-  ngOnDestroy(): void {
-    this.authUserSub.unsubscribe();
-    navigator.geolocation.clearWatch(this.locationWatchId);
-    clearInterval(this.locSimulationInterval);
   }
 
 }

@@ -10,7 +10,6 @@ import { PasajeroModalComponent } from '../../pasajero-modal/pasajero-modal.comp
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { TranslateModule } from '@ngx-translate/core';
-import { JoyrideModule } from 'ngx-joyride';
 
 @NgModule({
   imports: [
@@ -20,7 +19,6 @@ import { JoyrideModule } from 'ngx-joyride';
     PasajeroPageRoutingModule,
     Ng2SearchPipeModule,
     TranslateModule,
-    JoyrideModule.forChild(),
   ],
   declarations: [
     PasajeroPage,

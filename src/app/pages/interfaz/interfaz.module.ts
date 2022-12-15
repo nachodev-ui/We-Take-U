@@ -7,8 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { InterfazPageRoutingModule } from './interfaz-routing.module';
 import { InterfazPage } from './interfaz.page';
 
-import { JoyrideModule } from 'ngx-joyride';
-
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
@@ -17,8 +15,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FormsModule,
     IonicModule,
     InterfazPageRoutingModule,
-    Ng2SearchPipeModule,
-    JoyrideModule.forChild()
+    Ng2SearchPipeModule
   ],
   declarations: [InterfazPage]
 })

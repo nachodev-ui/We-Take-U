@@ -13,8 +13,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { QRCodeModule } from 'angularx-qrcode';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +21,6 @@ import { QRCodeModule } from 'angularx-qrcode';
     GooglemapsPageRoutingModule,
     GooglePlaceModule,
     TranslateModule,
-    QRCodeModule
   ],
   declarations: [GooglemapsPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
