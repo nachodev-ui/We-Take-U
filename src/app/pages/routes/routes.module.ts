@@ -8,12 +8,15 @@ import { RoutesPageRoutingModule } from './routes-routing.module';
 
 import { RoutesPage } from './routes.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RoutesPageRoutingModule
+    RoutesPageRoutingModule,
+    TranslateModule
   ],
   declarations: [RoutesPage]
 })

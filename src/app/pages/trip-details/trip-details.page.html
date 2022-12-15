@@ -24,7 +24,7 @@
     <ion-list lines="none" *ngIf="infoTrip">
 
       <div class="title">
-        <h1>Detalles de tu viaje</h1>
+        <h1> {{ 'DETAIL.details' | translate }} </h1>
       </div>
 
       <div class="receipt" *ngIf="infoTrip.estado === 'Pendiente'">
@@ -39,27 +39,27 @@
         <ion-item>
 
           <ion-icon slot="start" name="time-outline"></ion-icon>
-          <ion-label>Duración: {{ infoTrip.duracionViaje }} </ion-label>
+          <ion-label>{{ 'DETAIL.dur' | translate }}: {{ infoTrip.duracionViaje }} </ion-label>
 
         </ion-item>
 
         <ion-item>
 
           <ion-icon slot="start" name="man-outline"></ion-icon>
-          <ion-label>Capacidad: {{ infoTrip.capacidad }} </ion-label>
+          <ion-label>{{ 'DETAIL.cap' | translate }}: {{ infoTrip.capacidad }} </ion-label>
 
         </ion-item>
 
         <ion-item>
 
           <ion-icon slot="start" name="cash-outline"></ion-icon>
-          <ion-label>Valor: ${{ infoTrip.precio }} </ion-label>
+          <ion-label>{{ 'DETAIL.price' | translate }}: ${{ infoTrip.precio }} </ion-label>
 
         </ion-item>
 
         <ion-item class="passengers">
 
-          <ion-label class="text">Pasajeros
+          <ion-label class="text"> {{ 'DETAIL.pass' | translate }}
 
             <ion-list lines="none" *ngFor="let pass of passengers; index as i" class="passengers-list">
 
@@ -83,11 +83,11 @@
       </div>
 
       <ion-button *ngIf="infoTrip.estado === 'Pendiente'" (click)="startTrip()" fill="clear">
-        Comenzar viaje
+        {{ 'DETAIL.go' | translate }}
       </ion-button>
 
       <ion-button class="finish-trip" *ngIf="infoTrip.estado === 'En curso'" (click)="finishTrip()" fill="clear">
-        Finalizar viaje
+        {{ 'DETAIL.fin' | translate }}
       </ion-button>
 
     </ion-list>

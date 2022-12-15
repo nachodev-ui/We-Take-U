@@ -237,7 +237,13 @@
 
   "GOOGLE" : {
     "input": "Enter the address...",
-    "data": "Trip data: "
+    "data": "Trip data: ",
+    "load": "Loading",
+    "conf": "Would you like to confirm your trip?",
+    "no": "Cancel",
+    "yes": "Confirm",
+    "good": "Your trip is confirmed :)!",
+    "cont": "Then press OK to view the details."
   },
 
   "API": {
@@ -247,6 +253,21 @@
     "rest": "Rest",
     "new": "News",
     "looking": "Looking for passengers?"
-  }
+  },
 
+  "DETAIL": {
+    "no-exists": "At the moment there is no travel. . .",
+    "dur": "Duration",
+    "join": "Join trip",
+    "qr": "QR Image",
+    "scan": "Scan",
+    "res-scan": "Restart scanner",
+    "stop": "Stop scan",
+    "details": "Travel details",
+    "cap": "Capacity",
+    "price": "Price",
+    "pass": "Passengers",
+    "go": "Start trip",
+    "fin": "Finish trip"
+  }
 }

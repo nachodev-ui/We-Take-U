@@ -236,7 +236,13 @@
 
   "GOOGLE" : {
     "input": "Ingresa la dirección...",
-    "data": "Datos del viaje: "
+    "data": "Datos del viaje: ",
+    "load": "Cargando",
+    "conf": "¿Desea confirmar su viaje?",
+    "no": "Cancelar",
+    "yes": "Confirmar",
+    "good": "Tú viaje ha sido confirmado :)!",
+    "cont": "A continuación, presiona OK para ver los detalles"
   },
 
   "API": {
@@ -246,6 +252,22 @@
     "rest": "Descansar",
     "new": "Nuevo",
     "looking": "¿Buscando pasajeros?"
+  },
+
+  "DETAIL": {
+    "no-exists": "De momento no existen viajes. . .",
+    "dur": "Duración",
+    "join": "Unirse al viaje",
+    "qr": "Imágen QR",
+    "scan": "Escánear",
+    "res-scan": "Reiniciar escáner",
+    "stop": "Detener escáner",
+    "details": "Detalles de tu viaje",
+    "cap": "Capacidad",
+    "price": "Precio",
+    "pass": "Pasajeros",
+    "go": "Comenzar viaje",
+    "fin": "Finalizar viaje"
   }
 
 }

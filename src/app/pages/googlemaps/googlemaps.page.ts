@@ -18,6 +18,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-googlemaps',
   templateUrl: './googlemaps.page.html',
@@ -96,6 +98,7 @@ export class GooglemapsPage implements OnInit {
     private dbFire: FirebaseService,
     private afs: AngularFirestore,
     private platform: Platform,
+    private translate: TranslateService
   ) {
     this.authService.stateUser().subscribe( credentials => {
       if(credentials) {
@@ -253,7 +256,7 @@ export class GooglemapsPage implements OnInit {
 
   async loading() {
     const loading = await this.loadingCtrl.create({
-      message: 'Cargando',
+      message: this.translate.instant('GOOGLE.load'),
       duration: 1200
     });
     await loading.present();
@@ -479,13 +482,13 @@ export class GooglemapsPage implements OnInit {
   async detailsPage() {
     const trip = await this.alertCtrl.create({
       mode: 'ios',
-      header: '¿Desea confirmar su viaje?',
+      header: this.translate.instant('GOOGLE.conf'),
       buttons: [
         {
-          text: 'Cancelar'
+          text: this.translate.instant('GOOGLE.no')
         },
         {
-          text: 'Confirmar',
+          text: this.translate.instant('GOOGLE.yes'),
           handler: async() => {
             const handleLoader = await this.loadingCtrl.create({
               mode: 'ios',
@@ -499,8 +502,8 @@ export class GooglemapsPage implements OnInit {
               setTimeout( async() => {
                 const handleAlert = await this.alertCtrl.create({
                   mode: 'ios',
-                  header: 'Tú viaje ha sido confirmado :)!',
-                  message: 'A continuación, presiona OK para ver los detalles',
+                  header: this.translate.instant('GOOGLE.good'),
+                  message: this.translate.instant('GOOGLE.cont'),
                   buttons: [
                     {
                       text: 'OK',

@@ -11,7 +11,7 @@
   <ion-list lines="none">
 
     <ion-title *ngIf="dataAvailable">
-      De momento no existen viajes. . .
+      {{ 'DETAIL.non-exists' | translate }}
     </ion-title>
 
     <ion-item *ngIf="infoViaje">
@@ -20,7 +20,7 @@
         <div class="tripInfoText">
 
           <h2> {{ infoViaje.destino }}. </h2>
-          <p>Duración: {{ infoViaje.duracionViaje }} </p>
+          <p>{{ 'DETAIL.dur' | translate }}: {{ infoViaje.duracionViaje }} </p>
 
         </div>
 
@@ -37,7 +37,7 @@
         </div>
 
         <ion-button (click)="manualUpdate()" expand="block" fill="round">
-          Unirse al Viaje
+          {{ 'DETAIL.join' | translate }}
         </ion-button>
 
       </div>
@@ -50,17 +50,17 @@
 
       <ion-button (click)="captureImage()"  expand="full" fill="round">
         <ion-icon slot="start" name="camera"></ion-icon>
-        Capture Image
+        {{ 'DETAIL.qr' | translate }}
       </ion-button>
 
       <ion-button (click)="startScan()" expand="full" fill="round" *ngIf="!dataAvailable">
         <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-        Escanear
+        {{ 'DETAIL.scan' | translate }}
       </ion-button>
 
       <ion-button (click)="resetScan()" expand="full" fill="round" *ngIf="scanResult">
         <ion-icon slot="start" name="refresh"></ion-icon>
-        Reiniciar escáner
+        {{ 'DETAIL.res-scan' | translate }}
       </ion-button>
 
       <video #video [hidden]="!scanActive" width="100%"></video>
@@ -68,7 +68,7 @@
 
       <ion-button (click)="stopScan()" expand="full" fill="round" *ngIf="scanActive">
         <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
-        Detener escáner
+        {{ 'DETAIL.stop' | translate }}
       </ion-button>
 
       <ion-card *ngIf="scanResult">

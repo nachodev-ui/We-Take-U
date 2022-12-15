@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
   initializeApp() {
     this.platform.ready().then(() => {
 
-      this.router.navigateByUrl('splashscreen');
+      this.router.navigateByUrl('login');
 
       this.languageService.setInitialAppLanguage();
 

@@ -8,12 +8,15 @@ import { TripDetailsPageRoutingModule } from './trip-details-routing.module';
 
 import { TripDetailsPage } from './trip-details.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TripDetailsPageRoutingModule
+    TripDetailsPageRoutingModule,
+    TranslateModule
   ],
   declarations: [TripDetailsPage]
 })
